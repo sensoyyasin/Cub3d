@@ -7,6 +7,7 @@
 #include <math.h>
 #include "minilibx/mlx.h"
 #include "libft/libft.h"
+#include "get_next_line/get_next_line.h"
 
 #define PI 3.141592653
 
@@ -44,14 +45,20 @@ typedef struct cub3d
     void *mlx;
     void *mlx_win;
     t_player *player;
-    char *map;
+    char **map;
     char **map_input;
     int *addr;
     void *img;
     int y_kord;
+    void *wall;
+    void *floor;
+    int line_length;
+    int bits_per_pixel;
 } t_cub3d;
 
 int pushbutton(int keycode, t_cub3d *ptr);
 void isargtrue(t_cub3d *cub3dptr);
+int line_length(t_cub3d *cub3dptr);
+void putimage(t_cub3d *cub3dptr);
 
 #endif
