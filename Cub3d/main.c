@@ -1,20 +1,5 @@
 #include "cub3d.h"
 
-// int mapcheck2(char *line)
-// {
-// 	if (ft_strnstr(line, "NO", ft_strlen(line))
-// 		|| ft_strnstr(line, "SO", ft_strlen(line))
-// 		|| ft_strnstr(line, "WE", ft_strlen(line))
-// 		|| ft_strnstr(line, "EA", ft_strlen(line))
-// 		|| ft_strnstr(line, "F", ft_strlen(line))
-// 		|| ft_strnstr(line, "C", ft_strlen(line)))
-// 	{
-// 		free(line);
-// 		return (0);
-// 	}
-//     return (1);
-// }
-
 void mapcheck(t_cub3d *cub3dptr)
 {
     int fd_map;
