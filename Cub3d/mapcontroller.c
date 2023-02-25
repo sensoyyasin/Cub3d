@@ -12,7 +12,7 @@ void isargtrue(t_cub3d *cub3dptr)
         {
 			printf("\033[1;31mWrong map format!\n\033[0m"); //change
            	//write(2, "Error\n", 6);
-		    exit(1);
+		    exit_func(cub3dptr);
         }
 }
 
@@ -26,9 +26,8 @@ void mapcheck(t_cub3d *cub3dptr)
     if (fd_map < 0)
 	{
 		printf("\033[1;31mFile could not be opened!\n\033[0m");
-		exit(0);
+		exit_func(cub3dptr);
 	}
-    cub3dptr->y_kord = 0;
     cub3dptr->map = malloc((sizeof(char *)) * 1024);
     while (++uz_y < line_length(cub3dptr))
     {

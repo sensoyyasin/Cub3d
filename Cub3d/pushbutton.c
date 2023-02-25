@@ -6,7 +6,7 @@ int pushbutton(int keycode, t_cub3d *ptr)
     {
         write(2, "\033[35mGame was closing\n", 22);
         mlx_destroy_window(ptr->mlx, ptr->mlx_win);
-        exit(0);
+        exit_func(ptr);
     }
     else if (keycode == W || keycode == A || keycode == S || keycode == D)
         return (1);
