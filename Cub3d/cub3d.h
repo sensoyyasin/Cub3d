@@ -60,5 +60,8 @@ int pushbutton(int keycode, t_cub3d *ptr);
 void isargtrue(t_cub3d *cub3dptr);
 int line_length(t_cub3d *cub3dptr);
 void putimage(t_cub3d *cub3dptr);
+void mapcheck(t_cub3d *cub3dptr);
+void check_all(t_cub3d *img);
+void free_all(t_cub3d *img, t_cub3d *cub3d);
 
 #endif

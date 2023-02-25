@@ -3,30 +3,43 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yasinsensoy <yasinsensoy@student.42.fr>    +#+  +:+       +#+         #
+#    By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 12:28:00 by yasinsensoy       #+#    #+#              #
-#    Updated: 2023/02/24 11:05:52 by yasinsensoy      ###   ########.fr        #
+#    Updated: 2023/02/25 12:10:18 by mtemel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = Cub3d
-SRC = $(wildcard *.c)
-CC = gcc -Wall -Wextra -Werror
-CFLAGS = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c ./libft/libft.a -lmlx -framework OpenGL -framework AppKit -L ./minilibx
+SRC = $(wildcard *.c) $(wildcard get_next_line/*.c) libft/libft.a
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -lmlx -framework OpenGL -framework AppKit -L ./minilibx
+OBJ = $(SRC: .c = .o)
+
+$(NAME): $(OBJ)
+	@cd libft && make && cd ..
+	@cd minilibx && make && cd ..
+	$(CC) $(SRC) $(CFLAGS) -o Cub3d
+	@echo "\033[1;92mCOMPILING SUCCESSFUL\033[0m"
 
 all : $(NAME)
 
-$(NAME):
-	$(CC) *.c $(CFLAGS) -o Cub3d
-	@echo "\033[1;92mCompiled succesfully..\033[0m"
-
 clean:
-	rm -rf Cub3d
+	@rm -rf Cub3d
+	@echo "\033[1;92mCLEANING DONE\033[0m"
 
-fclean: clean
+fclean:
+	@echo "\033[1;92mFCLEAN\033[0m"
+	@make clean
 
-re: clean fclean all
+re:
+	@cd libft && make re && cd ..
+	@cd minilibx && make re && cd ..
+	@echo "\033[1;92mREMAKE\033[0m"
+	@make fclean
+	@make
+
+#get_next_line/get_next_line.c get_next_line/get_next_line_utils.c ./libft/libft.a
 
 #NAME = Cub3d
 # CC = gcc

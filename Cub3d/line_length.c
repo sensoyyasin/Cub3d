@@ -4,11 +4,17 @@ int line_length(t_cub3d *cub3dptr)
 {
     int fdmap;
     char c;
+    //char *str;
     int i;
 
     i = 0;
     fdmap = open(cub3dptr->map_input[1], O_RDONLY);
-    while (read(fdmap, &c, 1) >= 1)
+
+	/*str = get_next_line(fdmap);
+	i = ft_strlen(str);*/
+	//printf("%s line length: %d\n", str, i);
+    
+	while (read(fdmap, &c, 1) >= 1)
     {
         if (ft_strchr(&c, '\n'))
             i++;
