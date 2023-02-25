@@ -32,9 +32,12 @@ void mapcheck(t_cub3d *cub3dptr)
 		if(!cub3dptr->texture_bool)
 		{
 			mapcheck2(cub3dptr->map[uz_y], cub3dptr);
-			printf("texture check i:%d\n", uz_y);
+			printf("texture check uz_y:%d\n", uz_y);
 		}
-		//if(!cub3dptr->map_bool)
+		else if(!cub3dptr->map_bool)
+		{
+			mapdrawcheck(cub3dptr->map[uz_y], cub3dptr);
+		}
 		//printf("i:%d\n", uz_y);
     }
     close(fd_map);
@@ -80,4 +83,10 @@ void mapcheck2(char *words, t_cub3d *img)
 	}
 	if (img->no == 1 && img->so == 1 && img->we == 1 && img->ea == 1 && img->f == 1 && img->c == 1)
 		img->texture_bool = 1;
+}
+
+void mapdrawcheck(char *words, t_cub3d *img)
+{
+	int (i) = 0;
+	//if(word[i] =)
 }

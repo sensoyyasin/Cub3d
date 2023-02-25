@@ -85,5 +85,6 @@ void free_split(char **split);
 void exit_double_split_func(char **split, char **color, t_cub3d *img);
 char *clear_endstr(char *str);
 int is_number(char *str);
+void mapdrawcheck(char *words, t_cub3d *img);
 
 #endif
