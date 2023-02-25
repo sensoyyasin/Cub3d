@@ -34,7 +34,8 @@ void mapcheck(t_cub3d *cub3dptr)
     {
 		//printf("\033[1;31mline length: %d\n\033[0m", line_length(cub3dptr)); //sil
 		cub3dptr->map[uz_y] = get_next_line(fd_map);
-        //mapcheck2(cub3dptr->map[uz_y]);
+		//bu satır deneme
+		//mapcheck2(cub3dptr->map[uz_y]);
 		printf("%s",cub3dptr->map[uz_y]);
     }
     close(fd_map);
