@@ -10,9 +10,9 @@ void isargtrue(t_cub3d *cub3dptr)
         cub3dptr->map_input[1][len - 3] != 'c' &&
         cub3dptr->map_input[1][len - 4] != '.')
         {
-			printf("\033[1;31mWrong map format!\n\033[0m"); //change
+			//printf("\033[1;31mWrong map format!\n\033[0m"); //change
            	//write(2, "Error\n", 6);
-		    exit_func(cub3dptr);
+		    exit_func("\033[1;31mWrong map format!\n\033[0m", cub3dptr);
         }
 }
 
@@ -24,18 +24,47 @@ void mapcheck(t_cub3d *cub3dptr)
     uz_y = -1;
     fd_map = open(cub3dptr->map_input[1], O_RDONLY);
     if (fd_map < 0)
-	{
-		printf("\033[1;31mFile could not be opened!\n\033[0m");
-		exit_func(cub3dptr);
-	}
+		exit_func("\033[1;31mFile could not be opened!\n\033[0m", cub3dptr);
     cub3dptr->map = malloc((sizeof(char *)) * 1024);
     while (++uz_y < line_length(cub3dptr))
     {
-		//printf("\033[1;31mline length: %d\n\033[0m", line_length(cub3dptr)); //sil
 		cub3dptr->map[uz_y] = get_next_line(fd_map);
-		//bu satır deneme
-		//mapcheck2(cub3dptr->map[uz_y]);
-		printf("%s",cub3dptr->map[uz_y]);
+		if(!cub3dptr->texture_bool)
+			mapcheck2(cub3dptr->map[uz_y], cub3dptr);
+		//printf("%s",cub3dptr->map[uz_y]);
     }
     close(fd_map);
+}
+
+void mapcheck2(char *words, t_cub3d *img)
+{
+	int fd;
+	char **split;
+	char **color;
+	int (i) = 0;
+
+	split = ft_split(words, ' ');
+	if(!strcmp(split[0], "NO") || !strcmp(split[0], "SO")
+		|| !strcmp(split[0], "WE") || !strcmp(split[0], "EA"))
+	{
+		split[1] = clear_endstr(split[1]);
+		if ((fd = open(split[1], O_RDONLY)) < 0) //./map.cub 'u acamadigi icin hata.
+			exit_split_func(split, img);
+		split_comp(split, img);
+	}
+	else if(!strcmp(split[0], "F") || !strcmp(split[0], "C"))
+	{
+		color = ft_split(split[1], ',');
+		while (i < 3)
+		{
+			if (!color[i] || ft_atoi(color[i]) > 255 || ft_atoi(color[i]) < 0)
+				exit_double_split_func(split, color, img);
+			else if ((ft_atoi(color[i]) >= 0 && ft_atoi(color[i]) <= 255) && strcmp(split[0], "F") == 0)
+				img->f_color[i] = ft_atoi(color[i]);
+			else if ((ft_atoi(color[i]) >= 0 && ft_atoi(color[i]) <= 255) && strcmp(split[0], "C") == 0)
+				img->c_color[i] = ft_atoi(color[i]);
+			printf("color: %i\n",img->f_color[i]);
+			i++;
+		}
+	}
 }

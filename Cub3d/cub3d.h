@@ -54,6 +54,21 @@ typedef struct cub3d
     void *floor;
     int line_length;
     int bits_per_pixel;
+	int no;
+	int so;
+	int we;
+	int ea;
+	int f;
+	int c;
+	char *no_path; //will be freed from here
+	char *so_path;
+	char *we_path;
+	char *ea_path;
+	char *f_path;
+	char *c_path; //will be freed to here
+	int f_color[3];
+	int c_color[3];
+	int texture_bool;
 } t_cub3d;
 
 int pushbutton(int keycode, t_cub3d *ptr);
@@ -63,6 +78,12 @@ void putimage(t_cub3d *cub3dptr);
 void mapcheck(t_cub3d *cub3dptr);
 void check_all(t_cub3d *img);
 void free_all(t_cub3d *img);
-void exit_func(t_cub3d *img);
+void exit_func(char *err, t_cub3d *img);
+void split_comp(char **split, t_cub3d *img);
+void mapcheck2(char *words, t_cub3d *img);
+void exit_split_func(char **split, t_cub3d *img);
+void free_split(char **split);
+void exit_double_split_func(char **split, char **color, t_cub3d *img);
+char *clear_endstr(char *str);
 
 #endif
