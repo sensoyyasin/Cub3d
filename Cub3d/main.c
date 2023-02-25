@@ -21,6 +21,7 @@ void initializer(t_cub3d *img)
 	img->f = 0;
 	img->c = 0;
 	img->texture_bool = 0;
+	img->map_bool = 0;
 }
 
 int main(int argc, char **argv)

@@ -30,8 +30,12 @@ void mapcheck(t_cub3d *cub3dptr)
     {
 		cub3dptr->map[uz_y] = get_next_line(fd_map);
 		if(!cub3dptr->texture_bool)
+		{
 			mapcheck2(cub3dptr->map[uz_y], cub3dptr);
-		//printf("%s",cub3dptr->map[uz_y]);
+			printf("texture check i:%d\n", uz_y);
+		}
+		//if(!cub3dptr->map_bool)
+		//printf("i:%d\n", uz_y);
     }
     close(fd_map);
 }
@@ -57,14 +61,23 @@ void mapcheck2(char *words, t_cub3d *img)
 		color = ft_split(split[1], ',');
 		while (i < 3)
 		{
-			if (!color[i] || ft_atoi(color[i]) > 255 || ft_atoi(color[i]) < 0)
+			if (!color[i] || !is_number(color[i]) || ft_atoi(color[i]) > 255 || ft_atoi(color[i]) < 0)
 				exit_double_split_func(split, color, img);
-			else if ((ft_atoi(color[i]) >= 0 && ft_atoi(color[i]) <= 255) && strcmp(split[0], "F") == 0)
+			else if (strcmp(split[0], "F") == 0)
+			{
 				img->f_color[i] = ft_atoi(color[i]);
-			else if ((ft_atoi(color[i]) >= 0 && ft_atoi(color[i]) <= 255) && strcmp(split[0], "C") == 0)
+				if (i == 2)
+					img->f = 1;
+			}
+			else if (strcmp(split[0], "C") == 0)
+			{
 				img->c_color[i] = ft_atoi(color[i]);
-			printf("color: %i\n",img->f_color[i]);
+				if (i == 2)
+					img->c = 1;
+			}
 			i++;
 		}
 	}
+	if (img->no == 1 && img->so == 1 && img->we == 1 && img->ea == 1 && img->f == 1 && img->c == 1)
+		img->texture_bool = 1;
 }

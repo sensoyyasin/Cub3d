@@ -60,15 +60,14 @@ typedef struct cub3d
 	int ea;
 	int f;
 	int c;
+	int texture_bool;
+	int map_bool;
 	char *no_path; //will be freed from here
 	char *so_path;
 	char *we_path;
-	char *ea_path;
-	char *f_path;
-	char *c_path; //will be freed to here
+	char *ea_path; //will be freed to here
 	int f_color[3];
 	int c_color[3];
-	int texture_bool;
 } t_cub3d;
 
 int pushbutton(int keycode, t_cub3d *ptr);
@@ -85,5 +84,6 @@ void exit_split_func(char **split, t_cub3d *img);
 void free_split(char **split);
 void exit_double_split_func(char **split, char **color, t_cub3d *img);
 char *clear_endstr(char *str);
+int is_number(char *str);
 
 #endif
