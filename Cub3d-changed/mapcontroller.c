@@ -35,10 +35,10 @@ void mapcheck(t_cub3d *cub3dptr)
 		else if (!cub3dptr->map_bool)
 		{
 			mapcheck3(cub3dptr->map[uz_y], cub3dptr);
-			printf(" texture check uz_y2:%d\n", uz_y);
 		}
-		//printf("i:%d\n", uz_y);
     }
+	printf("i:%d\n", uz_y);
+	printf("Texture check uz_y2: %d\n", uz_y);
     close(fd_map);
 }
 
@@ -84,28 +84,34 @@ void mapcheck2(char *words, t_cub3d *img)
 		img->texture_bool = 1;
 }
 
-void mapcheck3(char *words, t_cub3d *img)
-{
-	int i = 0;
-	int j = 0;
+void mapcheck3(char *words, t_cub3d *img) {
 
-	if (words[i])
+    int i = 0;
+    int j = 0;
+
+    while (words[j])
 	{
-		while (words[j])
-		{
-			if (words[j] == 'N')
-				img->n_timer++;
-			else if (words[j] == 'S')
-				img->s_timer++;
-			else if (words[j] == 'E')
-				img->e_timer++;
-			else if (words[j] == 'W')
-				img->w_timer++;
-			j++;
-		}
-		i++;
-	}
-	if ((img->w_timer == 1 || img->s_timer == 1 || img->e_timer == 1 || img->n_timer == 1) && !words[i])
-		img->map_bool = 1;
-	printf("img->n_timer : %d",img->n_timer);
+        if (words[j] != '1' && words[j] != '0' && words[j] != 'N'
+            && words[j] != 'S' && words[j] != 'E' && words[j] != 'W'
+            && words[j] != '\n' && words[j] != ' ' && words[j] != 32) {
+            free_all(img);
+            printf("%c : Hatali bir yer var.\n", words[j]);
+            exit(1);
+        }
+        else {
+            if (words[j] == 'N')
+                img->n_timer++;
+            else if (words[j] == 'S')
+                img->s_timer++;
+            else if (words[j] == 'E')
+                img->e_timer++;
+            else if (words[j] == 'W')
+                img->w_timer++;
+        }
+		printf("%c",words[j]);
+        j++;
+    }
+    if ((img->w_timer == 1 || img->s_timer == 1 || img->e_timer == 1 || img->n_timer == 1) && !words[i]) {
+        img->map_bool = 1;
+    }
 }
