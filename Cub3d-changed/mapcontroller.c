@@ -147,6 +147,11 @@ void realmapcheck(int i, t_cub3d *img)
 				write(2,"Ilk sutun 0 hatasi\n", 19);
 				exit_func(img->map[i], img);
 			}
+			else if (img->map[i][j + 1] == '\n' && img->map[i][j] != '1')
+			{
+				write(2, "Son sutun 0 hatasi\n",19);
+				exit_func(img->map[i], img);
+			}
 			// else if (img->map[i][j] == '0' && (!img->map[i + 1] || !img->map[i + 1][j]))
 			// {
 			// 	printf("img->map[i]: %s",img->map[i]);
