@@ -30,13 +30,13 @@ void mapcheck(t_cub3d *cub3dptr)
 		if(!cub3dptr->texture_bool)
 		{
 			mapcheck2(cub3dptr->map[uz_y], cub3dptr);
-			printf("texture check uz_y:%d\n", uz_y);
 		}
-		else if (!cub3dptr->map_bool && cub3dptr->texture_bool)
+		else if (!cub3dptr->map_bool && cub3dptr->texture_bool && cub3dptr->map[uz_y][0] != '\n')
 		{
 			mapcheck3(cub3dptr->map[uz_y], cub3dptr);
+			realmapcheck(uz_y, cub3dptr);
 		}
-		free(cub3dptr->map[uz_y]);
+		//free(cub3dptr->map[uz_y]); -> Line freelendigi icin bir oncekine bakamiyorum en son mapi tek tek
     }
 	printf("i:%d\n", uz_y);
 	printf("Texture check uz_y2: %d\n", uz_y);
@@ -49,8 +49,15 @@ void mapcheck2(char *words, t_cub3d *img)
 	char **split;
 	char **color;
 	int (i) = 0;
+	//int (j) = 0;
 
 	split = ft_split(words, ' ');
+	// while (split[i])
+	// {
+	// 	if (split[i][j] <= 32)
+	// 		split = ft_split(words, '\t');
+	// 	i++;
+	// }
 	if(!strcmp(split[0], "NO") || !strcmp(split[0], "SO")
 		|| !strcmp(split[0], "WE") || !strcmp(split[0], "EA"))
 	{
@@ -86,21 +93,20 @@ void mapcheck2(char *words, t_cub3d *img)
 		img->texture_bool = 1;
 }
 
-void mapcheck3(char *words, t_cub3d *img) {
-
-    int i = 0;
+void mapcheck3(char *words, t_cub3d *img)
+{
     int j = 0;
 
-    while (words[j])
+    while (words[j] && words[j] != '\n')
 	{
         if (words[j] != '1' && words[j] != '0' && words[j] != 'N'
             && words[j] != 'S' && words[j] != 'E' && words[j] != 'W'
-            && words[j] != '\n' && words[j] != ' ' && words[j] != 32) {
-            free_all(img);
-            printf("%c : Hatali bir yer var.\n", words[j]);
-            exit(1);
+            && words[j] != '\n' && words[j] != ' ' && words[j] != 32)
+		{
+			exit_func("hatali bir yer var\n", img);
         }
-        else {
+        else
+		{
             if (words[j] == 'N')
                 img->n_timer++;
             else if (words[j] == 'S')
@@ -111,17 +117,49 @@ void mapcheck3(char *words, t_cub3d *img) {
                 img->w_timer++;
         }
 		if (img->n_timer + img->s_timer + img->e_timer + img->w_timer > 1)
-		{
-			printf("\033[1;36mntimer: %d\n", img->n_timer);
-			printf("stimer: %d\n", img->s_timer);
-			printf("etimer: %d\n", img->e_timer);
-			printf("wtimer: %d\033[0m\n", img->w_timer);
-			exit_func("W, S, E, or N not occured once\n", img);
-		}
-		printf("%c",words[j]);
-         j++;
+			exit_func("\nW, S, E, or N not occured once\n", img);
+		write(1, &words[j], 1);
+        j++;
     }
-    if ((img->w_timer == 1 || img->s_timer == 1 || img->e_timer == 1 || img->n_timer == 1) && !words[i]) {
+	write(1, "\n", 1);
+    if (!words[j] && (img->w_timer == 1 || img->s_timer == 1 || img->e_timer == 1 || img->n_timer == 1))
         img->map_bool = 1;
-    }
+}
+
+void realmapcheck(int i, t_cub3d *img)
+{
+	int (j) = 0;
+
+	while (img->map[i])
+	{
+		j = 0;
+		while(img->map[i][j])
+		{
+			if (img->map[i][j] == ' ' && img->map[i][j] == '\t')
+				j++;
+			else if (img->map[i][j] == '0' && (!img->map[i - 1] || !img->map[i - 1][j]))
+			{
+				write(2, "Ilk satir\n",10);
+				exit_func(img->map[i], img);
+			}
+			else if (img->map[i][0] != '1' && img->map[i][0] > 32)
+			{
+				write(2,"Ilk sutun 0 hatasi\n", 19);
+				exit_func(img->map[i], img);
+			}
+			// else if (img->map[i][j] == '0' && (!img->map[i + 1] || !img->map[i + 1][j]))
+			// {
+			// 	printf("img->map[i]: %s",img->map[i]);
+			// 	//printf("img->map[i]: %s",img->map[i + 1]); ->Buna bakamıyorum satırları tek tek aldıgım icin.
+			// 	exit_func(img->map[i],img);
+			// }
+			else if ((img->map[i][j] <= 32 && img->map[i][j + 1] == '0') || (img->map[i][j] == '0' && img->map[i][j + 1] <= 32))
+			{
+				write(2, "Hata\n",5);
+				exit(1);
+			}
+			j++;
+		}
+		i++;
+	}
 }

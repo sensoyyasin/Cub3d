@@ -93,5 +93,6 @@ int is_number(char *str);
 void mapdrawcheck(char *words, t_cub3d *img);
 void ismaptrue(char *words, t_cub3d *img);
 void double_free_split(char **split1, char **split2);
+void realmapcheck(int i, t_cub3d *img);
 
 #endif
