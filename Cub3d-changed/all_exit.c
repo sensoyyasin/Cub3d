@@ -2,7 +2,7 @@
 
 void exit_func(char *err, t_cub3d *img)
 {
-	write(2, err, ft_strlen(err));
+	write(2, err, 100 /*ft_strlen(err)*/);
 	free_all(img);
 	exit(0);
 }

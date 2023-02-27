@@ -10,6 +10,7 @@ char *clear_endstr(char *str)
 		{
 			str[i] = 0;
 			newstr = ft_strdup(str);
+			//free(str + ft_strlen(newstr));
 			free(str);
 		}
 		i++;
