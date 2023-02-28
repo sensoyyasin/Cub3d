@@ -52,7 +52,7 @@ void turnleft(t_cub3d *cub3d)
         my_mlx_pixel_put(cub3d, cub3d->x_kord - 1, cub3d->y_kord - 1, WHITE);
 
         //Yeni oyuncu konumu yeşil olsun.
-        my_mlx_pixel_put(cub3d, cub3d->x_kord - 2, cub3d->y_kord - 1, GREEN);
+        my_mlx_pixel_put(cub3d, cub3d->x_kord - 2, cub3d->y_kord - 1, RED);
 
 	    cub3d->map[cub3d->y_kord-1][cub3d->x_kord - 1] = '0';
 	    cub3d->map[cub3d->y_kord-1][cub3d->x_kord - 2] = 'N';
@@ -66,7 +66,7 @@ void turnright(t_cub3d *cub3d)
     if (cub3d->map[cub3d->y_kord - 1][cub3d->x_kord] == '0')
     {
         my_mlx_pixel_put(cub3d, cub3d->x_kord - 1, cub3d->y_kord - 1, WHITE);
-        my_mlx_pixel_put(cub3d, cub3d->x_kord, cub3d->y_kord - 1, GREEN);
+        my_mlx_pixel_put(cub3d, cub3d->x_kord, cub3d->y_kord - 1, RED);
 	    cub3d->map[cub3d->y_kord - 1][cub3d->x_kord - 1] = '0';
 	    cub3d->map[cub3d->y_kord - 1][cub3d->x_kord] = 'N';
         cub3d->x_kord++;
@@ -79,7 +79,7 @@ void turnup(t_cub3d *cub3d)
     if (cub3d->map[cub3d->y_kord - 2][cub3d->x_kord - 1] == '0')
     {
         my_mlx_pixel_put(cub3d, cub3d->x_kord - 1, cub3d->y_kord - 1, WHITE);
-        my_mlx_pixel_put(cub3d, cub3d->x_kord - 1, cub3d->y_kord - 2, GREEN);
+        my_mlx_pixel_put(cub3d, cub3d->x_kord - 1, cub3d->y_kord - 2, RED);
 	    cub3d->map[cub3d->y_kord-1][cub3d->x_kord - 1] = '0';
 	    cub3d->map[cub3d->y_kord-2][cub3d->x_kord - 1] = 'N';
         cub3d->y_kord--;
@@ -92,7 +92,7 @@ void turndown(t_cub3d *cub3d)
     if (cub3d->map[cub3d->y_kord][cub3d->x_kord - 1] == '0')
     {
         my_mlx_pixel_put(cub3d, cub3d->x_kord - 1, cub3d->y_kord - 1, WHITE);
-        my_mlx_pixel_put(cub3d, cub3d->x_kord - 1, cub3d->y_kord, GREEN);
+        my_mlx_pixel_put(cub3d, cub3d->x_kord - 1, cub3d->y_kord, RED);
 	    cub3d->map[cub3d->y_kord-1][cub3d->x_kord - 1] = '0';
 	    cub3d->map[cub3d->y_kord][cub3d->x_kord - 1] = 'N';
         cub3d->y_kord++;

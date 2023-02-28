@@ -30,6 +30,8 @@
 # define GREEN 0x0000FF00
 # define WHITE 0x00FFFFFF
 # define BLACK 0x00000000
+# define MAGENTA 0xFF00FF
+# define CYAN 0x8000FFFF
 
 typedef struct s_player
 {
