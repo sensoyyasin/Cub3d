@@ -60,6 +60,8 @@ void mapcheck(t_cub3d *cub3dptr)
 			//realmapcheck(uz_y, cub3dptr);
 	printf("Texture check uz_y2: %d\n", uz_y);
     close(fd_map);
+	if ((cub3dptr->w_timer == 1 || cub3dptr->s_timer == 1 || cub3dptr->e_timer == 1 || cub3dptr->n_timer == 1))
+        cub3dptr->map_bool = 1;
 }
 
 void mapcheck2(char *words, t_cub3d *img)
@@ -134,8 +136,6 @@ void mapcheck3(char *words, t_cub3d *img)
         j++;
     }
 	write(1, "\n", 1);
-    if ((img->w_timer == 1 || img->s_timer == 1 || img->e_timer == 1 || img->n_timer == 1))
-        img->map_bool = 1;
 }
 
 void realmapcheck(int i, t_cub3d *img)
@@ -177,6 +177,9 @@ void realmapcheck(int i, t_cub3d *img)
 			// }
 			else if (img->map[i][j] == '0' && (i == img->map_length - 1 || (img->map[i + 1][j] && img->map[i + 1][j] <= 32)))
 			{
+				//write(1, "0'ın altı:",11);
+				//write(1, &img->map[i + 1][j], 1);
+				//write(2, "\n", 1);
 				write(2, "Son satir 0 hatasi\n",19);
 				exit_func(img->map[i], img);
 			}
