@@ -49,7 +49,6 @@ typedef struct cub3d
     char **map_input;
     int *addr;
     void *img;
-    int y_kord;
     void *wall;
     void *floor;
     int line_length;
@@ -73,6 +72,8 @@ typedef struct cub3d
     int s_timer;
     int e_timer;
     int w_timer;
+    int x_kord;
+    int y_kord;
 } t_cub3d;
 
 int pushbutton(int keycode, t_cub3d *ptr);
@@ -97,5 +98,10 @@ void double_free_split(char **split1, char **split2);
 void realmapcheck(int i, t_cub3d *img);
 void my_mlx_pixel_put(t_cub3d *img, int x, int y, int color);
 void my_mlx_pixel_put2(t_cub3d *img, int x, int y, int color);
+void player(t_cub3d *cub3dptr);
+void turnleft(t_cub3d *cub3d);
+void turnup(t_cub3d *cub3d);
+void turnright(t_cub3d *cub3d);
+void turndown(t_cub3d *cub3d);
 
 #endif

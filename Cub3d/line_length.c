@@ -69,10 +69,10 @@ void my_mlx_pixel_put2(t_cub3d *img, int x, int y, int color)
     int (i) = 0;
     int (j) = 0;
     
-    while (i < 14)
+    while (i < 16)
     {
         j = 0;
-        while (j < 14)
+        while (j < 16)
         {
             mlx_pixel_put(img->mlx, img->mlx_win, (x * 16) + j, (y * 16) + i, color);
             j++;
