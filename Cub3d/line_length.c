@@ -78,6 +78,9 @@ void putimage(t_cub3d *cub3dptr)
                 my_mlx_pixel_put(cub3dptr, x, y, RED);
             else if (cub3dptr->map[y][x] == '0')
                 my_mlx_pixel_put(cub3dptr, x,y, WHITE);
+            else if (cub3dptr->map[y][x] == 'N' || cub3dptr->map[y][x] == 'S' || cub3dptr->map[y][x] == 'E'
+                || cub3dptr->map[y][x] == 'W')
+                    my_mlx_pixel_put(cub3dptr, x, y, GREEN);
             x++;
         }
         y++;
