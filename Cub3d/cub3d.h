@@ -68,6 +68,10 @@ typedef struct cub3d
 	char *ea_path; //will be freed to here
 	int f_color[3];
 	int c_color[3];
+    int n_timer;
+    int s_timer;
+    int e_timer;
+    int w_timer;
 } t_cub3d;
 
 int pushbutton(int keycode, t_cub3d *ptr);
@@ -80,11 +84,15 @@ void free_all(t_cub3d *img);
 void exit_func(char *err, t_cub3d *img);
 void split_comp(char **split, t_cub3d *img);
 void mapcheck2(char *words, t_cub3d *img);
+void mapcheck3(char *words, t_cub3d *img);
 void exit_split_func(char **split, t_cub3d *img);
 void free_split(char **split);
 void exit_double_split_func(char **split, char **color, t_cub3d *img);
 char *clear_endstr(char *str);
 int is_number(char *str);
 void mapdrawcheck(char *words, t_cub3d *img);
+void ismaptrue(char *words, t_cub3d *img);
+void double_free_split(char **split1, char **split2);
+void realmapcheck(int i, t_cub3d *img);
 
 #endif

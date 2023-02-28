@@ -10,8 +10,6 @@ void isargtrue(t_cub3d *cub3dptr)
         cub3dptr->map_input[1][len - 3] != 'c' &&
         cub3dptr->map_input[1][len - 4] != '.')
         {
-			//printf("\033[1;31mWrong map format!\n\033[0m"); //change
-           	//write(2, "Error\n", 6);
 		    exit_func("\033[1;31mWrong map format!\n\033[0m", cub3dptr);
         }
 }
@@ -26,20 +24,24 @@ void mapcheck(t_cub3d *cub3dptr)
     if (fd_map < 0)
 		exit_func("\033[1;31mFile could not be opened!\n\033[0m", cub3dptr);
     cub3dptr->map = malloc((sizeof(char *)) * 1024);
-    while (++uz_y < line_length(cub3dptr))
+    while (++uz_y <= line_length(cub3dptr) && (cub3dptr->map[uz_y] = get_next_line(fd_map)))
     {
-		cub3dptr->map[uz_y] = get_next_line(fd_map);
+		// cub3dptr->map[uz_y] = get_next_line(fd_map);
+		// if (ft_strlen(cub3dptr->map[uz_y]) == '\n')
+		// 	return ;
 		if(!cub3dptr->texture_bool)
 		{
 			mapcheck2(cub3dptr->map[uz_y], cub3dptr);
-			printf("texture check uz_y:%d\n", uz_y);
 		}
-		else if(!cub3dptr->map_bool)
+		else if (!cub3dptr->map_bool && cub3dptr->texture_bool && cub3dptr->map[uz_y][0] != '\n')
 		{
-			mapdrawcheck(cub3dptr->map[uz_y], cub3dptr);
+			mapcheck3(cub3dptr->map[uz_y], cub3dptr);
+			realmapcheck(uz_y, cub3dptr);
 		}
-		//printf("i:%d\n", uz_y);
+		//free(cub3dptr->map[uz_y]); -> Line freelendigi icin bir oncekine bakamiyorum en son mapi tek tek
     }
+	printf("i:%d\n", uz_y);
+	printf("Texture check uz_y2: %d\n", uz_y);
     close(fd_map);
 }
 
@@ -80,13 +82,89 @@ void mapcheck2(char *words, t_cub3d *img)
 			}
 			i++;
 		}
+		double_free_split(split, color);
 	}
 	if (img->no == 1 && img->so == 1 && img->we == 1 && img->ea == 1 && img->f == 1 && img->c == 1)
 		img->texture_bool = 1;
 }
 
-void mapdrawcheck(char *words, t_cub3d *img)
+void mapcheck3(char *words, t_cub3d *img)
 {
-	int (i) = 0;
-	//if(word[i] =)
+    int j = 0;
+
+    while (words[j] && words[j] != '\n')
+	{
+        if (words[j] != '1' && words[j] != '0' && words[j] != 'N'
+            && words[j] != 'S' && words[j] != 'E' && words[j] != 'W'
+            && words[j] != '\n' && words[j] != ' ' && words[j] != 32)
+		{
+			exit_func("hatali bir yer var\n", img);
+        }
+        else
+		{
+            if (words[j] == 'N')
+                img->n_timer++;
+            else if (words[j] == 'S')
+                img->s_timer++;
+            else if (words[j] == 'E')
+                img->e_timer++;
+            else if (words[j] == 'W')
+                img->w_timer++;
+        }
+		if (img->n_timer + img->s_timer + img->e_timer + img->w_timer > 1)
+			exit_func("\nW, S, E, or N not occured once\n", img);
+		write(1, &words[j], 1);
+        j++;
+    }
+	write(1, "\n", 1);
+    if ((img->w_timer == 1 || img->s_timer == 1 || img->e_timer == 1 || img->n_timer == 1))
+        img->map_bool = 1;
+}
+
+void realmapcheck(int i, t_cub3d *img)
+{
+	int (j) = 0;
+
+	while (img->map[i])
+	{
+		j = 0;
+		while(img->map[i][j])
+		{
+			if ((img->map[i][j] == 'N' || img->map[i][j] == 'S' || img->map[i][j] == 'W' || img->map[i][j] == 'E') 
+				&& (img->map[i][j - 1] <= 32 || img->map[i][j + 1] <= 32))
+			{
+				write(2, "PATLAT\n",7);
+				exit_func(img->map[i], img);
+			}
+			if (img->map[i][j] == ' ' && img->map[i][j] == '\t')
+				j++;
+			else if (img->map[i][j] == '0' && (!img->map[i - 1] || !img->map[i - 1][j]))
+			{
+				write(2, "Ilk satir\n",10);
+				exit_func(img->map[i], img);
+			}
+			else if (img->map[i][0] != '1' && img->map[i][0] > 32)
+			{
+				write(2,"Ilk sutun 0 hatasi\n", 19);
+				exit_func(img->map[i], img);
+			}
+			else if (img->map[i][j + 1] == '\n' && img->map[i][j] == '0')
+			{
+				write(2, "Son sutun 0 hatasi\n",19);
+				exit_func(img->map[i], img);
+			}
+			// else if ((img->map[i][j] <= 32 && img->map[i][j + 1] == '0') || (img->map[i][j] == '0' && img->map[i][j + 1] <= 32))
+			// {
+			// 	write(2, "Hata\n",5);
+			// 	exit(1);
+			// }
+			else if (line_length(img) == i && img->map[i][j] == '0')
+			{
+				write(2, "Son satir 0 hatasi\n",19);
+				exit_func(img->map[i], img);
+			}
+			j++;
+		}
+		i++;
+	}
 }

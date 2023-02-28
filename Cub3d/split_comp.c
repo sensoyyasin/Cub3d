@@ -1,5 +1,17 @@
 #include "cub3d.h"
 
+void double_free_split(char **split1, char **split2)
+{
+	int (i) = 0;
+	while (split1[i])
+		free(split1[i++]);
+	free(split1);
+	i = 0;
+	while (split2[i])
+		free(split2[i++]);
+	free(split2);
+}
+
 void free_split(char **split)
 {
 	int (i) = 0;
