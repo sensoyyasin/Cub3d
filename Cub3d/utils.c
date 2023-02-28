@@ -10,12 +10,12 @@ char *clear_endstr(char *str)
 		{
 			str[i] = 0;
 			newstr = ft_strdup(str);
-			//free(str + ft_strlen(newstr));
 			free(str);
+			return(newstr);
 		}
 		i++;
 	}
-	return (newstr);
+	return (str);
 }
 
 int is_number(char *str)

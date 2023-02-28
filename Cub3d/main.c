@@ -4,7 +4,6 @@ void check_all(t_cub3d *img)
 {
 	isargtrue(img);
 	mapcheck(img);
-	 printf("img->texture_bool: %d, img->map_bool: %d\n", img->texture_bool, img->map_bool);
   	if (!img->texture_bool || !img->map_bool)
         exit_func("\033[1;31mMap or texture error\033[0m", img);
 }
@@ -42,8 +41,8 @@ int main(int argc, char **argv)
 	initializer(img);
 	check_all(img);
     img->mlx = mlx_init();
-    img->mlx_win = mlx_new_window(img->mlx, 750, 750 ,"Cub3d");
-    //putimage(img);
+    img->mlx_win = mlx_new_window(img->mlx, 1080, 720 ,"Cub3d");
+    putimage(img);
 	mlx_hook(img->mlx_win, 2, 1L << 0, pushbutton, &img->mlx);
 	mlx_hook(img->mlx_win, 17, (0L), pushbutton, img);
     mlx_loop(img->mlx);

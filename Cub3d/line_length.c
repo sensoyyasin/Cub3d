@@ -47,23 +47,39 @@ int column_length(t_cub3d *cub3dptr)
 // 	int		endian;
 // }				t_data;
 
+void my_mlx_pixel_put(t_cub3d *img, int x, int y, int color)
+{
+    int i = 0;
+    int j = 0;
+    while (i < 32)
+    {
+        j = 0;
+        while (j < 32)
+        {
+            mlx_pixel_put(img->mlx, img->mlx_win, (x * 32) + j, (y * 32) + i, color);
+            j++;
+        }
+        i++;
+    }
+}
+
 void putimage(t_cub3d *cub3dptr)
 {
     int x;
     int y;
 
-    x = 0;
-    while (cub3dptr->map[x])
+    y = 0;
+    while (cub3dptr->map[y])
     {
-        y = 0;
-        while (cub3dptr->map[x][y])
+        x = 0;
+        while (cub3dptr->map[y][x])
         {
-            // if (cub3dptr->map[x][y] == '1')
-            //     my_mlx_pixel_put(&cub3dptr->img, x,y, 0x00FF0000);
-            // else if (cub3dptr->map[x][y] == '0')
-            //     my_mlx_pixel_put(&cub3dptr->img, x,y, 0x00FF0000);
-            y++;
+            if (cub3dptr->map[y][x] == '1')
+                my_mlx_pixel_put(cub3dptr, x, y, RED);
+            else if (cub3dptr->map[y][x] == '0')
+                my_mlx_pixel_put(cub3dptr, x,y, WHITE);
+            x++;
         }
-        x++;
+        y++;
     }
 }
