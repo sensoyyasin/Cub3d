@@ -62,6 +62,7 @@ typedef struct cub3d
 	int c;
 	int texture_bool;
 	int map_bool;
+	int map_length;
 	char *no_path; //will be freed from here
 	char *so_path;
 	char *we_path;

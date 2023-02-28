@@ -18,29 +18,46 @@ void mapcheck(t_cub3d *cub3dptr)
 {
     int fd_map;
     int uz_y;
-    
+    char *line;
+	int i = 0;
+	
     uz_y = -1;
     fd_map = open(cub3dptr->map_input[1], O_RDONLY);
     if (fd_map < 0)
 		exit_func("\033[1;31mFile could not be opened!\n\033[0m", cub3dptr);
     cub3dptr->map = malloc((sizeof(char *)) * 1024);
-    while (++uz_y <= line_length(cub3dptr) && (cub3dptr->map[uz_y] = get_next_line(fd_map)))
+    while (++uz_y <= line_length(cub3dptr) && (line = get_next_line(fd_map))) //(cub3dptr->map[uz_y] = get_next_line(fd_map))
     {
 		// cub3dptr->map[uz_y] = get_next_line(fd_map);
 		// if (ft_strlen(cub3dptr->map[uz_y]) == '\n')
 		// 	return ;
 		if(!cub3dptr->texture_bool)
 		{
-			mapcheck2(cub3dptr->map[uz_y], cub3dptr);
+			//mapcheck2(cub3dptr->map[uz_y], cub3dptr);
+			mapcheck2(line, cub3dptr);
 		}
-		else if (!cub3dptr->map_bool && cub3dptr->texture_bool && cub3dptr->map[uz_y][0] != '\n')
+		else if (!cub3dptr->map_bool && cub3dptr->texture_bool && line[0] != '\n')
 		{
-			mapcheck3(cub3dptr->map[uz_y], cub3dptr);
-			realmapcheck(uz_y, cub3dptr);
+			cub3dptr->map[i] = ft_strdup(line);
+			write(1, cub3dptr->map[i], ft_strlen(cub3dptr->map[i]));
+			i++;
 		}
 		//free(cub3dptr->map[uz_y]); -> Line freelendigi icin bir oncekine bakamiyorum en son mapi tek tek
+		free(line);
     }
-	printf("i:%d\n", uz_y);
+	cub3dptr->map[i] = NULL;
+	cub3dptr->map_length = i;
+	printf("i:%d - i:%d\n", i, cub3dptr->map_length);
+	i = 0;
+	while (i < cub3dptr->map_length)
+	{
+		mapcheck3(cub3dptr->map[i], cub3dptr);
+		realmapcheck(i, cub3dptr);
+		i++;
+	}
+	
+			//mapcheck3(cub3dptr->map[uz_y], cub3dptr);
+			//realmapcheck(uz_y, cub3dptr);
 	printf("Texture check uz_y2: %d\n", uz_y);
     close(fd_map);
 }
@@ -158,7 +175,7 @@ void realmapcheck(int i, t_cub3d *img)
 			// 	write(2, "Hata\n",5);
 			// 	exit(1);
 			// }
-			else if (line_length(img) == i && img->map[i][j] == '0')
+			else if (img->map[i][j] == '0' && (i == img->map_length - 1 || (img->map[i + 1][j] && img->map[i + 1][j] <= 32)))
 			{
 				write(2, "Son satir 0 hatasi\n",19);
 				exit_func(img->map[i], img);

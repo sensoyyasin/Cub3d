@@ -4,7 +4,7 @@ void check_all(t_cub3d *img)
 {
 	isargtrue(img);
 	mapcheck(img);
-	// printf("img->texture_bool: %d, img->map_bool: %d\n", img->texture_bool, img->map_bool);
+	 printf("img->texture_bool: %d, img->map_bool: %d\n", img->texture_bool, img->map_bool);
   	if (!img->texture_bool || !img->map_bool)
         exit_func("\033[1;31mMap or texture error\033[0m", img);
 }
