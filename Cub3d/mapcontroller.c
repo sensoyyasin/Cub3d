@@ -54,10 +54,7 @@ void mapcheck(t_cub3d *cub3dptr)
 		realmapcheck(i, cub3dptr);
 		i++;
 	}
-	
-		//mapcheck3(cub3dptr->map[uz_y], cub3dptr);
-		//realmapcheck(uz_y, cub3dptr);
-	printf("Texture check uz_y2: %d\n", uz_y);
+	//printf("Texture check uz_y2: %d\n", uz_y);
     close(fd_map);
 	if ((cub3dptr->w_timer == 1 || cub3dptr->s_timer == 1 || cub3dptr->e_timer == 1 || cub3dptr->n_timer == 1))
         cub3dptr->map_bool = 1;

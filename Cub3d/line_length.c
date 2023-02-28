@@ -49,14 +49,32 @@ int column_length(t_cub3d *cub3dptr)
 
 void my_mlx_pixel_put(t_cub3d *img, int x, int y, int color)
 {
-    int i = 0;
-    int j = 0;
-    while (i < 32)
+    int (i) = 0;
+    int (j) = 0;
+
+    while (i < 16)
     {
         j = 0;
-        while (j < 32)
+        while (j < 16)
         {
-            mlx_pixel_put(img->mlx, img->mlx_win, (x * 32) + j, (y * 32) + i, color);
+            mlx_pixel_put(img->mlx, img->mlx_win, (x * 16) + j, (y * 16) + i, color);
+            j++;
+        }
+        i++;
+    }
+}
+
+void my_mlx_pixel_put2(t_cub3d *img, int x, int y, int color)
+{
+    int (i) = 0;
+    int (j) = 0;
+    
+    while (i < 14)
+    {
+        j = 0;
+        while (j < 14)
+        {
+            mlx_pixel_put(img->mlx, img->mlx_win, (x * 16) + j, (y * 16) + i, color);
             j++;
         }
         i++;
@@ -80,7 +98,10 @@ void putimage(t_cub3d *cub3dptr)
                 my_mlx_pixel_put(cub3dptr, x,y, WHITE);
             else if (cub3dptr->map[y][x] == 'N' || cub3dptr->map[y][x] == 'S' || cub3dptr->map[y][x] == 'E'
                 || cub3dptr->map[y][x] == 'W')
-                    my_mlx_pixel_put(cub3dptr, x, y, GREEN);
+                {
+                    my_mlx_pixel_put(cub3dptr, x, y, WHITE);
+                    my_mlx_pixel_put2(cub3dptr, x, y, GREEN);
+                }
             x++;
         }
         y++;

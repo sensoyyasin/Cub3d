@@ -96,5 +96,6 @@ void ismaptrue(char *words, t_cub3d *img);
 void double_free_split(char **split1, char **split2);
 void realmapcheck(int i, t_cub3d *img);
 void my_mlx_pixel_put(t_cub3d *img, int x, int y, int color);
+void my_mlx_pixel_put2(t_cub3d *img, int x, int y, int color);
 
 #endif
