@@ -32,32 +32,17 @@ int column_length(t_cub3d *cub3dptr)
     return (i);
 }
 
-// void img_draw(t_cub3d *cub3dptr, void  *image, int x, int y)
-// {
-//     mlx_put_image_to_window(cub3dptr->mlx,
-//         cub3dptr->mlx_win, image, x, y);
-// }
-
-// typedef struct	s_data
-// {
-// 	void	*img;
-// 	char	*addr;
-// 	int		bits_per_pixel;
-// 	int		line_length;
-// 	int		endian;
-// }				t_data;
-
 void my_mlx_pixel_put(t_cub3d *img, int x, int y, int color)
 {
     int (i) = 0;
     int (j) = 0;
 
-    while (i < 16)
+    while (i < img->pixel)
     {
         j = 0;
-        while (j < 16)
+        while (j < img->pixel)
         {
-            mlx_pixel_put(img->mlx, img->mlx_win, (x * 16) + j, (y * 16) + i, color);
+            mlx_pixel_put(img->mlx, img->mlx_win, (x * img->pixel) + j, (y * img->pixel) + i, color);
             j++;
         }
         i++;
@@ -69,17 +54,38 @@ void my_mlx_pixel_put2(t_cub3d *img, int x, int y, int color)
     int (i) = 0;
     int (j) = 0;
     
-    while (i < 16)
+    while (i < img->pixel)
     {
         j = 0;
-        while (j < 16)
+        while (j < img->pixel)
         {
-            mlx_pixel_put(img->mlx, img->mlx_win, (x * 16) + j, (y * 16) + i, color);
+            mlx_pixel_put(img->mlx, img->mlx_win, (x * img->pixel) + j, (y * img->pixel) + i, color);
             j++;
         }
         i++;
     }
 }
+
+// void my_mlx_pixel_put3(t_cub3d *img, int x, int y, int color, char *str)
+// {
+//     int (i) = 0;
+//     int (j) = 0;
+//     double speed = img->speed_pixel / img->pixel; // 10 / 16
+    
+//     if (ft_strncmp(str, "-x", 2) == 0)
+//     {
+//         while (i < img->pixel)
+//         {
+//             j = 0;
+//             while (j < img->pixel)
+//             {
+//                 mlx_pixel_put(img->mlx, img->mlx_win, (x * img->pixel) + j, (y * img->pixel) + i, color);
+//                 j++;
+//             }
+//             i++;
+//         }   
+//     }
+// }
 
 void putimage(t_cub3d *cub3dptr)
 {

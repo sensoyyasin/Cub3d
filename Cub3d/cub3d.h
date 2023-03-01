@@ -76,6 +76,8 @@ typedef struct cub3d
     int w_timer;
     int x_kord;
     int y_kord;
+    int speed_pixel;
+    int pixel;
 } t_cub3d;
 
 int pushbutton(int keycode, t_cub3d *ptr);

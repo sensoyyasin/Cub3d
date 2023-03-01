@@ -28,6 +28,8 @@ void initializer(t_cub3d *img)
 	img->c = 0;
 	img->texture_bool = 0;
 	img->map_bool = 0;
+	img->speed_pixel = 5;
+	img->pixel = 16;
 }
 
 int main(int argc, char **argv)
