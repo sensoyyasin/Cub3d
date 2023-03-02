@@ -17,15 +17,6 @@
 #define W 13
 #define ESC 53
 
-#define WINDOW_X 500
-#define WINDOW_Y 500
-
-#define SQR_X 50
-#define SQR_Y 50
-#define SQR_LENGTH 45
-
-#define PLAYER 20
-
 # define RED 0x00FF0000
 # define GREEN 0x0000FF00
 # define WHITE 0x00FFFFFF
