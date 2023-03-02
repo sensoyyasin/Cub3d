@@ -5,7 +5,7 @@
 //  Created by yasin şensoy on 2.03.2023.
 //
 
-#include "math.h""
+#include "math.h"
 #include "stdio.h"
 #include "stdlib.h"
 #include <OpenGL/gl.h>
