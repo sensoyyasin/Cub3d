@@ -9,7 +9,7 @@
 #include "libft/libft.h"
 #include "get_next_line/get_next_line.h"
 
-#define PI 3.141592653
+#define PI 3.141592653 //M_PI
 
 #define A 0
 #define S 1
@@ -31,7 +31,7 @@
 # define WHITE 0x00FFFFFF
 # define BLACK 0x00000000
 # define MAGENTA 0xFF00FF
-# define CYAN 0x8000FFFF
+# define CYAN 0x0000FFFF
 
 typedef struct s_player
 {
@@ -63,7 +63,8 @@ typedef struct cub3d
 	int c;
 	int texture_bool;
 	int map_bool;
-	int map_length;
+	int max_map_width;
+	int max_map_height;
 	char *no_path; //will be freed from here
 	char *so_path;
 	char *we_path;
@@ -86,7 +87,7 @@ typedef struct cub3d
 int pushbutton(int keycode, t_cub3d *ptr);
 void isargtrue(t_cub3d *cub3dptr);
 int line_length(t_cub3d *cub3dptr);
-void putimage(t_cub3d *cub3dptr);
+void putpixel(t_cub3d *cub3dptr);
 void mapcheck(t_cub3d *cub3dptr);
 void check_all(t_cub3d *img);
 void free_all(t_cub3d *img);
@@ -110,5 +111,6 @@ void turnleft(t_cub3d *cub3d);
 void turnup(t_cub3d *cub3d);
 void turnright(t_cub3d *cub3d);
 void turndown(t_cub3d *cub3d);
+void putimage(t_cub3d *img);
 
 #endif

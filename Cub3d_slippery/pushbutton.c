@@ -50,9 +50,10 @@ void turnleft(t_cub3d *img)
     double newp_x = img->p_x - img->speed;
     double newp_y = img->p_y;
 
-    if(img->map[(int)newp_y][(int)newp_x] == '0'  && img->map[(int)newp_y][(int)newp_x - 1] == '0')
+    if(img->map[(int)newp_y][(int)newp_x] == '0'  && img->map[(int)newp_y][(int)newp_x] == '0')
     {
 		my_mlx_pixel_put2(img, img->p_x, img->p_y, WHITE);
+		//my_mlx_pixel_put2(img, img->p_x, img->p_y, 0xFF000000);
 		// putimage(img);
 		img->p_x = newp_x;
 		img->p_y = newp_y;
@@ -66,7 +67,7 @@ void turnright(t_cub3d *img)
     double newp_x = img->p_x + img->speed;
     double newp_y = img->p_y;
 
-    if(img->map[(int)newp_y][(int)newp_x] == '0' && img->map[(int)newp_y][(int)newp_x + 1] == '0')
+    if(img->map[(int)newp_y][(int)newp_x] == '0' && img->map[(int)newp_y][(int)newp_x] == '0')
     {
 		my_mlx_pixel_put2(img, img->p_x, img->p_y, WHITE);
 		// if(img->map[(int)newp_y][(int)newp_x + 1] == '1')
@@ -84,7 +85,7 @@ void turnup(t_cub3d *img)
     double newp_x = img->p_x;
     double newp_y = img->p_y - img->speed;
 
-    if(img->map[(int)newp_y][(int)newp_x] == '0' && img->map[(int)newp_y - 1][(int)newp_x] == '0')
+    if(img->map[(int)newp_y][(int)newp_x] == '0' && img->map[(int)newp_y][(int)newp_x] == '0')
     {
 		my_mlx_pixel_put2(img, img->p_x, img->p_y, WHITE);
 		//putimage(img);
@@ -100,7 +101,7 @@ void turndown(t_cub3d *img)
     double newp_x = img->p_x;
     double newp_y = img->p_y + img->speed;
 
-    if(img->map[(int)newp_y][(int)newp_x] == '0' && img->map[(int)newp_y + 1][(int)newp_x] == '0')
+    if(img->map[(int)newp_y][(int)newp_x] == '0' && img->map[(int)newp_y][(int)newp_x] == '0')
     {
 		my_mlx_pixel_put2(img, img->p_x, img->p_y, WHITE);
 		//putimage(img);

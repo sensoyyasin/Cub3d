@@ -46,16 +46,18 @@ void mapcheck(t_cub3d *cub3dptr)
 		free(line);
     }
 	cub3dptr->map[i] = NULL;
-	cub3dptr->map_length = i;
+	cub3dptr->max_map_height = i;
 	i = 0;
-	while (i < cub3dptr->map_length)
+	while (i < cub3dptr->max_map_height)
 	{
 		mapcheck3(cub3dptr->map[i], cub3dptr);
 		realmapcheck(i, cub3dptr);
+		if(cub3dptr->max_map_width < ft_strlen2(cub3dptr->map[i]))
+			cub3dptr->max_map_width = ft_strlen2(cub3dptr->map[i]);
 		i++;
 	}
-	//printf("Texture check uz_y2: %d\n", uz_y);
-    close(fd_map);
+	printf("width: %d height: %d\n", cub3dptr->max_map_width, cub3dptr->max_map_height);
+	close(fd_map);
 	if ((cub3dptr->w_timer == 1 || cub3dptr->s_timer == 1 || cub3dptr->e_timer == 1 || cub3dptr->n_timer == 1))
         cub3dptr->map_bool = 1;
 }
@@ -164,7 +166,7 @@ void realmapcheck(int i, t_cub3d *img)
 				write(2, "Son sutun 0 hatasi\n",19);
 				exit_func(img->map[i], img);
 			}
-			else if (img->map[i][j] == '0' && (i == img->map_length - 1 || (img->map[i + 1][j] && img->map[i + 1][j] <= 32)))
+			else if (img->map[i][j] == '0' && (i == img->max_map_height - 1 || (img->map[i + 1][j] && img->map[i + 1][j] <= 32)))
 			{
 				write(2, "Son satir 0 hatasi\n",19);
 				exit_func(img->map[i], img);
