@@ -102,6 +102,10 @@ int putimage(t_cub3d *img)
 	putpixel(img);
 	mlx_put_image_to_window(img->mlx, img->mlx_win, img->img, 0, 0);
 	my_mlx_pixel_put2(img);
-	printf("player x: %f, player y: %f\n", img->p_x, img->p_y);
+
+    // int fd;
+    // fd = open("log", O_CREAT | O_TRUNC | O_WRONLY);
+	// dprintf(fd, "player x: %f, player y: %f\n", img->p_x, img->p_y); //data-printf
+    // close(fd);
 	return (1);
 }
