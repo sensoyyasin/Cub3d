@@ -30,7 +30,7 @@
 # define GREEN 0x0000FF00
 # define WHITE 0x00FFFFFF
 # define BLACK 0x00000000
-# define MAGENTA 0xFF00FF
+# define MAGENTA 0x00FF00FF
 # define CYAN 0x0000FFFF
 
 typedef struct s_player
@@ -105,12 +105,12 @@ void ismaptrue(char *words, t_cub3d *img);
 void double_free_split(char **split1, char **split2);
 void realmapcheck(int i, t_cub3d *img);
 void my_mlx_pixel_put(t_cub3d *img, int x, int y, int color);
-void my_mlx_pixel_put2(t_cub3d *img, double x, double y, int color);
+void my_mlx_pixel_put2(t_cub3d *img);
 void player(t_cub3d *cub3dptr);
 void turnleft(t_cub3d *cub3d);
 void turnup(t_cub3d *cub3d);
 void turnright(t_cub3d *cub3d);
 void turndown(t_cub3d *cub3d);
-void putimage(t_cub3d *img);
+int putimage(t_cub3d *img);
 
 #endif

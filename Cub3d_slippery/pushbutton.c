@@ -8,13 +8,13 @@ int pushbutton(int keycode, t_cub3d *ptr)
         mlx_destroy_window(ptr->mlx, ptr->mlx_win);
         exit_func("\033[35m\nGame was closing\n", ptr);
     }
-    else if (keycode == W)
+    if (keycode == W)
         turnup(ptr);
-    else if (keycode == A)
+    if (keycode == A)
         turnleft(ptr);
-    else if (keycode == S)
+    if (keycode == S)
         turndown(ptr);
-    else if (keycode == D)
+    if (keycode == D)
         turnright(ptr);
     return (0);
 }
@@ -52,13 +52,9 @@ void turnleft(t_cub3d *img)
 
     if(img->map[(int)newp_y][(int)newp_x] == '0'  && img->map[(int)newp_y][(int)newp_x] == '0')
     {
-		my_mlx_pixel_put2(img, img->p_x, img->p_y, WHITE);
-		//my_mlx_pixel_put2(img, img->p_x, img->p_y, 0xFF000000);
-		// putimage(img);
 		img->p_x = newp_x;
 		img->p_y = newp_y;
 		//putimage(img);
-		my_mlx_pixel_put2(img, img->p_x, img->p_y, RED);
     }
 }
 
@@ -69,14 +65,9 @@ void turnright(t_cub3d *img)
 
     if(img->map[(int)newp_y][(int)newp_x] == '0' && img->map[(int)newp_y][(int)newp_x] == '0')
     {
-		my_mlx_pixel_put2(img, img->p_x, img->p_y, WHITE);
-		// if(img->map[(int)newp_y][(int)newp_x + 1] == '1')
-		// 	flag = 1;
-		//putimage(img);
 		img->p_x = newp_x;
 		img->p_y = newp_y;
-		// putimage(img);
-		my_mlx_pixel_put2(img, img->p_x, img->p_y, RED);
+		//putimage(img);
     }
 }
 
@@ -87,12 +78,9 @@ void turnup(t_cub3d *img)
 
     if(img->map[(int)newp_y][(int)newp_x] == '0' && img->map[(int)newp_y][(int)newp_x] == '0')
     {
-		my_mlx_pixel_put2(img, img->p_x, img->p_y, WHITE);
-		//putimage(img);
 		img->p_x = newp_x;
 		img->p_y = newp_y;
-		// putimage(img);
-		my_mlx_pixel_put2(img, img->p_x, img->p_y, RED);
+		//putimage(img);
     }
 }
 
@@ -103,63 +91,8 @@ void turndown(t_cub3d *img)
 
     if(img->map[(int)newp_y][(int)newp_x] == '0' && img->map[(int)newp_y][(int)newp_x] == '0')
     {
-		my_mlx_pixel_put2(img, img->p_x, img->p_y, WHITE);
-		//putimage(img);
 		img->p_x = newp_x;
 		img->p_y = newp_y;
-		// putimage(img);
-		my_mlx_pixel_put2(img, img->p_x, img->p_y, RED);
+		//putimage(img);
     }
 }
-
-// void turnleft(t_cub3d *cub3d)
-// {
-//     if (cub3d->map[cub3d->y_kord][cub3d->x_kord - 1] == '0')
-//     {
-//         //mevcut oyuncu konumunu zemin rengi yap.
-//         my_mlx_pixel_put(cub3d, cub3d->x_kord, cub3d->y_kord, WHITE);
-
-//         //Yeni oyuncu konumu yeşil olsun.
-//         my_mlx_pixel_put(cub3d, cub3d->x_kord - 1, cub3d->y_kord, RED);
-
-// 	    cub3d->map[cub3d->y_kord][cub3d->x_kord] = '0';
-// 	    cub3d->map[cub3d->y_kord][cub3d->x_kord - 1] = 'N';
-//         cub3d->x_kord--;
-//     }
-// }
-
-// void turnright(t_cub3d *cub3d)
-// {
-//     if (cub3d->map[cub3d->y_kord][cub3d->x_kord + 1] == '0')
-//     {
-//         my_mlx_pixel_put(cub3d, cub3d->x_kord, cub3d->y_kord, WHITE);
-//         my_mlx_pixel_put(cub3d, cub3d->x_kord + 1, cub3d->y_kord, RED);
-// 	    cub3d->map[cub3d->y_kord][cub3d->x_kord] = '0';
-// 	    cub3d->map[cub3d->y_kord][cub3d->x_kord + 1] = 'N';
-//         cub3d->x_kord++;
-//     }
-// }
-
-// void turnup(t_cub3d *cub3d)
-// {
-//     if (cub3d->map[cub3d->y_kord - 1][cub3d->x_kord] == '0')
-//     {
-//         my_mlx_pixel_put(cub3d, cub3d->x_kord, cub3d->y_kord, WHITE);
-//         my_mlx_pixel_put(cub3d, cub3d->x_kord, cub3d->y_kord - 1, RED);
-// 	    cub3d->map[cub3d->y_kord][cub3d->x_kord] = '0';
-// 	    cub3d->map[cub3d->y_kord - 1][cub3d->x_kord] = 'N';
-//         cub3d->y_kord--;
-//     }
-// }
-
-// void turndown(t_cub3d *cub3d)
-// {
-//     if (cub3d->map[cub3d->y_kord + 1][cub3d->x_kord] == '0')
-//     {
-//         my_mlx_pixel_put(cub3d, cub3d->x_kord, cub3d->y_kord, WHITE);
-//         my_mlx_pixel_put(cub3d, cub3d->x_kord, cub3d->y_kord + 1, RED);
-// 	    cub3d->map[cub3d->y_kord][cub3d->x_kord] = '0';
-// 	    cub3d->map[cub3d->y_kord + 1][cub3d->x_kord] = 'N';
-//         cub3d->y_kord++;
-//     }
-// }
