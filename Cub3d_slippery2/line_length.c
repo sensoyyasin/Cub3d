@@ -52,23 +52,35 @@ void my_mlx_pixel_put(t_cub3d *img, int x, int y, int color)
 
 void my_mlx_pixel_put2(t_cub3d *img)
 {
-    int (i) = -2;
-    int (j) = -2;
-	while (i < img->pixel / 4)
+    int (i) = - img->pixel / 4 + 1;
+    int (j) = - img->pixel / 4 + 1;
+	while (++i < img->pixel / 4 - 2)
 	{
-		j = -2;
-		while (j < img->pixel / 4)
-		{
-			if (j != 0 || i != 0)
-			{
-				mlx_pixel_put(img->mlx, img->mlx_win, img->p_x * img->pixel + j, img->p_y * img->pixel + i, 0x000a0c0f);
-			}
-			else
-				mlx_pixel_put(img->mlx, img->mlx_win, img->p_x * img->pixel, img->p_y * img->pixel, RED);
-			j++;
-		}
-		i++;
+		j = - img->pixel / 4 + 1;
+		while (++j < img->pixel / 4 - 2)
+			mlx_pixel_put(img->mlx, img->mlx_win, img->p_x * img->pixel + j, img->p_y * img->pixel + i, RED);
 	}
+}
+
+void    my_mlx_pixe_put_angle(t_cub3d *img)
+{
+    int i = 0;
+    int j = 0;
+    int def = -30;
+
+    while (++def < 30)
+    {
+        while (i < img->pixel)
+		{
+			j = 0;
+			while (j < img->pixel)
+			{
+				mlx_pixel_put(img->mlx, img->mlx_win, (img->p_x * img->pixel) + (img->angle_x * j), (img->p_y * img->pixel) - (img->angle_y * i), 0x00000000);
+				j++;
+			}
+			i++;
+		}
+    }
 }
 
 void putpixel(t_cub3d *cub3dptr)
@@ -97,6 +109,7 @@ int putimage(t_cub3d *img)
     keycheckforloop(img);
 	mlx_clear_window(img->mlx, img->mlx_win);
 	mlx_put_image_to_window(img->mlx, img->mlx_win, img->img, 0, 0);
+    my_mlx_pixe_put_angle(img);
 	my_mlx_pixel_put2(img);
 
 

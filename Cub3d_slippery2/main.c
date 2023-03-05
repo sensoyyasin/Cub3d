@@ -21,6 +21,8 @@ void initializer(t_cub3d *img)
 	img->check->a_check = false;
 	img->check->s_check = false;
 	img->check->d_check = false;
+	img->check->l_check = false;
+	img->check->r_check = false;
 	img->no = 0;
 	img->so = 0;
 	img->we = 0;
@@ -33,8 +35,8 @@ void initializer(t_cub3d *img)
 	img->c = 0;
 	img->texture_bool = 0;
 	img->map_bool = 0;
-	img->speed_pixel = 2;
-	img->pixel = 16;
+	img->speed_pixel = 4;
+	img->pixel = 32;
 	img->max_map_width = 0;
 	img->max_map_height = 0;
 	img->speed = (double)img->speed_pixel / (double)img->pixel;

@@ -20,6 +20,10 @@ void keycheckforloop(t_cub3d *img)
         turndown(img);
     if (img->check->d_check == true)
         turnright(img);
+	if (img->check->l_check == true)
+		angleleft(img);
+	if (img->check->r_check == true)
+		angleright(img);
 }
 
 int keychecker(int keycode, t_cub3d *ptr)
@@ -34,6 +38,10 @@ int keychecker(int keycode, t_cub3d *ptr)
 		ptr->check->s_check = true;
 	if (keycode == D)
 		ptr->check->d_check = true;
+	if (keycode == L)
+		ptr->check->l_check = true;
+	if (keycode == R)
+		ptr->check->r_check = true;
 	return (1);
 }
 
@@ -47,5 +55,9 @@ int keychecker2(int keycode, t_cub3d *ptr)
 		ptr->check->s_check = false;
 	if (keycode == D)
 		ptr->check->d_check = false;
+	if (keycode == L)
+		ptr->check->l_check = false;
+	if (keycode == R)
+		ptr->check->r_check = false;
 	return (1);
 }

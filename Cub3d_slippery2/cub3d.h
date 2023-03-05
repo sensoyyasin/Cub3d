@@ -17,6 +17,8 @@
 #define D 2
 #define W 13
 #define ESC 53
+#define L 123 //75
+#define R 124 //77
 
 # define RED 0x00FF0000
 # define GREEN 0x0000FF00
@@ -40,6 +42,8 @@ typedef struct s_bool
     bool a_check;
     bool s_check;
     bool d_check;
+    bool r_check;
+    bool l_check;
 }   t_check;
 
 typedef struct cub3d
@@ -83,6 +87,10 @@ typedef struct cub3d
     int speed_pixel;
     int pixel;
     double speed;
+    double angle;
+    double degree;
+    float angle_x;
+    float angle_y;
 } t_cub3d;
 
 int pushbutton(int keycode, t_cub3d *ptr);
@@ -117,5 +125,9 @@ void	map_addr(t_cub3d *img);
 int		keychecker(int keycode, t_cub3d *ptr);
 int		keychecker2(int keycode, t_cub3d *ptr);
 void	keycheckforloop(t_cub3d *img);
+void    convertangle(char c, t_cub3d *img);
+void    my_mlx_pixe_put_angle(t_cub3d *img);
+void angleright(t_cub3d *img);
+void angleleft(t_cub3d *img);
 
 #endif
