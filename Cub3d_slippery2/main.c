@@ -17,6 +17,10 @@ void free_all(t_cub3d *img)
 
 void initializer(t_cub3d *img)
 {
+	img->check->w_check = false;
+	img->check->a_check = false;
+	img->check->s_check = false;
+	img->check->d_check = false;
 	img->no = 0;
 	img->so = 0;
 	img->we = 0;
@@ -29,7 +33,7 @@ void initializer(t_cub3d *img)
 	img->c = 0;
 	img->texture_bool = 0;
 	img->map_bool = 0;
-	img->speed_pixel = 5;
+	img->speed_pixel = 2;
 	img->pixel = 16;
 	img->max_map_width = 0;
 	img->max_map_height = 0;
@@ -59,7 +63,8 @@ void	map_addr(t_cub3d *img)
 	img->img = mlx_new_image(img->mlx, img->max_map_width * img->pixel, img->max_map_height * img->pixel);
 	img->addr = (int*)mlx_get_data_addr(img->img, &ad, &ad, &ad);
 	while (++i < img->max_map_width * img->pixel * img->max_map_height * img->pixel)
-		img->addr[i] = 0xFF000000; 
+		img->addr[i] = 0xFF000000;
+	putpixel(img);
 }
 
 int main(int argc, char **argv)
@@ -69,6 +74,7 @@ int main(int argc, char **argv)
 	if (argc != 2)
 		return (printf("\033[1;31mBad argument!\n\033[0m"));
 	img = (t_cub3d *)malloc(sizeof(t_cub3d));
+	img->check = (t_check *)malloc(sizeof(t_check));
 	img->map_input = argv;
 	initializer(img);
 	check_all(img);
@@ -77,8 +83,9 @@ int main(int argc, char **argv)
 	map_addr(img);
 	//start_window(img);
 	//Bu iki çağrı arasındaki fark, olayların türüdür. İlk çağrı, bir klavye tuşuna basıldığında çalışacakken, ikinci çağrı klavye tuşunun serbest bırakılması durumunda çalışacaktır.
-	mlx_hook(img->mlx_win, 2, 1L << 0, pushbutton, &img->mlx);
+	mlx_hook(img->mlx_win, 2, 1L << 0, keychecker, &img->mlx);
 	mlx_hook(img->mlx_win, 17, (0L), pushbutton, img); //kapatmak icin.
+	mlx_hook(img->mlx_win, 3, 1L << 0, keychecker2, &img->mlx);
 	mlx_loop_hook(img->mlx, putimage, img);
 	mlx_loop(img->mlx);
 	//free_all(img);

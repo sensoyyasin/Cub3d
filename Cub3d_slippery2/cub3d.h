@@ -1,6 +1,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
@@ -33,11 +34,20 @@ typedef struct s_player
     float angle;
 }       t_player;
 
+typedef struct s_bool
+{
+    bool w_check;
+    bool a_check;
+    bool s_check;
+    bool d_check;
+}   t_check;
+
 typedef struct cub3d
 {
     void *mlx;
     void *mlx_win;
     t_player *player;
+    t_check *check;
     char **map;
     char **map_input;
     int *addr;
@@ -101,8 +111,11 @@ void player(t_cub3d *cub3dptr);
 void turnleft(t_cub3d *cub3d);
 void turnup(t_cub3d *cub3d);
 void turnright(t_cub3d *cub3d);
-void turndown(t_cub3d *cub3d);
-int putimage(t_cub3d *img);
+void	turndown(t_cub3d *cub3d);
+int		putimage(t_cub3d *img);
 void	map_addr(t_cub3d *img);
+int		keychecker(int keycode, t_cub3d *ptr);
+int		keychecker2(int keycode, t_cub3d *ptr);
+void	keycheckforloop(t_cub3d *img);
 
 #endif

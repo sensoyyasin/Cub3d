@@ -59,11 +59,7 @@ void my_mlx_pixel_put2(t_cub3d *img)
 		j = -2;
 		while (j < img->pixel / 4)
 		{
-			if ((j != 1 || i != 1) && (j != -1 || i != -1))
-			{
-				mlx_pixel_put(img->mlx, img->mlx_win, img->p_x * img->pixel + j, img->p_y * img->pixel + i, 0x00de5046);
-			}
-			else if (j != 0 || i != 0)
+			if (j != 0 || i != 0)
 			{
 				mlx_pixel_put(img->mlx, img->mlx_win, img->p_x * img->pixel + j, img->p_y * img->pixel + i, 0x000a0c0f);
 			}
@@ -98,11 +94,13 @@ void putpixel(t_cub3d *cub3dptr)
 
 int putimage(t_cub3d *img)
 {
+    keycheckforloop(img);
 	mlx_clear_window(img->mlx, img->mlx_win);
-	putpixel(img);
 	mlx_put_image_to_window(img->mlx, img->mlx_win, img->img, 0, 0);
 	my_mlx_pixel_put2(img);
 
+
+    //--->for log file.
     // int fd;
     // fd = open("log", O_CREAT | O_TRUNC | O_WRONLY);
 	// dprintf(fd, "player x: %f, player y: %f\n", img->p_x, img->p_y); //data-printf
