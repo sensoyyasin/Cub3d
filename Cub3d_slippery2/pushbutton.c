@@ -145,52 +145,99 @@ void angleleft(t_cub3d *img)
 	printf("x:%f, y:%f\n", img->angle_x, img->angle_y);
 }
 
-// void drawRays3D(t_cub3d *img)
-// {
-// 	int mx,my,mp,dof;
-// 	float rx,ry,ra,x0,y0;
-// 	int i = 0;
+double distance(double ax, double ay, double bx, double by)
+{
 
-// 	ra = img->angle;
-// 	while (i < 1)
-// 	{
-// 		//Check horizontal lines
-// 		dof = 0;
-// 		float aTan = -1 / tan(ra);
-// 		if (ra > PI) //looking up
-// 		{
-// 			ry = (((int)img->player->y >> 6) << 6) - 0.0001;
-// 			rx = (img->player->y - ry) * aTan + img->player->x;
-// 			y0 = -64;
-// 			x0 = -y0 * aTan;
-// 		}
-// 		if (ra < PI) //looking up
-// 		{
-// 			ry = (((int)img->player->y >> 6) << 6) + 64;
-// 			rx = (img->player->y - ry) * aTan + img->player->x;
-// 			y0 = 64;
-// 			x0 = -y0 * aTan;
-// 		}
-// 		if (ra == 0 || ra== PI) // looking straight left or right
-// 		{
-// 			rx = img->player->x;
-// 			ry = img->player->y;
-// 			dof = 8;
-// 		}
-// 		while (dof < 8)
-// 		{
-// 			mx = (int)(rx) >> 6;
-// 			my = (int)(ry) >> 6;
-// 			mp = (my * img->max_map_height) + mx;
-// 			if (mp < img->max_map_height && img->map[mp] == 1)
-// 				dof = 8;
-// 			else
-// 			{
-// 				rx += x0;
-// 				ry += y0;
-// 				dof++;
-// 			}
-// 		}
-// 	}
-// 	i++;
-// }
+	return (sqrt(bx - ax) * (bx - ax) + (by - ay) * (by - ay));
+}
+
+void drawRays3D(t_cub3d *img)
+{
+	int mx,my,mp,dof;
+	double rx,ry,ra,x0,y0;
+	int i = 0;
+
+	ra = img->angle;
+	while (i < 1)
+	{
+		//--Check Horizontal Lines--
+		dof = 0;
+		//double disH = 100000;
+		//double hx = img->p_x;
+		//double hy = img->p_y;
+		double aTan = -1 / tan(ra);
+		if (ra > PI) //looking left
+		{
+			ry = (((int)img->p_y >> 6) << 6) - 0.0001; // 64 
+			rx = (img->p_y - ry) * aTan + img->p_x;
+			y0 = -64;
+			x0 = -y0 * aTan;
+		}
+		if (ra < PI) //looking right
+		{
+			ry = (((int)img->p_y >> 6) << 6) + 64;
+			rx = (img->p_y - ry) * aTan + img->p_x;
+			y0 = 64;
+			x0 = -y0 * aTan;
+		}
+		if (ra == 0 || ra== PI) // looking straight up or down
+		{
+			rx = img->p_x;
+			ry = img->p_y;
+			dof = 8;
+		}
+		while (dof < 8)
+		{
+			mx = (int)(rx) >> 6;
+			my = (int)(ry) >> 6;
+			mp = my * img->max_map_height + mx;
+			if (mp > 0 && mp < img->max_map_height * img->max_map_width && img->map[my][mx] == 1)
+				dof = 8;
+			else
+			{
+				rx += x0;
+				ry += y0;
+				dof++;
+			}
+		}
+
+		//--Check Vertical Lines--
+			dof = 0;
+		float nTan = -tan(ra); //negative tan(x)
+		if (ra > PI / 2 && ra < 3 * PI / 2) //looking left
+		{
+			rx = (((int)img->p_x >> 6) << 6) - 0.0001; // 64 
+			ry = (img->p_x - rx) * nTan + img->p_y;
+			y0 = -64;
+			x0 = -y0 * aTan;
+		}
+		if (ra < PI / 2 || ra > 3 * PI / 2) //looking right
+		{
+			rx = (((int)img->p_x >> 6) << 6) + 64;
+			ry = (img->p_x - rx) * nTan + img->p_y;
+			y0 = 64;
+			x0 = -y0 * aTan;
+		}
+		if (ra == 0 || ra== PI) // looking straight up or down
+		{
+			rx = img->p_x;
+			ry = img->p_y;
+			dof = 8;
+		}
+		while (dof < 8)
+		{
+			mx = (int)(rx) >> 6;
+			my = (int)(ry) >> 6;
+			mp = my * img->max_map_height + mx;
+			if (mp > 0 && mp < img->max_map_height * img->max_map_width && img->map[my][mx] == 1)
+				dof = 8;
+			else
+			{
+				rx += x0;
+				ry += y0;
+				dof++;
+			}
+		}
+	}
+	i++;
+}

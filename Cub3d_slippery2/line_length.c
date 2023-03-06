@@ -60,14 +60,6 @@ void my_mlx_pixel_put2(t_cub3d *img)
 	}
 }
 
-// float distance(t_cub3d *img)
-// {
-//     float x2 = img->angle_x * img->angle_x;
-//     float y2 = img->angle_y * img->angle_y;
-
-//     return (sqrt(x2 * y2));
-// }
-
 void    my_mlx_pixe_put_angle(t_cub3d *img)
 {
     int i = 0;
@@ -109,12 +101,12 @@ void putpixel(t_cub3d *cub3dptr)
 
 int putimage(t_cub3d *img)
 {
+    //drawRays3D(img);
     keycheckforloop(img);
 	mlx_clear_window(img->mlx, img->mlx_win);
 	mlx_put_image_to_window(img->mlx, img->mlx_win, img->img, 0, 0);
     my_mlx_pixe_put_angle(img);
 	my_mlx_pixel_put2(img);
-
 
     //--->for log file.
     // int fd;
