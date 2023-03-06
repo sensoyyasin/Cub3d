@@ -62,25 +62,30 @@ void my_mlx_pixel_put2(t_cub3d *img)
 	}
 }
 
+// float distance(t_cub3d *img)
+// {
+//     float x2 = img->angle_x * img->angle_x;
+//     float y2 = img->angle_y * img->angle_y;
+
+//     return (sqrt(x2 * y2));
+// }
+
 void    my_mlx_pixe_put_angle(t_cub3d *img)
 {
     int i = 0;
     int j = 0;
-    int def = -30;
 
-    while (++def < 30)
-    {
-        while (i < img->pixel)
+    while (i < img->pixel * 5)
+	{
+		j = 0;
+		while (j < img->pixel * 5)
 		{
-			j = 0;
-			while (j < img->pixel)
-			{
-				mlx_pixel_put(img->mlx, img->mlx_win, (img->p_x * img->pixel) + (img->angle_x * j), (img->p_y * img->pixel) - (img->angle_y * i), 0x00000000);
-				j++;
-			}
-			i++;
+            if (i == j)
+		        mlx_pixel_put(img->mlx, img->mlx_win, (img->p_x * img->pixel) + (img->angle_x * j), (img->p_y * img->pixel) - (img->angle_y * i), 0);
+			j++;
 		}
-    }
+		i++;
+	}
 }
 
 void putpixel(t_cub3d *cub3dptr)
