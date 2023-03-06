@@ -171,3 +171,11 @@ void angleleft(t_cub3d *img)
 		img->check->l_check = false;
 	}
 }
+
+	// if (img->check->l_check == true)
+	// {
+	// 	img->angle -= 1;
+	// 	if (img->angle < 0)
+	// 		img->angle += 2 * PI;
+	// 	img->check->l_check = false;
+	// }

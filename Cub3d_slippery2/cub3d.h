@@ -129,5 +129,6 @@ void    convertangle(char c, t_cub3d *img);
 void    my_mlx_pixe_put_angle(t_cub3d *img);
 void angleright(t_cub3d *img);
 void angleleft(t_cub3d *img);
+void dda(t_cub3d *img, float x1, float y1, float x2, float y2);
 
 #endif
