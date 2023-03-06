@@ -36,8 +36,6 @@ void my_mlx_pixel_put(t_cub3d *img, int x, int y, int color)
 {
     int (i) = 0;
     int (j) = 0;
-	//printf("y:%d, x:%d\n", y, x);
-	//printf("calc:%d\n", (img->pixel * y + i) * img->max_map_width * img->pixel + (img->pixel * x) + j);
 	while (i < img->pixel)
 	{
 		j = 0;

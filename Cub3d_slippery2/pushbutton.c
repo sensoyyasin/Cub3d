@@ -151,7 +151,7 @@ void angleleft(t_cub3d *img)
 // 	float rx,ry,ra,x0,y0;
 // 	int i = 0;
 
-// 	ra = img->player->angle;
+// 	ra = img->angle;
 // 	while (i < 1)
 // 	{
 // 		//Check horizontal lines

@@ -27,15 +27,6 @@
 # define MAGENTA 0x00FF00FF
 # define CYAN 0x8000FFFF
 
-typedef struct s_player
-{
-    float x;
-    float y;
-    float dx;
-    float dy;
-    float angle;
-}       t_player;
-
 typedef struct s_bool
 {
     bool w_check;
@@ -50,7 +41,6 @@ typedef struct cub3d
 {
     void *mlx;
     void *mlx_win;
-    t_player *player;
     t_check *check;
     char **map;
     char **map_input;
