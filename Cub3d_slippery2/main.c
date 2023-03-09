@@ -35,10 +35,11 @@ void initializer(t_cub3d *img)
 	img->c = 0;
 	img->texture_bool = 0;
 	img->map_bool = 0;
-	img->speed_pixel = 4;
+	img->speed_pixel = 3;
 	img->pixel = 32;
 	img->max_map_width = 0;
 	img->max_map_height = 0;
+	img->angle = 0;
 	img->speed = (double)img->speed_pixel / (double)img->pixel;
 }
 

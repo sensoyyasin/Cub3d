@@ -101,12 +101,12 @@ void putpixel(t_cub3d *cub3dptr)
 
 int putimage(t_cub3d *img)
 {
-    //drawRays3D(img);
     keycheckforloop(img);
 	mlx_clear_window(img->mlx, img->mlx_win);
 	mlx_put_image_to_window(img->mlx, img->mlx_win, img->img, 0, 0);
     my_mlx_pixe_put_angle(img);
 	my_mlx_pixel_put2(img);
+    drawRays3D(img);
 
     //--->for log file.
     // int fd;
