@@ -122,8 +122,8 @@ void angleright(t_cub3d *img)
 		if (img->angle <= 0)
 			img->angle += 2 * PI;
 		img->angle -= 0.1;
-		img->angle_x = 1 * cos(img->angle);
-		img->angle_y = 1 * sin(img->angle);
+		img->angle_x = cos(img->angle);
+		img->angle_y = sin(img->angle);
 		// img->check->r_check = false;
 	}
 	printf("img angle : %f\n",img->angle);
@@ -137,8 +137,8 @@ void angleleft(t_cub3d *img)
 		if (img->angle > 2 * PI)
 			img->angle -= 2 * PI;
 		img->angle += 0.1;
-		img->angle_x = 1 * cos(img->angle);
-		img->angle_y = 1 * sin(img->angle);
+		img->angle_x = cos(img->angle);
+		img->angle_y = sin(img->angle);
 		// img->check->l_check = false;
 	}
 	printf("Img angle : %f\n",img->angle);
