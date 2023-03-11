@@ -7,6 +7,8 @@ void check_all(t_cub3d *img)
 	if (!img->texture_bool || !img->map_bool)
         exit_func("\033[1;31mMap or texture error\033[0m", img);
 	player(img);
+	img->angle_x = 1 * cos(img->angle);
+	img->angle_y = 1 * sin(img->angle);
 }
 
 void free_all(t_cub3d *img)
@@ -88,7 +90,7 @@ int main(int argc, char **argv)
 	//Bu iki çağrı arasındaki fark, olayların türüdür. İlk çağrı, bir klavye tuşuna basıldığında çalışacakken, ikinci çağrı klavye tuşunun serbest bırakılması durumunda çalışacaktır.
 	mlx_hook(img->mlx_win, 2, 1L << 0, keychecker, &img->mlx);
 	mlx_hook(img->mlx_win, 17, (0L), pushbutton, img); //kapatmak icin.
-	mlx_hook(img->mlx_win, 3, 1L << 0, keychecker2, &img->mlx);
+	mlx_hook(img->mlx_win, 3, 1L << 1, keychecker2, &img->mlx);
 	mlx_loop_hook(img->mlx, putimage, img);
 	mlx_loop(img->mlx);
 	//free_all(img);

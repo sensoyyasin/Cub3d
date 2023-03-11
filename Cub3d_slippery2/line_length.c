@@ -63,17 +63,10 @@ void my_mlx_pixel_put2(t_cub3d *img)
 void    my_mlx_pixe_put_angle(t_cub3d *img)
 {
     int i = 0;
-    int j = 0;
 
-    while (i < img->pixel * 5)
+    while (i < img->pixel * 10)
 	{
-		j = 0;
-		while (j < img->pixel * 5)
-		{
-            if (i == j)
-		        mlx_pixel_put(img->mlx, img->mlx_win, (img->p_x * img->pixel) + (img->angle_x * j), (img->p_y * img->pixel) - (img->angle_y * i), 0);
-			j++;
-		}
+		mlx_pixel_put(img->mlx, img->mlx_win, (img->p_x * img->pixel) + (img->angle_x * i), (img->p_y * img->pixel) - (img->angle_y * i), 0);
 		i++;
 	}
 }
@@ -96,7 +89,7 @@ void putpixel(t_cub3d *cub3dptr)
             x++;
         }
         y++;
-    }
+	}
 }
 
 int putimage(t_cub3d *img)
@@ -106,7 +99,7 @@ int putimage(t_cub3d *img)
 	mlx_put_image_to_window(img->mlx, img->mlx_win, img->img, 0, 0);
     my_mlx_pixe_put_angle(img);
 	my_mlx_pixel_put2(img);
-    drawRays3D(img);
+    //drawRays3D(img);
 
     //--->for log file.
     // int fd;
