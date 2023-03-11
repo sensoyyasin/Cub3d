@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-void ddaaaaaas(t_cub3d *img, float x1, float y1, float x2, float y2)
+void dda(t_cub3d *img, double x1, double y1, double x2, double y2)
 {
     //x1,y1 (2,2)
     //x2,y2 (9,2)

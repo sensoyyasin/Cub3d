@@ -11,6 +11,7 @@
 #include "get_next_line/get_next_line.h"
 
 #define PI 3.141592653
+#define DR 0.0174533
 
 #define A 0
 #define S 1
@@ -116,11 +117,11 @@ int		keychecker(int keycode, t_cub3d *ptr);
 int		keychecker2(int keycode, t_cub3d *ptr);
 void	keycheckforloop(t_cub3d *img);
 void    convertangle(char c, t_cub3d *img);
-void    my_mlx_pixe_put_angle(t_cub3d *img);
 void angleright(t_cub3d *img);
 void angleleft(t_cub3d *img);
-void dda(t_cub3d *img, float x1, float y1, float x2, float y2);
 double distance(double ax, double ay, double bx, double by);
 void drawRays3D(t_cub3d *img);
+void dda(t_cub3d *img, double x1, double y1, double x2, double y2);
+void    my_mlx_pixe_put_angle(t_cub3d *img);
 
 #endif
