@@ -150,82 +150,82 @@ double distance(double ax, double ay, double bx, double by)
 	return (sqrt(bx - ax) * (bx - ax) + (by - ay) * (by - ay));
 }
 
-void drawRays3D(t_cub3d *img)
-{
-	int mx,my,mp,dof;
-	double rx,ry,ra,x0,y0;
-	int i = 0;
+// void drawRays3D(t_cub3d *img)
+// {
+// 	int mx,my,mp,dof;
+// 	double rx,ry,ra,x0,y0;
+// 	int i = 0;
 	
-	ra = (img->angle - DR * 30);
-	if (ra < 0)
-		ra += 2 * PI;
-	if (ra > 2 * PI)
-		ra -= 2 * PI;
-	for (i = 0; i < 30; i++)
-	{
-		//--Check Horizontal Lines--
-		dof = 0;
-		float disH = 10000000;
-		float hx = img->p_x;
-		float hy = img->p_y;
-		double aTan = -1 / tan(ra);
-		if (ra > PI) { ry = (((int)img->p_y >>  (int)log2(img->pixel)) <<  (int)log2(img->pixel)) - 0.0001; rx = (img->p_y - ry) * aTan + img->p_x;
-		y0 = -img->pixel; x0 = -y0 * aTan;}
-		if (ra < PI) { ry = (((int)img->p_y >>  (int)log2(img->pixel)) <<  (int)log2(img->pixel)) + img->pixel; rx = (img->p_y - ry) * aTan + img->p_x;
-		y0 = img->pixel; x0 = -y0 * aTan;}
-		if (ra == 0 || ra == PI){ rx = img->p_x; ry = img->p_y; dof = img->max_map_height;}
-		while (dof < img->max_map_height)
-		{
-			mx = (int) (rx) >> img->pixel; my = (int) (ry) >> img->pixel; mp = my * img->max_map_width + mx;
-			if (mx > 0 && my > 0 && my < img->max_map_height && mx < img->max_map_width && img->map[my][mx] == '1')
-			{
-				hy = img->p_y;
-				hx = img->p_x;
-				disH = distance(img->p_x, img->p_y,hx,hy); 
-				dof = img->max_map_height;
-			}
-			else { rx += x0; ry += y0; dof++;}
-		}
-		//--Check Vertical Lines--
-		dof = 0;
-		float disV = 10000000;
-		float vx = img->p_x;
-		float vy = img->p_y;
-		double nTan = -tan(ra);
-		if (ra > PI / 2 && ra < (3 * PI / 2)) { ry = (((int)img->p_y >>  (int)log2(img->pixel)) <<  (int)log2(img->pixel)) - 0.0001; rx = (img->p_y - ry) * nTan + img->p_x;
-		y0 = -img->pixel; x0 = -y0 * nTan;}
-		if (ra < PI / 2 || ra > (3 * PI / 2)) { ry = (((int)img->p_y >>  (int)log2(img->pixel)) << (int)log2(img->pixel)) + img->pixel; rx = (img->p_y - ry) * nTan + img->p_x;
-		y0 = img->pixel; x0 = -y0 * nTan;}
-		if (ra == 0 || ra == PI){ rx = img->p_x; ry = img->p_y; dof = img->max_map_height;}
-		while (dof < img->max_map_height)
-		{
-			mx = (int) (rx) >> img->pixel; my = (int) (ry) >> img->pixel; mp = my * img->max_map_width + mx;
-			if (mx > 0 && my > 0 && my < img->max_map_height && mx < img->max_map_width && img->map[my][mx] == 1)
-			{
-				vy = img->p_y;
-				vx = img->p_x;
-				disH = distance(img->p_x, img->p_y,vx,vy); 
-				dof = img->max_map_height;
-			}
-			else { rx += x0; ry += y0; dof++;}
-		}
-		if (disV < disH)
-		{
-			rx = vx;
-			ry = vy;
-		}
-		if (disH < disV)
-		{
-			rx = hx;
-			ry = hy;
-		}
-		//dda(img, img->p_x,img->p_y,rx,ry);
-		//func (start.x, start.y, rx, ry)
-		ra += DR;
-		if (ra < 0)
-			ra += 2 * PI;
-		if (ra > 2 * PI)
-			ra -= 2 * PI;
+// 	ra = (img->angle - DR * 30);
+// 	if (ra < 0)
+// 		ra += 2 * PI;
+// 	if (ra > 2 * PI)
+// 		ra -= 2 * PI;
+// 	for (i = 0; i < 30; i++)
+// 	{
+// 		//--Check Horizontal Lines--
+// 		dof = 0;
+// 		float disH = 10000000;
+// 		float hx = img->p_x;
+// 		float hy = img->p_y;
+// 		double aTan = -1 / tan(ra);
+// 		if (ra > PI) { ry = (((int)img->p_y >>  (int)log2(img->pixel)) <<  (int)log2(img->pixel)) - 0.0001; rx = (img->p_y - ry) * aTan + img->p_x;
+// 		y0 = -img->pixel; x0 = -y0 * aTan;}
+// 		if (ra < PI) { ry = (((int)img->p_y >>  (int)log2(img->pixel)) <<  (int)log2(img->pixel)) + img->pixel; rx = (img->p_y - ry) * aTan + img->p_x;
+// 		y0 = img->pixel; x0 = -y0 * aTan;}
+// 		if (ra == 0 || ra == PI){ rx = img->p_x; ry = img->p_y; dof = img->max_map_height;}
+// 		while (dof < img->max_map_height)
+// 		{
+// 			mx = (int) (rx) >> img->pixel; my = (int) (ry) >> img->pixel; mp = my * img->max_map_width + mx;
+// 			if (mx > 0 && my > 0 && my < img->max_map_height && mx < img->max_map_width && img->map[my][mx] == '1')
+// 			{
+// 				hy = img->p_y;
+// 				hx = img->p_x;
+// 				disH = distance(img->p_x, img->p_y,hx,hy); 
+// 				dof = img->max_map_height;
+// 			}
+// 			else { rx += x0; ry += y0; dof++;}
+// 		}
+// 		//--Check Vertical Lines--
+// 		dof = 0;
+// 		float disV = 10000000;
+// 		float vx = img->p_x;
+// 		float vy = img->p_y;
+// 		double nTan = -tan(ra);
+// 		if (ra > PI / 2 && ra < (3 * PI / 2)) { ry = (((int)img->p_y >>  (int)log2(img->pixel)) <<  (int)log2(img->pixel)) - 0.0001; rx = (img->p_y - ry) * nTan + img->p_x;
+// 		y0 = -img->pixel; x0 = -y0 * nTan;}
+// 		if (ra < PI / 2 || ra > (3 * PI / 2)) { ry = (((int)img->p_y >>  (int)log2(img->pixel)) << (int)log2(img->pixel)) + img->pixel; rx = (img->p_y - ry) * nTan + img->p_x;
+// 		y0 = img->pixel; x0 = -y0 * nTan;}
+// 		if (ra == 0 || ra == PI){ rx = img->p_x; ry = img->p_y; dof = img->max_map_height;}
+// 		while (dof < img->max_map_height)
+// 		{
+// 			mx = (int) (rx) >> img->pixel; my = (int) (ry) >> img->pixel; mp = my * img->max_map_width + mx;
+// 			if (mx > 0 && my > 0 && my < img->max_map_height && mx < img->max_map_width && img->map[my][mx] == 1)
+// 			{
+// 				vy = img->p_y;
+// 				vx = img->p_x;
+// 				disH = distance(img->p_x, img->p_y,vx,vy); 
+// 				dof = img->max_map_height;
+// 			}
+// 			else { rx += x0; ry += y0; dof++;}
+// 		}
+// 		if (disV < disH)
+// 		{
+// 			rx = vx;
+// 			ry = vy;
+// 		}
+// 		if (disH < disV)
+// 		{
+// 			rx = hx;
+// 			ry = hy;
+// 		}
+// 		//dda(img, img->p_x,img->p_y,rx,ry);
+// 		//func (start.x, start.y, rx, ry)
+// 		ra += DR;
+// 		if (ra < 0)
+// 			ra += 2 * PI;
+// 		if (ra > 2 * PI)
+// 			ra -= 2 * PI;
 	// while (i++ < 1)
 	// {
 	// 	//--Check Horizontal Lines--
@@ -308,5 +308,5 @@ void drawRays3D(t_cub3d *img)
 		// 		ry += y0;
 		// 		dof++;
 		// 	}
-		}
-	}
+	// 	}
+	// }

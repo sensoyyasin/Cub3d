@@ -109,7 +109,7 @@ void    my_mlx_pixe_put_angle(t_cub3d *img)
 			}
 			else
 			{
-				//get3D(img, i, j);
+				draw3DWalls(img, i, j);
 				break;
 			}			
 			i++;
@@ -117,28 +117,6 @@ void    my_mlx_pixe_put_angle(t_cub3d *img)
 		j += 1;
 	}
 }
-
-//void	get3D(t_cub3d *img, int i, int j)
-//{
-//	//WIDTH / 2 + (i / img->pixel);
-//	//WIDTH / 2 - (i / img->pixel);
-//}
-
-//void    my_mlx_pixe_put_angle(t_cub3d *img)
-//{
-//    int i = 0;
-//	int j = -30;
-//	while (j < 30)
-//	{
-//		i = 0;
-//		while (i < img->pixel * 10)
-//		{
-//			mlx_pixel_put(img->mlx, img->mlx_win, (img->p_x * img->pixel) + (cos(img->angle - (j * DR)) * i), (img->p_y * img->pixel) - (sin(img->angle - (j * DR)) * i), 0x0F0000FF);
-//			i++;
-//		}
-//		j++;
-//	}
-//}
 
 void putpixel(t_cub3d *cub3dptr)
 {
@@ -161,6 +139,35 @@ void putpixel(t_cub3d *cub3dptr)
     }
 }
 
+// void draw3DWalls(t_cub3d *img, int i, int j)
+// {
+//     double distance_proj_plane;
+//     double wall_height;
+//     double wall_top;
+//     double wall_bottom;
+//     double distance_to_wall;
+//     double corrected_distance_to_wall;
+//     double wall_texture_x;
+//     int wall_texture_y;
+//     int texture_color;
+    
+//     distance_proj_plane = (img->max_map_width / 2) / tan(30 / 2);
+//     distance_to_wall = distance(img->p_x, img->p_y, (img->p_x + cos(img->angle - (j * DR)) * i), (img->p_y - sin(img->angle - (j * DR)) * i));
+//     corrected_distance_to_wall = distance_to_wall * cos(img->angle - (j * DR));
+//     wall_height = (img->pixel / corrected_distance_to_wall) * distance_proj_plane;
+//     wall_top = (img->max_map_height / 2) - (wall_height / 2);
+//     wall_bottom = (img->max_map_height / 2) + (wall_height / 2);
+
+//     if (wall_height > img->max_map_height)
+//         wall_height = img->max_map_height;
+//     wall_texture_x = (i / (double)img->pixel) * 720;
+//     wall_texture_y = ((wall_top - img->max_map_height / 2 + wall_height / 2) / wall_height) * 1080;
+//     texture_color = get_color(img->wall, wall_texture_x, wall_texture_y);
+//     texture_color = darken_color(texture_color, corrected_distance_to_wall);
+//     draw_vertical_line(img, i, wall_top, wall_bottom, texture_color);
+// }
+
+
 int putimage(t_cub3d *img)
 {
     keycheckforloop(img);
@@ -168,7 +175,7 @@ int putimage(t_cub3d *img)
 	mlx_put_image_to_window(img->mlx, img->mlx_win, img->img, 0, 0);
     my_mlx_pixe_put_angle(img);
 	my_mlx_pixel_put2(img);
-    drawRays3D(img);
+    //drawRays3D(img);
 
     //--->for log file.
     // int fd;
