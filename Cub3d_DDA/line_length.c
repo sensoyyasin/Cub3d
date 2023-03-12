@@ -109,9 +109,9 @@ void    my_mlx_pixe_put_angle(t_cub3d *img)
 			}
 			else
 			{
-				draw3DWalls(img, i, j);
+				// draw3DWalls(img, i, j);
 				break;
-			}			
+			}
 			i++;
 		}
 		j += 1;
