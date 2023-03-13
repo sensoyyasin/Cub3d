@@ -91,21 +91,20 @@ void my_mlx_pixel_put2(t_cub3d *img)
 
 void    my_mlx_pixe_put_angle(t_cub3d *img)
 {
-    int i = 0;
-	double j = -30;
+	int i = 0;
+	double j = -((double)ANGLE_CAMERA/2);
 	double newp_x;
 	double newp_y;
-	double (degree) = 60;
-	double (inc) = degree / WINDOW_WIDTH;
+	double inc = ((double)ANGLE_CAMERA/(double)WINDOW_WIDTH);
 
 	int counter = 0;//sil
-	while (j < 30)
+	while (j < (double)(ANGLE_CAMERA/2))
 	{
 		i = 0;
 		while (1)
 		{
 			newp_x = ((img->p_x * img->pixel) + (cos(img->angle - (j * DR)) * i));
-    		newp_y = ((img->p_y * img->pixel) - (sin(img->angle - (j * DR)) * i));
+			newp_y = ((img->p_y * img->pixel) - (sin(img->angle - (j * DR)) * i));
 			if (img->map[(int)(newp_y / img->pixel)][(int)(newp_x / img->pixel)] == '0')
 			{
 				mlx_pixel_put(img->mlx, img->mlx_win, newp_x, newp_y, 0x123456 / M_PI * j);

@@ -15,6 +15,7 @@
 
 #define WINDOW_WIDTH 1080
 #define WINDOW_HEIGHT 720
+#define ANGLE_CAMERA 60
 
 #define A 0
 #define S 1
