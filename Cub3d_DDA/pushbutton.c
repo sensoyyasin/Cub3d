@@ -65,6 +65,8 @@ void turnleft(t_cub3d *img)
 		img->p_y = newp_y;
 	else if (img->map[(int)img->p_y][(int)newp_x] == '0' && img->check->a_check == true)
 		img->p_x = newp_x;
+
+	img->check->a_check = false;
 }
 
 void turnright(t_cub3d *img)
@@ -81,6 +83,8 @@ void turnright(t_cub3d *img)
 		img->p_y = newp_y;
 	else if (img->map[(int)img->p_y][(int)newp_x] == '0' && img->check->d_check == true)
 		img->p_x = newp_x;
+
+	img->check->d_check = false;
 }
 
 void turnup(t_cub3d *img)
@@ -97,6 +101,7 @@ void turnup(t_cub3d *img)
 		img->p_y = newp_y;
 	else if (img->map[(int)img->p_y][(int)newp_x] == '0' && img->check->w_check == true)
 		img->p_x = newp_x;
+	img->check->w_check = false;
 }
 
 void turndown(t_cub3d *img)
@@ -113,34 +118,34 @@ void turndown(t_cub3d *img)
 		img->p_y = newp_y;
 	else if (img->map[(int)img->p_y][(int)newp_x] == '0' && img->check->s_check == true)
 		img->p_x = newp_x;
+
+	img->check->s_check = false;
 }
 
 void angleright(t_cub3d *img)
 {
-	if (img->check->r_check == true)
-	{
-		if (img->angle <= 0)
-			img->angle += 2 * PI;
-		img->angle -= 0.1;
-		img->angle_x = cos(img->angle);
-		img->angle_y = sin(img->angle);
-		// img->check->r_check = false;
-	}
+	if (img->angle <= 0)
+		img->angle += 2 * PI;
+	img->angle -= 0.1;
+	img->angle_x = cos(img->angle);
+	img->angle_y = sin(img->angle);
+	
+	img->check->r_check = false;
+	
 	printf("img angle : %f\n",img->angle);
 	printf("x:%f, y:%f\n", img->angle_x, img->angle_y);
 }
 
 void angleleft(t_cub3d *img)
 {
-	if (img->check->l_check == true)
-	{
-		if (img->angle > 2 * PI)
-			img->angle -= 2 * PI;
-		img->angle += 0.1;
-		img->angle_x = cos(img->angle);
-		img->angle_y = sin(img->angle);
-		// img->check->l_check = false;
-	}
+	if (img->angle > 2 * PI)
+		img->angle -= 2 * PI;
+	img->angle += 0.1;
+	img->angle_x = cos(img->angle);
+	img->angle_y = sin(img->angle);
+	
+	img->check->l_check = false;
+	
 	printf("Img angle : %f\n",img->angle);
 	printf("x:%f, y:%f\n", img->angle_x, img->angle_y);
 }

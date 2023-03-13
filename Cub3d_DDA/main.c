@@ -66,7 +66,7 @@ int main(int argc, char **argv)
 	initializer(img);
 	check_all(img);
 	img->mlx = mlx_init();
-	img->mlx_win = mlx_new_window(img->mlx, 1080, 720,"Cub3d");
+	img->mlx_win = mlx_new_window(img->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "Cub3d");
 	map_addr(img);
 	//start_window(img);
 	//Bu iki çağrı arasındaki fark, olayların türüdür. İlk çağrı, bir klavye tuşuna basıldığında çalışacakken, ikinci çağrı klavye tuşunun serbest bırakılması durumunda çalışacaktır.

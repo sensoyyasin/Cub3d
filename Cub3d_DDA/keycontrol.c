@@ -2,11 +2,9 @@
 
 int pushbutton(int keycode, t_cub3d *ptr)
 {
-	if (keycode == ESC || keycode == 65307)
-	{
-		mlx_destroy_window(ptr->mlx, ptr->mlx_win);
-		exit_func("\033[35m\nGame was closing\n", ptr);
-	}
+	(void)keycode;
+	mlx_destroy_window(ptr->mlx, ptr->mlx_win);
+	exit_func("\033[35m\nGame was closing\n", ptr);
 	return (0);
 }
 

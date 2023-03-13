@@ -13,6 +13,9 @@
 #define PI 3.141592653
 #define DR 0.0174533
 
+#define WINDOW_WIDTH 1080
+#define WINDOW_HEIGHT 720
+
 #define A 0
 #define S 1
 #define D 2

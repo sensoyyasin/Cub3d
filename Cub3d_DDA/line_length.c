@@ -92,10 +92,13 @@ void my_mlx_pixel_put2(t_cub3d *img)
 void    my_mlx_pixe_put_angle(t_cub3d *img)
 {
     int i = 0;
-	int j = -30;
+	double j = -30;
 	double newp_x;
-    double newp_y;
+	double newp_y;
+	double (degree) = 60;
+	double (inc) = degree / WINDOW_WIDTH;
 
+	int counter = 0;//sil
 	while (j < 30)
 	{
 		i = 0;
@@ -105,7 +108,7 @@ void    my_mlx_pixe_put_angle(t_cub3d *img)
     		newp_y = ((img->p_y * img->pixel) - (sin(img->angle - (j * DR)) * i));
 			if (img->map[(int)(newp_y / img->pixel)][(int)(newp_x / img->pixel)] == '0')
 			{
-				mlx_pixel_put(img->mlx, img->mlx_win,newp_x , newp_y, 0x123456 / M_PI * j);
+				mlx_pixel_put(img->mlx, img->mlx_win, newp_x, newp_y, 0x123456 / M_PI * j);
 			}
 			else
 			{
@@ -114,8 +117,10 @@ void    my_mlx_pixe_put_angle(t_cub3d *img)
 			}
 			i++;
 		}
-		j += 1;
+		j += inc;
+		counter++;//sil
 	}
+	printf("------------>counter:%d\n", counter); //1080
 }
 
 void putpixel(t_cub3d *cub3dptr)
