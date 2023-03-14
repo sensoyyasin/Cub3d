@@ -129,5 +129,6 @@ double distance(double ax, double ay, double bx, double by);
 void dda(t_cub3d *img, double x1, double y1, double x2, double y2);
 void    my_mlx_pixe_put_angle(t_cub3d *img);
 void draw3DWalls(t_cub3d *img, int i, int j, double distance_to_wall);
+void my_mlx3_pixel_put_image(t_cub3d *img, int x, int y, int color);
 
 #endif

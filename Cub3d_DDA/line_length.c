@@ -59,6 +59,15 @@ void my_mlx_pixel_put2(t_cub3d *img)
 	}
 }
 
+// ->mlx_pixel_put yerine image bastırmaya calistim burada.
+// void my_mlx3_pixel_put_image(t_cub3d *img, int x, int y, int color)
+// {
+//     unsigned int *dst;
+
+//     dst = (unsigned int *)(img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8)));
+//     *dst = color;
+// }
+
 void    my_mlx_pixe_put_angle(t_cub3d *img)
 {
 	int i = 0;
@@ -69,9 +78,6 @@ void    my_mlx_pixe_put_angle(t_cub3d *img)
 
 	//printf("(double)(ANGLE_CAMERA/2) : %f\n", (double)(ANGLE_CAMERA/2)); -> 30 degree.
 	//printf("j : %f\n",j); -> -30 degree
-	//printf("img->p_x : %f\n",img->p_x); -> player_x
-	//printf("img->p_y: %f\n",img->p_y); -> player_y
-	//j = 330 * DR * ;
 	while (j  < (double)ANGLE_CAMERA) // 30'dan - 30 'a kadar dönmüyor çünkü while - ye dönmüyor.
 	{
 		i = 0;
@@ -81,7 +87,7 @@ void    my_mlx_pixe_put_angle(t_cub3d *img)
 			newp_y = ((img->p_y * img->pixel) - (sin((img->angle + 30 * DR) - (j * DR)) * i));
 			if (img->map[(int)(newp_y / img->pixel)][(int)(newp_x / img->pixel)] == '0')
 			{
-				//my_mlx_pixel_put(img->mlx, i, j, 0x123456 / M_PI * j);
+				//my_mlx3_pixel_put_image(img->mlx, newp_x, newp_y, GREEN);
 				mlx_pixel_put(img->mlx, img->mlx_win, newp_x, newp_y, GREEN);
 			}
 			else
