@@ -74,9 +74,9 @@ void    my_mlx_pixe_put_angle(t_cub3d *img)
 	double j = 0;
 	double newp_x;
 	double newp_y;
-	//double inc = ((double)ANGLE_CAMERA/(double)WINDOW_WIDTH);
+	double inc = ((double)ANGLE_CAMERA/(double)WINDOW_WIDTH);
 
-	//printf("(double)(ANGLE_CAMERA/2) : %f\n", (double)(ANGLE_CAMERA/2)); -> 30 degree.
+	printf("inc : %f\n", inc); 
 	//printf("j : %f\n",j); -> -30 degree
 	while (j  < (double)ANGLE_CAMERA) // 30'dan - 30 'a kadar dönmüyor çünkü while - ye dönmüyor.
 	{
