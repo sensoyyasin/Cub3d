@@ -10,7 +10,8 @@ void isargtrue(t_cub3d *cub3dptr)
         cub3dptr->map_input[1][len - 3] != 'c' &&
         cub3dptr->map_input[1][len - 4] != '.')
         {
-		    exit_func("\033[1;31mWrong map format!\n\033[0m", cub3dptr);
+			write(2, "\033[1;31mWrong map format!\n\033[0m", 30);
+		    exit(1);
         }
 }
 
