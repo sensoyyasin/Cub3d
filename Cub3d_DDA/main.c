@@ -23,6 +23,7 @@ void initializer(t_cub3d *img)
 	img->check->d_check = false;
 	img->check->l_check = false;
 	img->check->r_check = false;
+	img->check->tab_check = true;
 	img->no = 0;
 	img->so = 0;
 	img->we = 0;
@@ -36,7 +37,7 @@ void initializer(t_cub3d *img)
 	img->texture_bool = 0;
 	img->map_bool = 0;
 	img->speed_pixel = 2;
-	img->pixel = 32;
+	img->pixel = 16;
 	img->max_map_width = 0;
 	img->max_map_height = 0;
 	img->angle = 0;
@@ -51,6 +52,7 @@ void	map_addr(t_cub3d *img)
 	img->addr = (int*)mlx_get_data_addr(img->img, &ad, &ad, &ad);
 	while (++i < img->max_map_width * img->pixel * img->max_map_height * img->pixel)
 		img->addr[i] = 0xFF000000;
+	//Bakilacak sonra.
 	putpixel(img);
 }
 
@@ -72,7 +74,7 @@ int main(int argc, char **argv)
 	//Bu iki çağrı arasındaki fark, olayların türüdür. İlk çağrı, bir klavye tuşuna basıldığında çalışacakken, ikinci çağrı klavye tuşunun serbest bırakılması durumunda çalışacaktır.
 	mlx_hook(img->mlx_win, 2, 1L << 0, keychecker, &img->mlx);
 	mlx_hook(img->mlx_win, 17, (0L), pushbutton, img); //kapatmak icin.
-	mlx_hook(img->mlx_win, 3, 1L << 1, keychecker2, &img->mlx);
+	mlx_hook(img->mlx_win, 3, 1L << 0, keychecker2, &img->mlx);
 	mlx_loop_hook(img->mlx, putimage, img);
 	mlx_loop(img->mlx);
 	//free_all(img);

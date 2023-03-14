@@ -16,6 +16,7 @@
 #define WINDOW_WIDTH 1080
 #define WINDOW_HEIGHT 720
 #define ANGLE_CAMERA 60
+#define TAB 48
 
 #define A 0
 #define S 1
@@ -40,6 +41,7 @@ typedef struct s_bool
     bool d_check;
     bool r_check;
     bool l_check;
+    bool tab_check;
 }   t_check;
 
 typedef struct cub3d
@@ -124,8 +126,8 @@ void    convertangle(char c, t_cub3d *img);
 void angleright(t_cub3d *img);
 void angleleft(t_cub3d *img);
 double distance(double ax, double ay, double bx, double by);
-void drawRays3D(t_cub3d *img);
 void dda(t_cub3d *img, double x1, double y1, double x2, double y2);
 void    my_mlx_pixe_put_angle(t_cub3d *img);
+void draw3DWalls(t_cub3d *img, int i, int j, double distance_to_wall);
 
 #endif

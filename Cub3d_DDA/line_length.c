@@ -4,7 +4,6 @@ int line_length(t_cub3d *cub3dptr)
 {
     int fdmap;
     char c;
-    //char *str;
     int i;
 
     i = 0;
@@ -60,66 +59,56 @@ void my_mlx_pixel_put2(t_cub3d *img)
 	}
 }
 
-// void    my_mlx_pixe_put_angle(t_cub3d *img)
-// {
-//     int i = 0;
-//     int j = 0;
-
-//     while (i < img->pixel * 5)
-// 	{
-// 		j = 0;
-// 		while (j < img->pixel * 5)
-// 		{
-//             if (i == j)
-// 		        mlx_pixel_put(img->mlx, img->mlx_win, (img->p_x * img->pixel) + (img->angle_x * j), (img->p_y * img->pixel) - (img->angle_y * i), 0);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
-
-/*
-	double newp_x = img->p_x + img->speed * cos(img->angle);
-    double newp_y = img->p_y - img->speed * sin(img->angle);
-
-    if (img->map[(int)newp_y][(int)newp_x] == '0' && img->check->w_check == true)
-    {
-		img->p_x = newp_x;
-		img->p_y = newp_y;
-    }
-*/
-
 void    my_mlx_pixe_put_angle(t_cub3d *img)
 {
 	int i = 0;
-	double j = -((double)ANGLE_CAMERA/2);
+	double j = 0;
 	double newp_x;
 	double newp_y;
-	double inc = ((double)ANGLE_CAMERA/(double)WINDOW_WIDTH);
+	//double inc = ((double)ANGLE_CAMERA/(double)WINDOW_WIDTH);
 
-	int counter = 0;//sil
-	while (j < (double)(ANGLE_CAMERA/2))
+	//printf("(double)(ANGLE_CAMERA/2) : %f\n", (double)(ANGLE_CAMERA/2)); -> 30 degree.
+	//printf("j : %f\n",j); -> -30 degree
+	//printf("img->p_x : %f\n",img->p_x); -> player_x
+	//printf("img->p_y: %f\n",img->p_y); -> player_y
+	//j = 330 * DR * ;
+	while (j  < (double)ANGLE_CAMERA) // 30'dan - 30 'a kadar dönmüyor çünkü while - ye dönmüyor.
 	{
 		i = 0;
 		while (1)
 		{
-			newp_x = ((img->p_x * img->pixel) + (cos(img->angle - (j * DR)) * i));
-			newp_y = ((img->p_y * img->pixel) - (sin(img->angle - (j * DR)) * i));
+			newp_x = ((img->p_x * img->pixel) + (cos((img->angle + 30 * DR) - (j * DR)) * i));
+			newp_y = ((img->p_y * img->pixel) - (sin((img->angle + 30 * DR) - (j * DR)) * i));
 			if (img->map[(int)(newp_y / img->pixel)][(int)(newp_x / img->pixel)] == '0')
 			{
-				mlx_pixel_put(img->mlx, img->mlx_win, newp_x, newp_y, 0x123456 / M_PI * j);
+				//my_mlx_pixel_put(img->mlx, i, j, 0x123456 / M_PI * j);
+				mlx_pixel_put(img->mlx, img->mlx_win, newp_x, newp_y, GREEN);
 			}
 			else
 			{
-				// draw3DWalls(img, i, j);
+				// double d = distance(img->p_x,img->p_y, newp_x,newp_y); //Player ve rayin koordinatlari.
+				// draw3DWalls(img, i, j, d);
 				break;
 			}
 			i++;
 		}
-		j += inc;
-		counter++;//sil
+		j++;
 	}
-	printf("------------>counter:%d\n", counter); //1080
+}
+
+// void draw3DWalls(t_cub3d *img, int i, int j, double distance_to_wall)
+// {
+// 	(void)distance_to_wall;
+// 	//int k1 = (img->max_map_width * img->max_map_height / 2) + distance_to_wall;
+// 	//int k2 = (img->max_map_width * img->max_map_height / 2) - distance_to_wall;
+
+// 	mlx_pixel_put(img->mlx, img->mlx_win, i, j, RED);
+// 	return ;
+// }
+
+double	distance(double x1, double y1, double x2, double y2)
+{
+	return (sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1))));
 }
 
 void putpixel(t_cub3d *cub3dptr)
@@ -143,44 +132,18 @@ void putpixel(t_cub3d *cub3dptr)
     }
 }
 
-// void draw3DWalls(t_cub3d *img, int i, int j)
-// {
-//     double distance_proj_plane;
-//     double wall_height;
-//     double wall_top;
-//     double wall_bottom;
-//     double distance_to_wall;
-//     double corrected_distance_to_wall;
-//     double wall_texture_x;
-//     int wall_texture_y;
-//     int texture_color;
-    
-//     distance_proj_plane = (img->max_map_width / 2) / tan(30 / 2);
-//     distance_to_wall = distance(img->p_x, img->p_y, (img->p_x + cos(img->angle - (j * DR)) * i), (img->p_y - sin(img->angle - (j * DR)) * i));
-//     corrected_distance_to_wall = distance_to_wall * cos(img->angle - (j * DR));
-//     wall_height = (img->pixel / corrected_distance_to_wall) * distance_proj_plane;
-//     wall_top = (img->max_map_height / 2) - (wall_height / 2);
-//     wall_bottom = (img->max_map_height / 2) + (wall_height / 2);
-
-//     if (wall_height > img->max_map_height)
-//         wall_height = img->max_map_height;
-//     wall_texture_x = (i / (double)img->pixel) * 720;
-//     wall_texture_y = ((wall_top - img->max_map_height / 2 + wall_height / 2) / wall_height) * 1080;
-//     texture_color = get_color(img->wall, wall_texture_x, wall_texture_y);
-//     texture_color = darken_color(texture_color, corrected_distance_to_wall);
-//     draw_vertical_line(img, i, wall_top, wall_bottom, texture_color);
-// }
-
-
 int putimage(t_cub3d *img)
 {
-    keycheckforloop(img);
 	mlx_clear_window(img->mlx, img->mlx_win);
+    keycheckforloop(img);
 	mlx_put_image_to_window(img->mlx, img->mlx_win, img->img, 0, 0);
-    my_mlx_pixe_put_angle(img);
-	my_mlx_pixel_put2(img);
-    //drawRays3D(img);
+	if (img->check->tab_check)
+	{
+    	my_mlx_pixe_put_angle(img);
+		my_mlx_pixel_put2(img);
+	}
 
+    //drawRays3D(img);
     //--->for log file.
     // int fd;
     // fd = open("log", O_CREAT | O_TRUNC | O_WRONLY);
