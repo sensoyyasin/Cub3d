@@ -12,7 +12,7 @@ int pushbutton(int keycode, t_cub3d *ptr)
 
 void keycheckforloop(t_cub3d *img)
 {
-	printf("img->check->w_check degeri : %d\n",img->check->w_check);
+	//printf("img->check->w_check degeri : %d\n",img->check->w_check);
 	if (img->check->w_check == true)
 		turnup(img);
 	if (img->check->a_check == true)
