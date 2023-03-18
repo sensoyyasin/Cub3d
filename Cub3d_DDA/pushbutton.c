@@ -130,7 +130,7 @@ void angleright(t_cub3d *img)
 	img->angle_x = cos(img->angle);
 	img->angle_y = sin(img->angle);
 	
-	img->check->r_check = false;
+	//img->check->r_check = false;
 	//printf("img angle : %f\n",img->angle);
 	//printf("x:%f, y:%f\n", img->angle_x, img->angle_y);
 }
@@ -143,7 +143,7 @@ void angleleft(t_cub3d *img)
 	img->angle_x = cos(img->angle);
 	img->angle_y = sin(img->angle);
 	
-	img->check->l_check = false;
+	//img->check->l_check = false;
 	//printf("Img angle : %f\n",img->angle);
 	//printf("x:%f, y:%f\n", img->angle_x, img->angle_y);
 }

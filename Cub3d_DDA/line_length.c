@@ -31,6 +31,7 @@ int column_length(t_cub3d *cub3dptr)
     return (i);
 }
 
+/* map to image */
 void my_mlx_pixel_put(t_cub3d *img, int x, int y, int color)
 {
     int (i) = 0;
@@ -40,13 +41,14 @@ void my_mlx_pixel_put(t_cub3d *img, int x, int y, int color)
 		j = 0;
 		while (j < img->pixel)
 		{
-			img->addr[(img->pixel * y + i) * img->max_map_width * img->pixel + (img->pixel * x) + j] = color;
+			img->addr_map[(img->pixel * y + i) * img->max_map_width * img->pixel + (img->pixel * x) + j] = color;
 			j++;
 		}
 		i++;
 	}
 }
 
+/* player to screen */
 void my_mlx_pixel_put2(t_cub3d *img)
 {
     int (i) = - img->pixel / 4 + 1;
@@ -68,6 +70,7 @@ void my_mlx_pixel_put2(t_cub3d *img)
 //     *dst = color;
 // }
 
+/* rays to screen */
 void    my_mlx_pixe_put_angle(t_cub3d *img)
 {
 	int i = 0;
@@ -75,6 +78,7 @@ void    my_mlx_pixe_put_angle(t_cub3d *img)
 	double newp_x;
 	double newp_y;
 	double inc = ((double)ANGLE_CAMERA/(double)WINDOW_WIDTH);
+	int counter = 0;//sil
 
 	printf("inc : %f\n", inc); 
 	//printf("j : %f\n",j); -> -30 degree
@@ -98,8 +102,10 @@ void    my_mlx_pixe_put_angle(t_cub3d *img)
 			}
 			i++;
 		}
-		j++;
+		j += inc;
+		counter++;//sil
 	}
+	printf("counter:%d\n", counter);
 }
 
 // void draw3DWalls(t_cub3d *img, int i, int j, double distance_to_wall)
@@ -141,11 +147,11 @@ void putpixel(t_cub3d *cub3dptr)
 int putimage(t_cub3d *img)
 {
 	mlx_clear_window(img->mlx, img->mlx_win);
-    keycheckforloop(img);
-	mlx_put_image_to_window(img->mlx, img->mlx_win, img->img, 0, 0);
+	keycheckforloop(img);
 	if (img->check->tab_check)
 	{
-    	my_mlx_pixe_put_angle(img);
+		mlx_put_image_to_window(img->mlx, img->mlx_win, img->img_map, 0, 0);
+		my_mlx_pixe_put_angle(img);
 		my_mlx_pixel_put2(img);
 	}
 

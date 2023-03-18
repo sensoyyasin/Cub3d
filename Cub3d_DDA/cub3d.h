@@ -51,8 +51,14 @@ typedef struct cub3d
     t_check *check;
     char **map;
     char **map_input;
-    int *addr;
-    void *img;
+	int *addr_map;
+	void *img_map;
+	int *addr_player;
+	void *img_player;
+	int *addr_ray;
+	void *img_ray;
+	int *addr_game;
+	void *img_game;
     void *wall;
     void *floor;
     int line_length;
