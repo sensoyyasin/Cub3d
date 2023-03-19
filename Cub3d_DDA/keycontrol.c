@@ -7,6 +7,7 @@ int pushbutton(int keycode, t_cub3d *ptr)
 		mlx_destroy_window(ptr->mlx, ptr->mlx_win);
 		exit_func("\033[35m\nGame was closing\n", ptr);
 	}
+	exit(0);
 	return (0);
 }
 

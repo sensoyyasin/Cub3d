@@ -138,6 +138,6 @@ void dda(t_cub3d *img, double x1, double y1, double x2, double y2);
 void    my_mlx_pixe_put_angle(t_cub3d *img);
 void pixel_to_player_image_address(t_cub3d *img, int x, int y, int color);
 void pixel_to_ray_image_address(t_cub3d *img, int x, int y, int color);
-void put_game_to_window(t_cub3d *img);
+void draw3DWalls(t_cub3d *img, double i, int counter, int dir);
 
 #endif

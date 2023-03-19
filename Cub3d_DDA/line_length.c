@@ -84,14 +84,14 @@ void pixel_to_player_image_address(t_cub3d *img, int x, int y, int color)
 /* rays to screen */
 void	my_mlx_pixe_put_angle(t_cub3d *img)
 {
-	int i = 0;
-	double j = 0;
+	double i = 0;
+	double j = -(double)ANGLE_CAMERA / 2;
 	double newp_x;
 	double newp_y;
 	double inc = ((double)ANGLE_CAMERA/(double)WINDOW_WIDTH);
 	int counter = 0;//sil
 	int (k) = -1;
-
+	int dir = 0;
 
 	int (l) = 0;
 	while (l < WINDOW_HEIGHT * WINDOW_WIDTH / 2)
@@ -100,30 +100,44 @@ void	my_mlx_pixe_put_angle(t_cub3d *img)
 			img->addr_game[l++] = img->f_final;
 	
 	//printf("inc : %f\n", inc); 
-	//printf("j : %f\n",j); -> -30 degree
+	//printf("j : %f\n",j); //-> -30 degree
 
 	while (++k < img->max_map_width * img->pixel * img->max_map_height * img->pixel)
 		img->addr_ray[k] = 0xFF000000;//player transparent
 	
-	while (j < (double)ANGLE_CAMERA) // 30'dan - 30 'a kadar dönmüyor çünkü while - ye dönmüyor.
+	while (j < (double)(ANGLE_CAMERA / 2)) // 30'dan - 30 'a kadar dönmüyor çünkü while - ye dönmüyor.
 	{
 		i = 0;
 		while (1)
 		{
-			newp_x = ((img->p_x * img->pixel) + (cos((img->angle + 30 * DR) - (j * DR)) * i));
-			newp_y = ((img->p_y * img->pixel) - (sin((img->angle + 30 * DR) - (j * DR)) * i));
+			newp_x = ((img->p_x * img->pixel) + (cos(img->angle - (j * DR)) * i));
+			newp_y = ((img->p_y * img->pixel) - (sin(img->angle - (j * DR)) * i));
 			if (img->map[(int)(newp_y / img->pixel)][(int)(newp_x / img->pixel)] == '0')
 			{
-				pixel_to_ray_image_address(img, newp_x, newp_y, GREEN);
+				pixel_to_ray_image_address(img, newp_x, newp_y, 0x123456 * i);
 				//mlx_pixel_put(img->mlx, img->mlx_win, newp_x, newp_y, GREEN);
 			}
 			else
 			{
+				if ((int)newp_x % img->pixel == 0)
+					dir = 200;
+				else if ((int)newp_y % img->pixel == 0)
+					dir = 10;
+				else if ((int)newp_x % img->pixel == 0)
+					dir = 200;
+				else
+					dir = 0;
 				// double d = distance(img->p_x,img->p_y, newp_x,newp_y); //Player ve rayin koordinatlari.
-				//draw3DWalls(img, i, counter);
+				//i -= cos((img->angle + 30 * DR) - (j * DR));
+				//main->ray.distance = main->ray.distance * cos((main->player->angle - angle) * (M_PI / 180.0));
+				//if(fabs(cos(img->angle - (j * DR))) < PI/4 || fabs(cos(img->angle - (j * DR))) > 7 * PI / 4 || (fabs(cos(img->angle - (j * DR))) > 3 * PI / 4 && fabs(cos(img->angle - (j * DR))) < 5 * PI / 4 ))
+				//	i = i * fabs(sin(img->angle - (j * DR)));
+				//else
+				//	i = i * fabs(cos(img->angle - (j * DR)));
+				draw3DWalls(img, i, counter, dir);
 				break;
 			}
-			i++;
+			i += 0.1;
 		}
 		j += inc;
 		counter++;//sil
@@ -132,17 +146,24 @@ void	my_mlx_pixe_put_angle(t_cub3d *img)
 	//printf("counter:%d\n", counter);
 }
 
+//newp_x = ((img->p_x * img->pixel) + (cos((img->angle + 30 * DR) - (j * DR)) * i));
+//newp_y = ((img->p_y * img->pixel) - (sin((img->angle + 30 * DR) - (j * DR)) * i));
+
 /* ray pixel to map address and player image to window */
 void pixel_to_ray_image_address(t_cub3d *img, int x, int y, int color)
 {
 	img->addr_ray[(y * img->pixel * img->max_map_width) + x] = color;
 }
 
-void	draw3DWalls(t_cub3d *img, int i, int counter)
+void	draw3DWalls(t_cub3d *img, double i, int counter, int dir)
 {
-	while (WINDOW_HEIGHT - i)
+	int (j) = 0;
+	while (j < WINDOW_HEIGHT / i * 5 && ((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + counter) - (WINDOW_WIDTH * j) >= 0
+			&& ((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + counter) + (WINDOW_WIDTH * j) < WINDOW_WIDTH * WINDOW_HEIGHT)
 	{
-		img->addr_game[(WINDOW_HEIGHT - i)] = 0x00FF5733;
+		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + counter) + (WINDOW_WIDTH * j)] = 0x00FF5733 * dir;
+		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + counter) - (WINDOW_WIDTH * j)] = 0x00FF5733 * dir; //0x00FF5733
+		j++;
 	}
 }
 
