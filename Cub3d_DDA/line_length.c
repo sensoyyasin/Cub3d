@@ -88,11 +88,15 @@ void	my_mlx_pixe_put_angle(t_cub3d *img)
 	double j = -(double)ANGLE_CAMERA / 2;
 	double newp_x;
 	double newp_y;
+	double new_angle;
 	double inc = ((double)ANGLE_CAMERA/(double)WINDOW_WIDTH);
 	int counter = 0;//sil
 	int (k) = -1;
 	int dir = 0;
-	int last_dir = 0;
+	//int last_dir = 0;
+	int step_x;
+	int step_y;
+	int ray;
 
 	int (l) = 0;
 	while (l < WINDOW_HEIGHT * WINDOW_WIDTH / 2)
@@ -106,13 +110,37 @@ void	my_mlx_pixe_put_angle(t_cub3d *img)
 	while (++k < img->max_map_width * img->pixel * img->max_map_height * img->pixel)
 		img->addr_ray[k] = 0xFF000000;//player transparent
 	
-	while (j < (double)(ANGLE_CAMERA / 2)) // 30'dan - 30 'a kadar dönmüyor çünkü while - ye dönmüyor.
+	while (j < (double)(ANGLE_CAMERA / 2)) // 30'dan - 30 'a kadar dönmüyor çünkü while - ye dönmüyor. 
 	{
 		i = 0;
+		step_x = 0;
+		step_y = 0;
+		ray = 0;
+		while (step_x < img->max_map_width)
+		{
+			if (cos(img->angle - (j * DR)) < 0 )
+			{
+				if ( img->map[(int)(newp_y / img->pixel)][((int)img->p_x - step_x)] != '0' )
+					break;
+			}
+			else
+			{
+				if ( img->map[(int)(newp_y / img->pixel)][((int)img->p_x + step_x)] != '0' )
+					break;
+			}
+			step_x++;
+		}
+		while (step_y < img->max_map_height)
+		{
+			//
+			step_y++;
+		}
+		
 		while (1)
 		{
-			newp_x = ((img->p_x * img->pixel) + (cos(img->angle - (j * DR)) * i));
-			newp_y = ((img->p_y * img->pixel) - (sin(img->angle - (j * DR)) * i));
+			new_angle = img->angle - (j * DR);
+			newp_x = (img->p_x * img->pixel) + (cos(new_angle) * i);
+			newp_y = (img->p_y * img->pixel) - (sin(new_angle) * i);
 			//if ((int)newp_x % img->pixel == 0)
 			//{
 			//	if(img->angle + (j * DR) < PI / 2)
@@ -134,24 +162,31 @@ void	my_mlx_pixe_put_angle(t_cub3d *img)
 			}
 			else
 			{
-				//printf("%f\n", img->angle);
-				if (!((int)newp_x % img->pixel) && ((int)newp_y % img->pixel))
-				{
+				if( x_side == 1 && new_angle > PI/2 && new_angle < 3*PI/2)
 					dir = 0xFE5000;//orange
-					last_dir = 0xFE5000;//orange
-				}
-				else if(!((int)newp_y % img->pixel) && ((int)newp_x % img->pixel))
-				{
+				else if (x_side == 1)
 					dir = 0x00AB84;//green
-					last_dir = 0x00AB84;//green
-				}
-				else if (((int)newp_y % img->pixel) && ((int)newp_x % img->pixel))
-				{
+				if (y_side == 1 && new_angle < PI)
 					dir = 0xBF9BDE;//violet
-					last_dir = 0xBF9BDE;//violet
-				}
-				else
-					dir = last_dir;
+				else if (y_side == 1)
+					dir = 0xFF3333;//red
+				//if (!((int)newp_x % img->pixel) && ((int)newp_y % img->pixel))
+				//{
+				//	dir = 0xFE5000;//orange
+				//	last_dir = 0xFE5000;//orange
+				//}
+				//else if(!((int)newp_y % img->pixel) && ((int)newp_x % img->pixel))
+				//{
+				//	dir = 0x00AB84;//green
+				//	last_dir = 0x00AB84;//green
+				//}
+				//else if (((int)newp_y % img->pixel) && ((int)newp_x % img->pixel))
+				//{
+				//	dir = 0xBF9BDE;//violet
+				//	last_dir = 0xBF9BDE;//violet
+				//}
+				//else
+				//	dir = last_dir;
 					
 				// double d = distance(img->p_x,img->p_y, newp_x,newp_y); //Player ve rayin koordinatlari.
 				//i -= cos((img->angle + 30 * DR) - (j * DR));
@@ -167,6 +202,7 @@ void	my_mlx_pixe_put_angle(t_cub3d *img)
 		}
 		j += inc;
 		counter++;
+		//printf("cos: %f, sin: %f\n", cos(new_angle), sin(new_angle));
 	}
 	//mlx_put_image_to_window(img->mlx, img->mlx_win, img->img_ray, 0, 0);
 	//printf("counter:%d\n", counter);
