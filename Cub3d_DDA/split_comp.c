@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   split_comp.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasinsensoy <yasinsensoy@student.42.fr>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/21 21:46:15 by yasinsensoy       #+#    #+#             */
+/*   Updated: 2023/03/21 21:48:55 by yasinsensoy      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-void double_free_split(char **split1, char **split2)
+void	double_free_split(char **split1, char **split2)
 {
 	int (i) = 0;
 	while (split1[i])
@@ -12,7 +24,7 @@ void double_free_split(char **split1, char **split2)
 	free(split2);
 }
 
-void free_split(char **split)
+void	free_split(char **split)
 {
 	int (i) = 0;
 	while (split[i])

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dda_algorithm.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasinsensoy <yasinsensoy@student.42.fr>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/21 21:55:59 by yasinsensoy       #+#    #+#             */
+/*   Updated: 2023/03/21 21:59:00 by yasinsensoy      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-void dda(t_cub3d *img, double x1, double y1, double x2, double y2)
+void    dda(t_cub3d *img, double x1, double y1, double x2, double y2)
 {
     //x1,y1 (2,2)
     //x2,y2 (9,2)
@@ -12,7 +24,7 @@ void dda(t_cub3d *img, double x1, double y1, double x2, double y2)
     //yinc = 0 / 7 = 0;
 
     int step;
-    
+
     double xinc;
     double yinc;
 

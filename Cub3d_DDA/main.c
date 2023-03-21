@@ -1,7 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasinsensoy <yasinsensoy@student.42.fr>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/21 21:36:26 by yasinsensoy       #+#    #+#             */
+/*   Updated: 2023/03/21 21:54:09 by yasinsensoy      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-void check_all(t_cub3d *img)
+void	check_all(t_cub3d *img)
 {
+	img->no = 0;
+	img->so = 0;
+	img->we = 0;
+	img->ea = 0;
 	isargtrue(img);
 	mapcheck(img);
 	if (!img->texture_bool || !img->map_bool)
@@ -26,10 +42,6 @@ void initializer(t_cub3d *img)
 	img->check->l_check = false;
 	img->check->r_check = false;
 	img->check->tab_check = true;
-	img->no = 0;
-	img->so = 0;
-	img->we = 0;
-	img->ea = 0;
 	img->n_timer = 0;
 	img->s_timer = 0;
 	img->e_timer = 0;
@@ -46,7 +58,7 @@ void initializer(t_cub3d *img)
 	img->speed = (double)img->speed_pixel / (double)img->pixel;
 }
 
-/*	map image creation and fill transparent 
+/*	map image creation and fill transparent
 	(work when start) */
 void	map_addr(t_cub3d *img)
 {
@@ -60,23 +72,22 @@ void	map_addr(t_cub3d *img)
 	img->img_map = mlx_new_image(img->mlx, img->max_map_width * img->pixel, img->max_map_height * img->pixel);
 	img->img_player = mlx_new_image(img->mlx, img->max_map_width * img->pixel, img->max_map_height * img->pixel);
 	img->img_ray = mlx_new_image(img->mlx, img->max_map_width * img->pixel, img->max_map_height * img->pixel);
-	
+
 	img->addr_game = (int*)mlx_get_data_addr(img->img_game, &game, &game, &game);
 	img->addr_map = (int*)mlx_get_data_addr(img->img_map, &map, &map, &map);
 	img->addr_player = (int*)mlx_get_data_addr(img->img_player, &player, &player, &player);
 	img->addr_ray = (int*)mlx_get_data_addr(img->img_ray, &ray, &ray, &ray);
-	
+
 	while (++i < img->max_map_width * img->pixel * img->max_map_height * img->pixel)
 	{
 		img->addr_map[i] = 0xFF000000;//map transparent
 		img->addr_player[i] = 0xFF000000;//player transparent
 		img->addr_ray[i] = 0xFF000000;//player transparent
 	}
-	//Bakilacak sonra. <- ???
 	putpixel(img);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_cub3d *img;
 

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   keycontrol.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasinsensoy <yasinsensoy@student.42.fr>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/21 21:55:50 by yasinsensoy       #+#    #+#             */
+/*   Updated: 2023/03/21 21:57:05 by yasinsensoy      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-int pushbutton(int keycode, t_cub3d *ptr)
+int	pushbutton(int keycode, t_cub3d *ptr)
 {
 	if (keycode == ESC || keycode == 65307)
 	{
@@ -11,7 +23,7 @@ int pushbutton(int keycode, t_cub3d *ptr)
 	return (0);
 }
 
-void keycheckforloop(t_cub3d *img)
+void	keycheckforloop(t_cub3d *img)
 {
 	//printf("img->check->w_check degeri : %d\n",img->check->w_check);
 	if (img->check->w_check == true)
