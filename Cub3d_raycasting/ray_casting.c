@@ -118,27 +118,10 @@ int is_wall_v2(double x, double y, t_cub3d *img)
 
 void draw_ray(double distance, int dir_x, int dir_y, t_cub3d *img, double angle, int ray_count, double original_dist)
 {
-    double    ray_x;
-    double    ray_y;
-    double    dx;
-    double    dy;
-
-	ray_x = img->p_x;
-	ray_y = img->p_y;
-    dx = distance * fabs(cos(angle * (PI / 180))) * dir_x;
-    dy = distance * fabs(sin(angle * (PI / 180))) * dir_y;
-    // while (1)
-    // {
-    //     if (!is_wall(ray_x, ray_y, img) && (sqrt(((img->p_x - ray_x) * (img->p_x - ray_x)) + ((img->p_y - ray_y) * (img->p_y - ray_y))) <= original_dist))
-    //         img->addr_map[(img->pixel * (img->max_x + 1)) * (int)floor(img->pixel * ray_y) + (int)floor(img->pixel * ray_x)] = 0x00ff00;
-    //     else
-	// 	{
-			_3D(img, distance, ray_count);
-            // break;
-	// 	}
-    //     ray_x += dx / (WINDOW_HEIGHT / 2);
-    //     ray_y += dy / (WINDOW_HEIGHT / 2);
-    // }
+	(void)angle;
+	(void)dir_x;
+	(void)dir_y;
+	_3D(img, distance, ray_count);
     (void)original_dist;
 }
 
@@ -158,15 +141,15 @@ int is_wall(double x, double y, t_cub3d *img)
 
 void _3D(t_cub3d *img, double distance, int ray_count)
 {
-	int loc;
-	int mid;
+	//int loc;
+	//int mid;
 	double oran;
 	int	i;
 	int color;
 	distance = distance * (double)img->pixel * ((double)WINDOW_HEIGHT / (double)WINDOW_WIDTH);
 	i = 0;
-	mid = WINDOW_HEIGHT / 2.0;
-	loc = (WINDOW_HEIGHT * mid) - ray_count;
+	//mid = WINDOW_HEIGHT / 2.0;
+	//loc = (WINDOW_HEIGHT * mid) - ray_count;
 	oran = (((double)WINDOW_HEIGHT / 2.0) / distance) * (double)img->pixel;
 
 	if (img->_hith == true)
@@ -177,8 +160,10 @@ void _3D(t_cub3d *img, double distance, int ray_count)
 		color = 0x00ff00; //error
     while (i <= oran && i <= (WINDOW_HEIGHT / 2.0))
     {
-        img->addr_game[(loc + (WINDOW_WIDTH * i ))] = color;
-        img->addr_game[(loc - (WINDOW_WIDTH * i ))] = color;
+		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + ray_count) + (WINDOW_WIDTH * i)] = color;
+		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + ray_count) - (WINDOW_WIDTH * i)] = color;
+        //img->addr_game[(loc + (WINDOW_WIDTH * i ))] = color;
+        //img->addr_game[(loc - (WINDOW_WIDTH * i ))] = color;
         i++;
     }
 }

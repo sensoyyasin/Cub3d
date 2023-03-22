@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+         #
+#    By: yasinsensoy <yasinsensoy@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 12:28:00 by yasinsensoy       #+#    #+#              #
-#    Updated: 2023/02/25 12:10:18 by mtemel           ###   ########.fr        #
+#    Updated: 2023/03/22 20:57:28 by yasinsensoy      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 OS = $(shell uname)
 ifeq ($(OS), Darwin)
 MINILIBX = minilibx
-CFLAGS = -Wall -Wextra -Werror -lmlx -framework OpenGL -framework AppKit -L ./$(MINILIBX)
+CFLAGS = -lmlx -framework OpenGL -framework AppKit -L ./$(MINILIBX)
 else
 MINILIBX = mlx
 CFLAGS	:= -Wall -Werror -Wextra -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz -L ./$(MINILIBX)
