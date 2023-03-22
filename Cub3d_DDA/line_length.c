@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_length.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yasinsensoy <yasinsensoy@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ysensoy <ysensoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:37:42 by yasinsensoy       #+#    #+#             */
-/*   Updated: 2023/03/21 21:55:48 by yasinsensoy      ###   ########.fr       */
+/*   Updated: 2023/03/22 17:21:57 by ysensoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ void	my_mlx_pixe_put_angle(t_cub3d *img)
 			//}
 			if (img->map[(int)(newp_y / img->pixel)][(int)(newp_x / img->pixel)] == '0')
 			{
-				pixel_to_ray_image_address(img, newp_x, newp_y, 0x123456 * i);
+				pixel_to_ray_image_address(img, newp_x, newp_y, GREEN);
 				//mlx_pixel_put(img->mlx, img->mlx_win, newp_x, newp_y, GREEN);
 			}
 			else
@@ -236,8 +236,8 @@ void	draw3DWalls(t_cub3d *img, double i, int counter, int dir)
 	while (j < WINDOW_HEIGHT / i * 5 && ((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + counter) - (WINDOW_WIDTH * j) >= 0
 			&& ((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + counter) + (WINDOW_WIDTH * j) < WINDOW_WIDTH * WINDOW_HEIGHT)
 	{
-		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + counter) + (WINDOW_WIDTH * j)] = dir;
-		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + counter) - (WINDOW_WIDTH * j)] = dir; //0x00FF5733
+		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + counter) + (WINDOW_WIDTH * j)] = 0x00FF5733;
+		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + counter) - (WINDOW_WIDTH * j)] = 0x00FF5733; //0x00FF5733
 		j++;
 	}
 }
