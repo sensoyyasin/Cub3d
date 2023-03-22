@@ -14,8 +14,8 @@ void	raycasting(t_cub3d *img, double angle, int ray_counter)
 	distance_v = ray_vertical(img, angle, dir_x, dir_y, &hitv); //dikey
 	distance_h = ray_horizonal(img, angle, dir_x, dir_y, &hith); //yatay
 
-    // printf("distance_v:%f\n", distance_v);
-    // printf("distance_h:%f\n", distance_h);
+    //printf("distance_v:%f\n", distance_v);
+    //printf("distance_h:%f\n", distance_h);
 
 	if (distance_v < distance_h)
 	{
@@ -31,7 +31,6 @@ void	raycasting(t_cub3d *img, double angle, int ray_counter)
 	}
 	double original_dist = distance;
 	distance = distance * fabs(cos(((img->angle * (180.0 / PI)) - angle) * (PI / 180)));
-    // printf("-->distance: %f\n", distance);
 	draw_ray(distance, dir_x, dir_y, img, angle, ray_counter, original_dist);
 }
 
@@ -160,10 +159,8 @@ void _3D(t_cub3d *img, double distance, int ray_count)
 		color = 0x00ff00; //error
     while (i <= oran && i <= (WINDOW_HEIGHT / 2.0))
     {
-		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + ray_count) + (WINDOW_WIDTH * i)] = color;
-		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + ray_count) - (WINDOW_WIDTH * i)] = color;
-        //img->addr_game[(loc + (WINDOW_WIDTH * i ))] = color;
-        //img->addr_game[(loc - (WINDOW_WIDTH * i ))] = color;
+		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + ray_count) + (WINDOW_WIDTH * i)] = color * 2;
+		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + ray_count) - (WINDOW_WIDTH * i)] = color * 2;
         i++;
     }
 }
