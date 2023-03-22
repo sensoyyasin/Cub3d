@@ -97,6 +97,12 @@ typedef struct cub3d
 	double degree;
 	float angle_x;
 	float angle_y;
+	double	_dir_x;
+	double	_dir_y;
+	int		max_x;
+	int		max_y;
+	bool	_hith;
+	bool	_hitv;
 } t_cub3d;
 
 int		pushbutton(int keycode, t_cub3d *ptr);
@@ -140,7 +146,16 @@ void	my_mlx_pixe_put_angle(t_cub3d *img);
 void	pixel_to_player_image_address(t_cub3d *img, int x, int y, int color);
 void	pixel_to_ray_image_address(t_cub3d *img, int x, int y, int color);
 void	draw3DWalls(t_cub3d *img, double i, int counter, int dir);
-
 void	fill_addr(t_cub3d *img);
+
+
+//Last Changes
+void	raycasting(t_cub3d *img, double angle, int ray_counter);
+double	ray_vertical(t_cub3d *img, double angle, double dir_x, double dir_y, bool *hit);
+double	ray_horizonal(t_cub3d *img, double angle, double dir_x, double dir_y, bool *hit);
+int		is_wall_v2(double x, double y, t_cub3d *img);
+void	draw_ray(double distance, int dir_x, int dir_y, t_cub3d *img, double angle, int ray_count, double original_dist);
+int		is_wall(double x, double y, t_cub3d *img);
+void	_3D(t_cub3d *img, double distance, int ray_count);
 
 #endif

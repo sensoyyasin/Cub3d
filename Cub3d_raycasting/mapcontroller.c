@@ -138,7 +138,6 @@ void	mapcheck3(char *words, t_cub3d *img)
 void	realmapcheck(int i, t_cub3d *img)
 {
 	int (j) = 0;
-
 	while (img->map[i])
 	{
 		j = 0;

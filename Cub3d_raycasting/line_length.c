@@ -6,7 +6,7 @@
 /*   By: ysensoy <ysensoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:37:42 by yasinsensoy       #+#    #+#             */
-/*   Updated: 2023/03/22 15:04:22 by ysensoy          ###   ########.fr       */
+/*   Updated: 2023/03/22 17:17:11 by ysensoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,66 +87,22 @@ void	pixel_to_player_image_address(t_cub3d *img, int x, int y, int color)
 /* rays to screen */
 void	my_mlx_pixe_put_angle(t_cub3d *img)
 {
-	double i = 0;
-	double j = -(double)ANGLE_CAMERA / 2;
-	double newp_x;
-	double newp_y;
-	double new_angle;
-	double inc = ((double)ANGLE_CAMERA/(double)WINDOW_WIDTH);
+	double j = -(double)ANGLE_CAMERA / 2.0;
+	// double i = 0;
+	// double newp_x;
+	// double newp_y;
+	// double new_angle;
+	//double inc = ((double)ANGLE_CAMERA/(double)WINDOW_WIDTH);
 	int ray_counter = 0;//sil
-	int dir = 0;
-	int step_x;
-	int step_y;
+	//int step_x;
+	//int step_y;
 
 	fill_addr(img);
-
 	//Ray casting --> Starting... i've done ray_casting file.
-	// while (angle <= (FOV / 2.0))
-	// {
-	// 	raycasting(main, main->ply.rotation_angle + angle, ray_count);
-	// 	angle += (FOV / 2.0) / ((FOV_THICKNESS - 1) / 2.0);
-	// 	ray_count++;
-	// }
-	while (j < (double)(ANGLE_CAMERA / 2)) // 30'dan - 30 'a kadar dönmüyor çünkü while - ye dönmüyor.
+	while (j <= (ANGLE_CAMERA / 2.0))
 	{
-		i = 0;
-		step_x = 0;
-		step_y = 0;
-		while (step_x < img->max_map_width)
-		{
-			if (cos(img->angle - (j * DR)) < 0 )
-			{
-				if ( img->map[(int)(newp_y / img->pixel)][((int)img->p_x - step_x)] != '0')
-					break;
-			}
-			else
-			{
-				if ( img->map[(int)(newp_y / img->pixel)][((int)img->p_x + step_x)] != '0')
-					break;
-			}
-			step_x++;
-		}
-		while (step_y < img->max_map_height)
-		{
-			step_y++;
-		}
-		while (1)
-		{
-			new_angle = img->angle - (j * DR);
-			newp_x = (img->p_x * img->pixel) + (cos(new_angle) * i);
-			newp_y = (img->p_y * img->pixel) - (sin(new_angle) * i);
-			if (img->map[(int)(newp_y / img->pixel)][(int)(newp_x / img->pixel)] == '0')
-			{
-				pixel_to_ray_image_address(img, newp_x, newp_y, GREEN);
-			}
-			else
-			{
-				draw3DWalls(img, i, ray_counter, dir);
-				break;
-			}
-			i += 0.1;
-		}
-		j += inc;
+		raycasting(img, (img->angle * (180.0 / PI)) + j, ray_counter);
+		j += (ANGLE_CAMERA / 2.0) / (WINDOW_WIDTH / 2.0);
 		ray_counter++;
 	}
 }
@@ -155,7 +111,7 @@ void	fill_addr(t_cub3d *img)
 {
 	int (k) = -1;
 	int (l) = 0;
-	while (l < WINDOW_HEIGHT * WINDOW_WIDTH / 2)
+	while (l < WINDOW_HEIGHT * WINDOW_WIDTH / 2.0)
 			img->addr_game[l++] = img->c_final;
 	while (l < WINDOW_HEIGHT * WINDOW_WIDTH)
 			img->addr_game[l++] = img->f_final;
@@ -177,8 +133,8 @@ void	draw3DWalls(t_cub3d *img, double i, int counter, int dir)
 	while (j < WINDOW_HEIGHT / i * 5 && ((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + counter) - (WINDOW_WIDTH * j) >= 0
 			&& ((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + counter) + (WINDOW_WIDTH * j) < WINDOW_WIDTH * WINDOW_HEIGHT)
 	{
-		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + counter) + (WINDOW_WIDTH * j)] = 0x00FF5733;
-		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + counter) - (WINDOW_WIDTH * j)] = 0x00FF5733;
+		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + counter) + (WINDOW_WIDTH * j)] = 0x8000FFFF;
+		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + counter) - (WINDOW_WIDTH * j)] = 0x8000FFFF;
 		j++;
 	}
 }
