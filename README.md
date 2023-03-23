@@ -1,8 +1,5 @@
 # Cub3d
-My first RayCaster with miniLibX!
 
-![raycasting](https://user-images.githubusercontent.com/73845925/223217346-cd63fce6-73dd-4bd8-b00c-28deca001742.png)
+![ray_casting](https://user-images.githubusercontent.com/73845925/227313581-6c09ee22-75f6-4e6e-8301-7ed31ebfc5b0.gif)
 
-About our raycasting prints
-
-https://user-images.githubusercontent.com/73845925/225102729-8702b3ce-4128-434e-9a04-e7aa404a009f.mov
+<img width="1075" alt="Ekran Resmi 2023-03-23 21 31 23" src="https://user-images.githubusercontent.com/73845925/227313584-05380a93-9c59-4ab2-b14b-1bb35c3caa96.png">
