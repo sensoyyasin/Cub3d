@@ -152,7 +152,7 @@ void	fill_addr(t_cub3d *img);
 //Last Changes
 void	raycasting(t_cub3d *img, double angle, int ray_counter);
 double	ray_vertical(t_cub3d *img, double angle, double dir_x, double dir_y, bool *hit);
-double	ray_horizonal(t_cub3d *img, double angle, double dir_x, double dir_y, bool *hit);
+double	ray_horizontal(t_cub3d *img, double angle, double dir_x, double dir_y, bool *hit);
 int		is_wall_v2(double x, double y, t_cub3d *img);
 void	draw_ray(double distance, int dir_x, int dir_y, t_cub3d *img, double angle, int ray_count, double original_dist);
 int		is_wall(double x, double y, t_cub3d *img);

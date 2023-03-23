@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_length.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yasinsensoy <yasinsensoy@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ysensoy <ysensoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:37:42 by yasinsensoy       #+#    #+#             */
-/*   Updated: 2023/03/22 22:27:54 by yasinsensoy      ###   ########.fr       */
+/*   Updated: 2023/03/23 12:12:39 by ysensoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,15 +87,8 @@ void	pixel_to_player_image_address(t_cub3d *img, int x, int y, int color)
 /* rays to screen */
 void	my_mlx_pixe_put_angle(t_cub3d *img)
 {
-	double j = -(double)ANGLE_CAMERA / 2.0;
-	// double i = 0;
-	// double newp_x;
-	// double newp_y;
-	// double new_angle;
-	//double inc = ((double)ANGLE_CAMERA/(double)WINDOW_WIDTH);
-	int ray_counter = 0;//sil
-	//int step_x;
-	//int step_y;
+	double (j) = -(double)ANGLE_CAMERA / 2.0;
+	int ray_counter = 0;
 
 	fill_addr(img);
 	//Ray casting --> Starting... i've done ray_casting file.
@@ -175,12 +168,5 @@ int	putimage(t_cub3d *img)
 		mlx_put_image_to_window(img->mlx, img->mlx_win, img->img_ray, 0, 0);
 		mlx_put_image_to_window(img->mlx, img->mlx_win, img->img_player, 0, 0);
 	}
-
-	//drawRays3D(img);
-	//--->for log file.
-	// int fd;
-	// fd = open("log", O_CREAT | O_TRUNC | O_WRONLY);
-	// dprintf(fd, "player x: %f, player y: %f\n", img->p_x, img->p_y); //data-printf
-	// close(fd);
 	return (1);
 }

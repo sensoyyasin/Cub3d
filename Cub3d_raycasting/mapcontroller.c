@@ -29,12 +29,8 @@ void mapcheck(t_cub3d *cub3dptr)
 	cub3dptr->map = malloc((sizeof(char *)) * 1024);
 	while (++uz_y <= line_length(cub3dptr) && (line = get_next_line(fd_map))) //(cub3dptr->map[uz_y] = get_next_line(fd_map))
 	{
-		// cub3dptr->map[uz_y] = get_next_line(fd_map);
-		// if (ft_strlen(cub3dptr->map[uz_y]) == '\n')
-		// 	return ;
 		if(!cub3dptr->texture_bool)
 		{
-			//mapcheck2(cub3dptr->map[uz_y], cub3dptr);
 			mapcheck2(line, cub3dptr);
 		}
 		else if (!cub3dptr->map_bool && cub3dptr->texture_bool && line[0] != '\n')

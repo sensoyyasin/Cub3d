@@ -7,16 +7,10 @@ void	raycasting(t_cub3d *img, double angle, int ray_counter)
 	double distance;
 	int dir_x = ((cos(angle * (PI / 180)) > 0) * 2) - 1;
 	int dir_y = ((sin(angle * (PI / 180)) > 0) * -2) + 1;
-    // printf("dir_x:%d\n", dir_x);
-    // printf("dir_y:%d\n", dir_y);
 	bool hitv = false;
 	bool hith = false;
 	distance_v = ray_vertical(img, angle, dir_x, dir_y, &hitv); //dikey
-	distance_h = ray_horizonal(img, angle, dir_x, dir_y, &hith); //yatay
-
-    //printf("distance_v:%f\n", distance_v);
-    //printf("distance_h:%f\n", distance_h);
-
+	distance_h = ray_horizontal(img, angle, dir_x, dir_y, &hith); //yatay
 	if (distance_v < distance_h)
 	{
 		distance = distance_v;
@@ -47,8 +41,8 @@ double	ray_vertical(t_cub3d *img, double angle, double dir_x, double dir_y, bool
 
 	double tmp_x = vdx*dir_x;
 	double tmp_y = vdy*dir_y;
-	while (img->p_x + vdx*dir_x - 0.0001 >= 0 && img->p_x + vdx*dir_x - 0.0001 <= 33
-	&& img->p_y + vdy * dir_y >= 0 && img->p_y + vdy*dir_y <= 13)
+	while (img->p_x + vdx*dir_x - 0.0001 >= 0 && img->p_x + vdx*dir_x - 0.0001 <= (img->max_map_width - 1)
+	&& img->p_y + vdy * dir_y >= 0 && img->p_y + vdy*dir_y <= img->max_map_height)
 	{
 		vdx = vdx + 0.0001;
 		if (is_wall_v2(img->p_x + vdx * dir_x, img->p_y + vdy * dir_y, img))
@@ -69,7 +63,7 @@ double	ray_vertical(t_cub3d *img, double angle, double dir_x, double dir_y, bool
 	return (distance);
 }
 
-double ray_horizonal(t_cub3d *img, double angle, double dir_x, double dir_y, bool *hit)
+double ray_horizontal(t_cub3d *img, double angle, double dir_x, double dir_y, bool *hit)
 {
 	double hdy;
 	double hdx;
@@ -79,11 +73,10 @@ double ray_horizonal(t_cub3d *img, double angle, double dir_x, double dir_y, boo
 	else
 		hdy = ceil(img->p_y) - img->p_y;
 	hdx = fabs(hdy / tan(angle * (PI / 180)));
-
 	double tmp_y = hdy * dir_y;
 	double tmp_x = hdx * dir_x;
 	while (img->p_x + hdx * dir_x >= 0 && img->p_x + hdx * dir_x <= 33
-	&& img->p_y + hdy*dir_y - 0.0001 >= 0 && img->p_y + hdy * dir_y - 0.0001 <= 13 )
+	&& img->p_y + hdy*dir_y - 0.0001 >= 0 && img->p_y + hdy * dir_y - 0.0001 <= 13)
 	{
 		hdy = hdy + 0.0001;
 		if (is_wall_v2(img->p_x + hdx * dir_x, img->p_y + hdy * dir_y, img))
@@ -140,15 +133,11 @@ int is_wall(double x, double y, t_cub3d *img)
 
 void _3D(t_cub3d *img, double distance, int ray_count)
 {
-	//int loc;
-	//int mid;
 	double oran;
 	int	i;
 	int color;
 	distance = distance * (double)img->pixel * ((double)WINDOW_HEIGHT / (double)WINDOW_WIDTH);
 	i = 0;
-	//mid = WINDOW_HEIGHT / 2.0;
-	//loc = (WINDOW_HEIGHT * mid) - ray_count;
 	oran = (((double)WINDOW_HEIGHT / 2.0) / distance) * (double)img->pixel;
 
 	if (img->_hith == true)
@@ -157,6 +146,9 @@ void _3D(t_cub3d *img, double distance, int ray_count)
 		color = 0x000040;
 	else
 		color = 0x00ff00; //error
+	if ((oran >= WINDOW_HEIGHT / 2.0))
+		oran = WINDOW_HEIGHT / 2.0 - 1;
+	//printf("oran : %f\n",oran);
     while (i <= oran && i <= (WINDOW_HEIGHT / 2.0))
     {
 		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + ray_count) + (WINDOW_WIDTH * i)] = color * 2;
