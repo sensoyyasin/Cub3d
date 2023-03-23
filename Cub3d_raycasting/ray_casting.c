@@ -151,8 +151,8 @@ void _3D(t_cub3d *img, double distance, int ray_count)
 	//printf("oran : %f\n",oran);
     while (i <= oran && i <= (WINDOW_HEIGHT / 2.0))
     {
-		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + ray_count) + (WINDOW_WIDTH * i)] = color * 2;
-		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + ray_count) - (WINDOW_WIDTH * i)] = color * 2;
+		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH - ray_count) + (WINDOW_WIDTH * i)] = color * 2;
+		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH - ray_count) - (WINDOW_WIDTH * i)] = color * 2;
         i++;
     }
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_length.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysensoy <ysensoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:37:42 by yasinsensoy       #+#    #+#             */
-/*   Updated: 2023/03/23 12:12:39 by ysensoy          ###   ########.fr       */
+/*   Updated: 2023/03/23 13:03:56 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,17 +87,34 @@ void	pixel_to_player_image_address(t_cub3d *img, int x, int y, int color)
 /* rays to screen */
 void	my_mlx_pixe_put_angle(t_cub3d *img)
 {
+	double (i) = 0;
 	double (j) = -(double)ANGLE_CAMERA / 2.0;
 	int ray_counter = 0;
+	double newp_x;
+	double newp_y;
+	double new_angle;
 
 	fill_addr(img);
 	//Ray casting --> Starting... i've done ray_casting file.
 	while (j <= (ANGLE_CAMERA / 2.0))
 	{
-		raycasting(img, (img->angle * (180.0 / PI)) + j, ray_counter);
+		i = 0;
+		while (1)
+		{
+			new_angle = img->angle - (j * DR);
+			newp_x = (img->p_x * img->pixel) + (cos(new_angle) * i);
+			newp_y = (img->p_y * img->pixel) - (sin(new_angle) * i);
+			if (img->map[(int)(newp_y / img->pixel)][(int)(newp_x / img->pixel)] == '0')
+				pixel_to_ray_image_address(img, newp_x, newp_y, GREEN);
+			else
+				break;
+			i += 0.1;
+		}
+		raycasting(img, (img->angle * (180.0 / PI)) + j, ray_counter); //draw wall
 		j += (ANGLE_CAMERA / 2.0) / (WINDOW_WIDTH / 2.0);
 		ray_counter++;
 	}
+	printf("ray_c: %d\n", ray_counter);
 }
 
 void	fill_addr(t_cub3d *img)
@@ -110,7 +127,7 @@ void	fill_addr(t_cub3d *img)
 			img->addr_game[l++] = img->f_final;
 
 	while (++k < img->max_map_width * img->pixel * img->max_map_height * img->pixel)
-		img->addr_ray[k] = 0xFF000000;//player transparent
+		img->addr_ray[k] = 0xFF000000;//ray transparent
 }
 
 /* ray pixel to map address and player image to window */

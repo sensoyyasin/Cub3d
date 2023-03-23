@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pushbutton.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yasinsensoy <yasinsensoy@student.42.fr>    +#+  +:+       +#+        */
+/*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:48:07 by yasinsensoy       #+#    #+#             */
-/*   Updated: 2023/03/22 22:27:15 by yasinsensoy      ###   ########.fr       */
+/*   Updated: 2023/03/23 13:07:26 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void	convertangle(char c, t_cub3d *img)
 
 void	turnleft(t_cub3d *img)
 {
-	double newp_x = img->p_x + img->speed * sin(img->angle);
-	double newp_y = img->p_y + img->speed * cos(img->angle);
+	double newp_x = img->p_x - img->speed * sin(img->angle);
+	double newp_y = img->p_y - img->speed * cos(img->angle);
 
 	if(img->map[(int)newp_y][(int)newp_x] == '0' && img->check->a_check == true)
 	{
@@ -83,8 +83,8 @@ void	turnleft(t_cub3d *img)
 
 void	turnright(t_cub3d *img)
 {
-	double newp_x = img->p_x - img->speed * sin(img->angle);
-	double newp_y = img->p_y - img->speed * cos(img->angle);
+	double newp_x = img->p_x + img->speed * sin(img->angle);
+	double newp_y = img->p_y + img->speed * cos(img->angle);
 
 	if(img->map[(int)newp_y][(int)newp_x] == '0' && img->check->d_check == true)
 	{
@@ -136,7 +136,7 @@ void	turndown(t_cub3d *img)
 
 void	angleright(t_cub3d *img)
 {
-	img->angle += 0.1;
+	img->angle -= 0.1;
 	if (img->angle > (2 * PI))
 		img->angle -= 2 * PI;
 	img->angle_x = cos(img->angle);
@@ -145,7 +145,7 @@ void	angleright(t_cub3d *img)
 
 void	angleleft(t_cub3d *img)
 {
-	img->angle -= 0.1;
+	img->angle += 0.1;
 	if (img->angle <= 0)
 		img->angle += 2 * PI;
 	img->angle_x = cos(img->angle);
