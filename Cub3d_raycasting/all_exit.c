@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   all_exit.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yasinsensoy <yasinsensoy@student.42.fr>    +#+  +:+       +#+        */
+/*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:58:43 by yasinsensoy       #+#    #+#             */
-/*   Updated: 2023/03/21 21:58:51 by yasinsensoy      ###   ########.fr       */
+/*   Updated: 2023/03/23 14:22:02 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ void	exit_func(char *err, t_cub3d *img)
 	write(2, err, ft_strlen2(err));
 	free_all(img);
 	exit(0);
+}
+
+void	exit_func2(char *err)
+{
+	write(2, err, ft_strlen(err));
+	exit(1);
 }
 
 void	exit_split_func(char **split, t_cub3d *img)

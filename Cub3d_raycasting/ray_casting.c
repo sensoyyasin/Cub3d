@@ -112,6 +112,34 @@ void draw_ray(double distance, int dir_x, int dir_y, t_cub3d *img, double angle,
 {
 	(void)angle;
 	//printf("dirx: %d, diry: %d\n", dir_x, dir_y);
+	if (img->_hith == true)
+	{
+		img->find_pixel = (img->ray_x - floor(img->ray_x)) * img->xpm[img->xpm_number].width;
+		if(dir_y > 0)
+		{
+			img->xpm_number = 1;
+			img->color = 0x800000;//red south
+		}
+		else
+		{
+			img->xpm_number = 0;
+			img->color = 0x80FFFF66;//yellow north
+		}
+	}
+	else if (img->_hitv == true)
+	{
+		img->find_pixel = (img->ray_y - floor(img->ray_y)) * img->xpm[img->xpm_number].width;
+		if(dir_x > 0)
+		{
+			img->xpm_number = 2;
+			img->color = 0x000080;//blue east
+		}
+		else
+		{
+			img->xpm_number = 3;
+			img->color = 0x8066FF66;//green west
+		}
+	}
 	_3D(img, distance, ray_count, dir_x, dir_y);
     (void)original_dist;
 }
@@ -132,36 +160,26 @@ int is_wall(double x, double y, t_cub3d *img)
 
 void _3D(t_cub3d *img, double distance, int ray_count, int dir_x, int dir_y)
 {
-	double oran;
-	int	i;
+	double	oran;
+	int		(i) = 0;;
 	int color;
 	distance = distance * (double)img->pixel * ((double)WINDOW_HEIGHT / (double)WINDOW_WIDTH);
-	i = 0;
 	oran = (((double)WINDOW_HEIGHT / 2.0) / distance) * (double)img->pixel;
-
-	if (img->_hith == true)
-	{
-		if(dir_y > 0)
-			color = 0x800000;//red
-		else
-			color = 0xFFFF66;//yellow
-	}
-	else if (img->_hitv == true)
-	{
-		if(dir_x > 0)
-			color = 0x000080;//blue
-		else
-			color = 0x66FF66;//green
-	}
-	else
-		color = 0x00ff00; //error
+	
+	img->img_loc = img->xpm[img->xpm_number].width * (img->xpm[img->xpm_number].height / 2)
+		+ img->find_pixel;
 	if ((oran >= WINDOW_HEIGHT / 2.0))
 		oran = WINDOW_HEIGHT / 2.0 - 1;
 	//printf("oran : %f\n",oran);
-    while (i <= oran && i <= (WINDOW_HEIGHT / 2.0))
-    {
-		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH - ray_count) + (WINDOW_WIDTH * i)] = color;
-		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH - ray_count) - (WINDOW_WIDTH * i)] = color;
-        i++;
-    }
+	while (i <= oran && i <= (WINDOW_HEIGHT / 2.0))
+	{
+		//color = img->xpm[img->xpm_number].img.addr[img->img_loc + img->xpm[img->xpm_number].width
+		//	* (int)((double)i * ((double)img->xpm[img->xpm_number].width / (double)(oran * 2)))];
+		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH - ray_count) + (WINDOW_WIDTH * i)] = img->color;
+	
+		//color = img->xpm[img->xpm_number].img.addr[img->img_loc - img->xpm[img->xpm_number].width
+		//	* (int)((double)i * ((double)img->xpm[img->xpm_number].width / (double)(oran * 2)))];
+		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH - ray_count) - (WINDOW_WIDTH * i)] = img->color;
+		i++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:37:42 by yasinsensoy       #+#    #+#             */
-/*   Updated: 2023/03/23 13:03:56 by mtemel           ###   ########.fr       */
+/*   Updated: 2023/03/23 17:14:32 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ void	my_mlx_pixe_put_angle(t_cub3d *img)
 	double (i) = 0;
 	double (j) = -(double)ANGLE_CAMERA / 2.0;
 	int ray_counter = 0;
-	double newp_x;
-	double newp_y;
+	//double newp_x;
+	//double newp_y;
 	double new_angle;
 
 	fill_addr(img);
@@ -102,10 +102,10 @@ void	my_mlx_pixe_put_angle(t_cub3d *img)
 		while (1)
 		{
 			new_angle = img->angle - (j * DR);
-			newp_x = (img->p_x * img->pixel) + (cos(new_angle) * i);
-			newp_y = (img->p_y * img->pixel) - (sin(new_angle) * i);
-			if (img->map[(int)(newp_y / img->pixel)][(int)(newp_x / img->pixel)] == '0')
-				pixel_to_ray_image_address(img, newp_x, newp_y, GREEN);
+			img->ray_x = (img->p_x * img->pixel) + (cos(new_angle) * i);
+			img->ray_y = (img->p_y * img->pixel) - (sin(new_angle) * i);
+			if (img->map[(int)(img->ray_y / img->pixel)][(int)(img->ray_x / img->pixel)] == '0')
+				pixel_to_ray_image_address(img, img->ray_x, img->ray_y, GREEN);
 			else
 				break;
 			i += 0.1;
@@ -114,7 +114,7 @@ void	my_mlx_pixe_put_angle(t_cub3d *img)
 		j += (ANGLE_CAMERA / 2.0) / (WINDOW_WIDTH / 2.0);
 		ray_counter++;
 	}
-	printf("ray_c: %d\n", ray_counter);
+	//printf("ray_c: %d\n", ray_counter);
 }
 
 void	fill_addr(t_cub3d *img)
@@ -136,16 +136,18 @@ void pixel_to_ray_image_address(t_cub3d *img, int x, int y, int color)
 	img->addr_ray[(y * img->pixel * img->max_map_width) + x] = color;
 }
 
-void	draw3DWalls(t_cub3d *img, double i, int counter, int dir)
+/* 0 north, 1 south, 2 east, 3 west */
+void	add_xpm(t_cub3d *img)
 {
-	(void)dir;
-	int (j) = 0;
-	while (j < WINDOW_HEIGHT / i * 5 && ((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + counter) - (WINDOW_WIDTH * j) >= 0
-			&& ((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + counter) + (WINDOW_WIDTH * j) < WINDOW_WIDTH * WINDOW_HEIGHT)
+	int (i) = -1;
+	img->xpm[0].img.ptr = mlx_xpm_file_to_image(img->mlx, img->no_path, &img->xpm[0].height, &img->xpm[0].width);
+	img->xpm[1].img.ptr = mlx_xpm_file_to_image(img->mlx, img->so_path, &img->xpm[1].height, &img->xpm[1].width);
+	img->xpm[2].img.ptr = mlx_xpm_file_to_image(img->mlx, img->ea_path, &img->xpm[2].height, &img->xpm[2].width);
+	img->xpm[3].img.ptr = mlx_xpm_file_to_image(img->mlx, img->we_path, &img->xpm[3].height, &img->xpm[3].width);
+	while (++i < 4)
 	{
-		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + counter) + (WINDOW_WIDTH * j)] = 0x6000FFFF;
-		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH + counter) - (WINDOW_WIDTH * j)] = 0x6000FFFF;
-		j++;
+		img->xpm[i].img.addr = (img->xpm[i].img.ptr, &img->xpm[i].img.bpp,
+				&img->xpm[i].img.line_size, &img->xpm[i].img.endian);
 	}
 }
 
@@ -155,6 +157,7 @@ void	putpixel(t_cub3d *cub3dptr)
 	int x;
 	int y;
 
+	add_xpm(cub3dptr);
 	y = 0;
 	while (cub3dptr->map[y])
 	{

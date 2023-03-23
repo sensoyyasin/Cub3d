@@ -45,6 +45,22 @@ typedef struct s_bool
     bool tab_check;
 }   t_check;
 
+typedef struct s_mlximg
+{
+	void	*ptr;
+	int		*addr;
+	int		bpp;
+	int		line_size;
+	int		endian;
+}		t_mlximg;
+
+typedef struct s_xpm
+{
+	t_mlximg	img;
+	int			width;
+	int			height;
+}		t_xpm;
+
 typedef struct cub3d
 {
     void *mlx;
@@ -103,6 +119,13 @@ typedef struct cub3d
 	int		max_y;
 	bool	_hith;
 	bool	_hitv;
+	t_xpm	xpm[4];
+	int		xpm_number;
+	int		img_loc;
+	int		find_pixel;
+	double	ray_x;
+	double	ray_y;
+	int		color;
 } t_cub3d;
 
 int		pushbutton(int keycode, t_cub3d *ptr);
@@ -157,5 +180,7 @@ int		is_wall_v2(double x, double y, t_cub3d *img);
 void	draw_ray(double distance, int dir_x, int dir_y, t_cub3d *img, double angle, int ray_count, double original_dist);
 int		is_wall(double x, double y, t_cub3d *img);
 void	_3D(t_cub3d *img, double distance, int ray_count, int dir_x, int dir_y);
+void	exit_func2(char *err);
+void	add_xpm(t_cub3d *img);
 
 #endif

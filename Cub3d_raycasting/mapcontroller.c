@@ -25,7 +25,7 @@ void mapcheck(t_cub3d *cub3dptr)
 	uz_y = -1;
 	fd_map = open(cub3dptr->map_input[1], O_RDONLY);
 	if (fd_map < 0)
-		exit_func("\033[1;31mFile could not be opened!\n\033[0m", cub3dptr);
+		exit_func2("\033[1;31mFile could not be opened!\n\033[0m");
 	cub3dptr->map = malloc((sizeof(char *)) * 1024);
 	while (++uz_y <= line_length(cub3dptr) && (line = get_next_line(fd_map))) //(cub3dptr->map[uz_y] = get_next_line(fd_map))
 	{
