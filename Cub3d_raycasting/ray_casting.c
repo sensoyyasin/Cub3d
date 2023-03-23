@@ -111,9 +111,8 @@ int is_wall_v2(double x, double y, t_cub3d *img)
 void draw_ray(double distance, int dir_x, int dir_y, t_cub3d *img, double angle, int ray_count, double original_dist)
 {
 	(void)angle;
-	(void)dir_x;
-	(void)dir_y;
-	_3D(img, distance, ray_count);
+	//printf("dirx: %d, diry: %d\n", dir_x, dir_y);
+	_3D(img, distance, ray_count, dir_x, dir_y);
     (void)original_dist;
 }
 
@@ -131,7 +130,7 @@ int is_wall(double x, double y, t_cub3d *img)
     return (1);
 }
 
-void _3D(t_cub3d *img, double distance, int ray_count)
+void _3D(t_cub3d *img, double distance, int ray_count, int dir_x, int dir_y)
 {
 	double oran;
 	int	i;
@@ -141,9 +140,19 @@ void _3D(t_cub3d *img, double distance, int ray_count)
 	oran = (((double)WINDOW_HEIGHT / 2.0) / distance) * (double)img->pixel;
 
 	if (img->_hith == true)
-		color = 0x400000;
+	{
+		if(dir_y > 0)
+			color = 0x800000;//red
+		else
+			color = 0xFFFF66;//yellow
+	}
 	else if (img->_hitv == true)
-		color = 0x000040;
+	{
+		if(dir_x > 0)
+			color = 0x000080;//blue
+		else
+			color = 0x66FF66;//green
+	}
 	else
 		color = 0x00ff00; //error
 	if ((oran >= WINDOW_HEIGHT / 2.0))
@@ -151,8 +160,8 @@ void _3D(t_cub3d *img, double distance, int ray_count)
 	//printf("oran : %f\n",oran);
     while (i <= oran && i <= (WINDOW_HEIGHT / 2.0))
     {
-		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH - ray_count) + (WINDOW_WIDTH * i)] = color * 2;
-		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH - ray_count) - (WINDOW_WIDTH * i)] = color * 2;
+		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH - ray_count) + (WINDOW_WIDTH * i)] = color;
+		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH - ray_count) - (WINDOW_WIDTH * i)] = color;
         i++;
     }
 }

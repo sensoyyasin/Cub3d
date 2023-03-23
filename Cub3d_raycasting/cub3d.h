@@ -156,6 +156,6 @@ double	ray_horizontal(t_cub3d *img, double angle, double dir_x, double dir_y, bo
 int		is_wall_v2(double x, double y, t_cub3d *img);
 void	draw_ray(double distance, int dir_x, int dir_y, t_cub3d *img, double angle, int ray_count, double original_dist);
 int		is_wall(double x, double y, t_cub3d *img);
-void	_3D(t_cub3d *img, double distance, int ray_count);
+void	_3D(t_cub3d *img, double distance, int ray_count, int dir_x, int dir_y);
 
 #endif
