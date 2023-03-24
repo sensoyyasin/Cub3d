@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keycontrol.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yasinsensoy <yasinsensoy@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ysensoy <ysensoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:55:50 by yasinsensoy       #+#    #+#             */
-/*   Updated: 2023/03/21 21:57:05 by yasinsensoy      ###   ########.fr       */
+/*   Updated: 2023/03/24 11:57:23 by ysensoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	pushbutton(int keycode, t_cub3d *ptr)
 
 void	keycheckforloop(t_cub3d *img)
 {
-	//printf("img->check->w_check degeri : %d\n",img->check->w_check);
 	if (img->check->w_check == true)
 		turnup(img);
 	if (img->check->a_check == true)
@@ -40,7 +39,7 @@ void	keycheckforloop(t_cub3d *img)
 		angleright(img);
 }
 
-int keychecker(int keycode, t_cub3d *ptr)
+int	keychecker(int keycode, t_cub3d *ptr)
 {
 	if (keycode == ESC || keycode == 65307)
 		pushbutton(keycode, ptr);
@@ -59,7 +58,7 @@ int keychecker(int keycode, t_cub3d *ptr)
 	return (1);
 }
 
-int keychecker2(int keycode, t_cub3d *ptr)
+int	keychecker2(int keycode, t_cub3d *ptr)
 {
 	if (keycode == W || keycode == 'w')
 		ptr->check->w_check = false;

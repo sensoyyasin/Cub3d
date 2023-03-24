@@ -1,31 +1,43 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ysensoy <ysensoy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/24 11:57:52 by ysensoy           #+#    #+#             */
+/*   Updated: 2023/03/24 12:03:21 by ysensoy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include <stdbool.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <math.h>
-#include "minilibx/mlx.h"
-#include "mlx/mlx.h"
-#include "libft/libft.h"
-#include "get_next_line/get_next_line.h"
+# include "stdbool.h"
+# include "stdio.h"
+# include "unistd.h"
+# include "fcntl.h"
+# include "math.h"
+# include "minilibx/mlx.h"
+# include "mlx/mlx.h"
+# include "libft/libft.h"
+# include "get_next_line/get_next_line.h"
 
-#define PI 3.141592653
-#define DR 0.0174533
+# define PI 3.141592653
+# define DR 0.0174533
 
-#define WINDOW_WIDTH 1080
-#define WINDOW_HEIGHT 720
-#define ANGLE_CAMERA 60
-#define TAB 48
+# define WINDOW_WIDTH 1080
+# define WINDOW_HEIGHT 720
+# define ANGLE_CAMERA 60
+# define TAB 48
 
-#define A 0
-#define S 1
-#define D 2
-#define W 13
-#define ESC 53
-#define L 123 //75
-#define R 124 //77
+# define A 0
+# define S 1
+# define D 2
+# define W 13
+# define ESC 53
+# define L 123
+# define R 124
 # define BLUE 0x000000FF
 # define RED 0x00FF0000
 # define GREEN 0x0000FF00
@@ -36,13 +48,13 @@
 
 typedef struct s_bool
 {
-    bool w_check;
-    bool a_check;
-    bool s_check;
-    bool d_check;
-    bool r_check;
-    bool l_check;
-    bool tab_check;
+    bool	w_check;
+    bool	a_check;
+    bool	s_check;
+    bool	d_check;
+    bool	r_check;
+    bool	l_check;
+    bool	tab_check;
 }   t_check;
 
 typedef struct s_mlximg
@@ -52,22 +64,22 @@ typedef struct s_mlximg
 	int		bpp;
 	int		line_size;
 	int		endian;
-}		t_mlximg;
+}	t_mlximg;
 
 typedef struct s_xpm
 {
 	t_mlximg	img;
 	int			width;
 	int			height;
-}		t_xpm;
+}	t_xpm;
 
 typedef struct cub3d
 {
-    void *mlx;
-    void *mlx_win;
-    t_check *check;
-    char **map;
-    char **map_input;
+	void *mlx;
+	void *mlx_win;
+	t_check *check;
+	char **map;
+	char **map_input;
 	int *addr_map;
 	void *img_map;
 	int *addr_player;
@@ -90,10 +102,10 @@ typedef struct cub3d
 	int map_bool;
 	int max_map_width;
 	int max_map_height;
-	char *no_path; //will be freed from here
+	char *no_path;
 	char *so_path;
 	char *we_path;
-	char *ea_path; //will be freed to here
+	char *ea_path;
 	int f_color[3];
 	int c_color[3];
 	int f_final;
@@ -126,7 +138,7 @@ typedef struct cub3d
 	double	ray_x;
 	double	ray_y;
 	int		color;
-} t_cub3d;
+}	t_cub3d;
 
 int		pushbutton(int keycode, t_cub3d *ptr);
 void	isargtrue(t_cub3d *cub3dptr);
@@ -171,8 +183,6 @@ void	pixel_to_ray_image_address(t_cub3d *img, int x, int y, int color);
 void	draw3DWalls(t_cub3d *img, double i, int counter, int dir);
 void	fill_addr(t_cub3d *img);
 
-
-//Last Changes
 void	raycasting(t_cub3d *img, double angle, int ray_counter);
 double	ray_vertical(t_cub3d *img, double angle, double dir_x, double dir_y, bool *hit);
 double	ray_horizontal(t_cub3d *img, double angle, double dir_x, double dir_y, bool *hit);
