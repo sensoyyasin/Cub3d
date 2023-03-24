@@ -6,7 +6,7 @@
 /*   By: ysensoy <ysensoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 11:57:52 by ysensoy           #+#    #+#             */
-/*   Updated: 2023/03/24 12:03:21 by ysensoy          ###   ########.fr       */
+/*   Updated: 2023/03/24 13:47:00 by ysensoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,56 +75,56 @@ typedef struct s_xpm
 
 typedef struct cub3d
 {
-	void *mlx;
-	void *mlx_win;
-	t_check *check;
-	char **map;
-	char **map_input;
-	int *addr_map;
-	void *img_map;
-	int *addr_player;
-	void *img_player;
-	int *addr_ray;
-	void *img_ray;
-	int *addr_game;
-	void *img_game;
-	void *wall;
-	void *floor;
-	int line_length;
-	int bits_per_pixel;
-	int no;
-	int so;
-	int we;
-	int ea;
-	int f;
-	int c;
-	int texture_bool;
-	int map_bool;
-	int max_map_width;
-	int max_map_height;
-	char *no_path;
-	char *so_path;
-	char *we_path;
-	char *ea_path;
-	int f_color[3];
-	int c_color[3];
-	int f_final;
-	int c_final;
-	int n_timer;
-	int s_timer;
-	int e_timer;
-	int w_timer;
-	int x_kord;
-	int y_kord;
-	double p_x;
-	double p_y;
-	int speed_pixel;
-	int pixel;
-	double speed;
-	double angle;
-	double degree;
-	float angle_x;
-	float angle_y;
+	void	*mlx;
+	void	*mlx_win;
+	t_check	*check;
+	char	**map;
+	char	**map_input;
+	int		*addr_map;
+	void	*img_map;
+	int		*addr_player;
+	void	*img_player;
+	int		*addr_ray;
+	void	*img_ray;
+	int		*addr_game;
+	void	*img_game;
+	void	*wall;
+	void	*floor;
+	int		line_length;
+	int		bits_per_pixel;
+	int		no;
+	int		so;
+	int		we;
+	int		ea;
+	int		f;
+	int		c;
+	int		texture_bool;
+	int		map_bool;
+	int		max_map_width;
+	int		max_map_height;
+	char	*no_path;
+	char	*so_path;
+	char	*we_path;
+	char	*ea_path;
+	int		f_color[3];
+	int		c_color[3];
+	int		f_final;
+	int		c_final;
+	int		n_timer;
+	int		s_timer;
+	int		e_timer;
+	int		w_timer;
+	int		x_kord;
+	int		y_kord;
+	double	p_x;
+	double	p_y;
+	int		speed_pixel;
+	int		pixel;
+	double	speed;
+	double	angle;
+	double	degree;
+	float	angle_x;
+	float	angle_y;
 	double	_dir_x;
 	double	_dir_y;
 	int		max_x;
@@ -138,6 +138,8 @@ typedef struct cub3d
 	double	ray_x;
 	double	ray_y;
 	int		color;
+	char	**split;
+	char	**ut_color;
 }	t_cub3d;
 
 int		pushbutton(int keycode, t_cub3d *ptr);
@@ -176,7 +178,6 @@ void	convertangle(char c, t_cub3d *img);
 void	angleright(t_cub3d *img);
 void	angleleft(t_cub3d *img);
 double	distance(double ax, double ay, double bx, double by);
-void	dda(t_cub3d *img, double x1, double y1, double x2, double y2);
 void	my_mlx_pixe_put_angle(t_cub3d *img);
 void	pixel_to_player_image_address(t_cub3d *img, int x, int y, int color);
 void	pixel_to_ray_image_address(t_cub3d *img, int x, int y, int color);
@@ -193,5 +194,6 @@ void	_3D(t_cub3d *img, double distance, int ray_count, int dir_x, int dir_y);
 void	exit_func2(char *err);
 void	add_xpm(t_cub3d *img);
 void	put_transparent(t_cub3d *img);
+void    ft_color(t_cub3d *img);
 
 #endif
