@@ -6,7 +6,7 @@
 /*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 12:21:35 by ysensoy           #+#    #+#             */
-/*   Updated: 2023/03/24 16:53:58 by mtemel           ###   ########.fr       */
+/*   Updated: 2023/03/24 17:18:30 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	mapcheck2(char *words, t_cub3d *img)
 	{
 		img->split[1] = clear_endstr(img->split[1]);
 		fd = open(img->split[1], O_RDONLY);
-		if (fd < 0)
+		if (fd < 0 || isargtrue2(img->split[1]))
 			exit_split_func(img->split, img);
 		split_comp(img->split, img);
 	}

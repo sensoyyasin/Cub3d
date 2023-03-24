@@ -6,7 +6,7 @@
 /*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 11:57:52 by ysensoy           #+#    #+#             */
-/*   Updated: 2023/03/24 16:59:13 by mtemel           ###   ########.fr       */
+/*   Updated: 2023/03/24 17:19:54 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,5 +204,6 @@ void	put_transparent(t_cub3d *img);
 void	ft_color(t_cub3d *img);
 void	mapcontroller2(t_cub3d	*cub3dptr, int i);
 void	exit_func3(t_cub3d *img);
+int		isargtrue2(char *str);
 
 #endif
