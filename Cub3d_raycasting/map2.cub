@@ -1,10 +1,10 @@
-NO ./pictures/bluestone.xpm
-SO ./pictures/bluestone.xpm
-WE ./pictures/bluestone.xpm
-EA ./pictures/bluestone.xpm
+NO ./pictures/square.xpm
+SO ./pictures/square.xpm
+WE ./pictures/square.xpm
+EA ./pictures/square.xpm
 
-F 255,140,0
-C 0,154,205
+F 100,0,139
+C 0,0,0
 
 111111111111111111
 101000000100000011

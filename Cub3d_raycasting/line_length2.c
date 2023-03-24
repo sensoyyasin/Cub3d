@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_length2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yasinsensoy <yasinsensoy@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 16:11:30 by mtemel            #+#    #+#             */
-/*   Updated: 2023/03/24 17:02:32 by mtemel           ###   ########.fr       */
+/*   Updated: 2023/03/24 22:01:03 by yasinsensoy      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	putpixel(t_cub3d *cub3dptr)
 		while (cub3dptr->map[y][x])
 		{
 			if (cub3dptr->map[y][x] == '1')
-				my_mlx_pixel_put(cub3dptr, x, y, BLUE);
+				my_mlx_pixel_put(cub3dptr, x, y, 0x008080);
 			else if (cub3dptr->map[y][x] == '0')
 				my_mlx_pixel_put(cub3dptr, x, y, WHITE);
 			x++;
