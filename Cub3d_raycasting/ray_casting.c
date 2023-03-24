@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysensoy <ysensoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 12:04:20 by ysensoy           #+#    #+#             */
-/*   Updated: 2023/03/24 12:04:21 by ysensoy          ###   ########.fr       */
+/*   Updated: 2023/03/24 15:57:45 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ double	ray_vertical(t_cub3d *img, double angle, double dir_x, double dir_y, bool
 			*hit = true;
 			tmp_x = vdx * dir_x;
 			tmp_y = vdy * dir_y;
+			img->ray_x_v = img->p_x + tmp_x;
+			img->ray_y_v = img->p_y + tmp_y;
 			break;
 		}
 		vdx = vdx + 1 - 0.0001; //ışının bir sonraki adımda ne kadar ilerleyeceğini belirler.
@@ -93,8 +95,8 @@ double ray_horizontal(t_cub3d *img, double angle, double dir_x, double dir_y, bo
 	hdx = fabs(hdy / tan(angle * (PI / 180)));
 	double tmp_y = hdy * dir_y;
 	double tmp_x = hdx * dir_x;
-	while (img->p_x + hdx * dir_x >= 0 && img->p_x + hdx * dir_x <= 33
-	&& img->p_y + hdy*dir_y - 0.0001 >= 0 && img->p_y + hdy * dir_y - 0.0001 <= 13)
+	while (img->p_x + hdx * dir_x >= 0 && img->p_x + hdx * dir_x <= img->max_map_width - 1
+	&& img->p_y + hdy*dir_y - 0.0001 >= 0 && img->p_y + hdy * dir_y - 0.0001 <= img->max_map_height)
 	{
 		hdy = hdy + 0.0001;
 		if (is_wall_v2(img->p_x + hdx * dir_x, img->p_y + hdy * dir_y, img))
@@ -102,6 +104,8 @@ double ray_horizontal(t_cub3d *img, double angle, double dir_x, double dir_y, bo
 			*hit = true;
 			tmp_x = hdx*dir_x;
 			tmp_y = hdy*dir_y;
+			img->ray_x_h = img->p_x + tmp_x;
+			img->ray_y_h = img->p_y + tmp_y;
 			break;
 		}
 		hdy = hdy + 1 - 0.0001;
@@ -131,34 +135,35 @@ void draw_ray(double distance, int dir_x, int dir_y, t_cub3d *img, double angle,
 	(void)angle;
 	if (img->_hith == true)
 	{
-		img->find_pixel = (img->ray_x - floor(img->ray_x)) * img->xpm[img->xpm_number].width;
+		img->ray_x = img->ray_x_h;
+		img->ray_y = img->ray_y_h;
+		//img->find_pixel = (img->ray_x - floor(img->ray_x)) * img->xpm[img->xpm_number].width;
 		if(dir_y > 0)
 		{
 			img->xpm_number = 1;
-			img->color = 0x800000;//red south
 		}
 		else
 		{
 			img->xpm_number = 0;
-			img->color = 0x80FFFF66;//yellow north
 		}
 	}
 	else if (img->_hitv == true)
 	{
-		img->find_pixel = (img->ray_y - floor(img->ray_y)) * img->xpm[img->xpm_number].width;
+		img->ray_x = img->ray_x_v;
+		img->ray_y = img->ray_y_v;
+		//img->find_pixel = (img->ray_y - floor(img->ray_y)) * img->xpm[img->xpm_number].width;
 		if(dir_x > 0)
 		{
 			img->xpm_number = 2;
-			img->color = 0x000080;//blue east
 		}
 		else
 		{
 			img->xpm_number = 3;
-			img->color = 0x8066FF66;//green west
 		}
 	}
-	_3D(img, distance, ray_count, dir_x, dir_y);
-    (void)original_dist;
+	//printf("texture:%d\n", img->xpm_number);
+	_3D(img, distance, ray_count, dir_x, dir_y, img->xpm[img->xpm_number]);
+	(void)original_dist;
 }
 
 int is_wall(double x, double y, t_cub3d *img)
@@ -175,27 +180,43 @@ int is_wall(double x, double y, t_cub3d *img)
     return (1);
 }
 
-void _3D(t_cub3d *img, double distance, int ray_count, int dir_x, int dir_y)
+void _3D(t_cub3d *img, double distance, int ray_count, int dir_x, int dir_y, t_xpm xpm)
 {
 	double	oran;
 	int		(i) = 0;;
 	int color;
+	//printf("distance: %f\n", distance);
+	//printf("hitv: %d\nhith: %d\n", img->_hitv, img->_hith);
 	distance = distance * (double)img->pixel * ((double)WINDOW_HEIGHT / (double)WINDOW_WIDTH);
 	oran = (((double)WINDOW_HEIGHT / 2.0) / distance) * (double)img->pixel;
 
-	img->img_loc = img->xpm[img->xpm_number].width * (img->xpm[img->xpm_number].height / 2)
-		+ img->find_pixel;
-	if ((oran >= WINDOW_HEIGHT / 2.0))
-		oran = WINDOW_HEIGHT / 2.0 - 1;
-	//printf("oran : %f\n",oran);
+	if (img->_hith == true)
+	{
+		//img->find_pixel = ((double)((int)img->ray_x % img->pixel) / (double)img->pixel) * xpm.width;
+		img->find_pixel = (img->ray_x - floor(img->ray_x)) * xpm.width;
+	}
+	else if (img->_hitv == true)
+	{
+		//img->find_pixel = ((double)((int)img->ray_y % img->pixel) / (double)img->pixel) * xpm.width;
+		img->find_pixel = (img->ray_y - floor(img->ray_y)) * img->xpm[img->xpm_number].width;
+	}
+
+	img->img_loc = xpm.width * (xpm.height / 2) + img->find_pixel;
+	//img->img_loc = img->xpm[img->xpm_number].width * (img->xpm[img->xpm_number].height / 2) + img->find_pixel;
+
+	if ((oran >= 4000))
+		oran = 4000;
+
 	while (i <= oran && i <= (WINDOW_HEIGHT / 2.0))
 	{
+		img->color = xpm.img.addr[img->img_loc + xpm.width
+			* (int)((double)i * ((double)xpm.width / (double)(oran * 2)))];
 		//color = img->xpm[img->xpm_number].img.addr[img->img_loc + img->xpm[img->xpm_number].width
-		//	* (int)((double)i * ((double)img->xpm[img->xpm_number].width / (double)(oran * 2)))];
+			//* (int)((double)i * ((double)img->xpm[img->xpm_number].width / (double)(oran * 2)))];
 		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH - ray_count) + (WINDOW_WIDTH * i)] = img->color;
 
-		//color = img->xpm[img->xpm_number].img.addr[img->img_loc - img->xpm[img->xpm_number].width
-		//	* (int)((double)i * ((double)img->xpm[img->xpm_number].width / (double)(oran * 2)))];
+		img->color = xpm.img.addr[img->img_loc -xpm.width
+			* (int)((double)i * ((double)xpm.width / (double)(oran * 2)))];
 		img->addr_game[((WINDOW_HEIGHT / 2) * WINDOW_WIDTH - ray_count) - (WINDOW_WIDTH * i)] = img->color;
 		i++;
 	}

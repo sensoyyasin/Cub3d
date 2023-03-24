@@ -6,7 +6,7 @@
 /*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:37:42 by yasinsensoy       #+#    #+#             */
-/*   Updated: 2023/03/23 17:14:32 by mtemel           ###   ########.fr       */
+/*   Updated: 2023/03/24 15:41:47 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,15 @@ void	my_mlx_pixe_put_angle(t_cub3d *img)
 			img->ray_x = (img->p_x * img->pixel) + (cos(new_angle) * i);
 			img->ray_y = (img->p_y * img->pixel) - (sin(new_angle) * i);
 			if (img->map[(int)(img->ray_y / img->pixel)][(int)(img->ray_x / img->pixel)] == '0')
+			{
+				//img->addr_ray[(img->pixel * (img->max_map_width))
+				//	* (int)floor(img->pixel * img->ray_y)
+				//	+ (int)floor(img->pixel * img->ray_x)] = GREEN;
 				pixel_to_ray_image_address(img, img->ray_x, img->ray_y, GREEN);
+			}
 			else
 				break;
-			i += 0.1;
+			i += 1;
 		}
 		raycasting(img, (img->angle * (180.0 / PI)) + j, ray_counter); //draw wall
 		j += (ANGLE_CAMERA / 2.0) / (WINDOW_WIDTH / 2.0);
@@ -125,7 +130,6 @@ void	fill_addr(t_cub3d *img)
 			img->addr_game[l++] = img->c_final;
 	while (l < WINDOW_HEIGHT * WINDOW_WIDTH)
 			img->addr_game[l++] = img->f_final;
-
 	while (++k < img->max_map_width * img->pixel * img->max_map_height * img->pixel)
 		img->addr_ray[k] = 0xFF000000;//ray transparent
 }
@@ -146,7 +150,7 @@ void	add_xpm(t_cub3d *img)
 	img->xpm[3].img.ptr = mlx_xpm_file_to_image(img->mlx, img->we_path, &img->xpm[3].height, &img->xpm[3].width);
 	while (++i < 4)
 	{
-		img->xpm[i].img.addr = (img->xpm[i].img.ptr, &img->xpm[i].img.bpp,
+		img->xpm[i].img.addr = mlx_get_data_addr(img->xpm[i].img.ptr, &img->xpm[i].img.bpp,
 				&img->xpm[i].img.line_size, &img->xpm[i].img.endian);
 	}
 }
@@ -187,6 +191,8 @@ int	putimage(t_cub3d *img)
 		mlx_put_image_to_window(img->mlx, img->mlx_win, img->img_map, 0, 0);
 		mlx_put_image_to_window(img->mlx, img->mlx_win, img->img_ray, 0, 0);
 		mlx_put_image_to_window(img->mlx, img->mlx_win, img->img_player, 0, 0);
+		//mlx_put_image_to_window(img->mlx, img->mlx_win, img->xpm[2].img.ptr, 0, 0);
+		//mlx_put_image_to_window(img->mlx, img->mlx_win, img->xpm[3].img.ptr, 64, 0);
 	}
 	return (1);
 }

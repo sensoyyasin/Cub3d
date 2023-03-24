@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysensoy <ysensoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 11:57:52 by ysensoy           #+#    #+#             */
-/*   Updated: 2023/03/24 13:47:00 by ysensoy          ###   ########.fr       */
+/*   Updated: 2023/03/24 15:47:47 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,11 @@ typedef struct cub3d
 	int		img_loc;
 	int		find_pixel;
 	double	ray_x;
+	double	ray_x_v;
+	double	ray_x_h;
 	double	ray_y;
+	double	ray_y_v;
+	double	ray_y_h;
 	int		color;
 	char	**split;
 	char	**ut_color;
@@ -190,7 +194,7 @@ double	ray_horizontal(t_cub3d *img, double angle, double dir_x, double dir_y, bo
 int		is_wall_v2(double x, double y, t_cub3d *img);
 void	draw_ray(double distance, int dir_x, int dir_y, t_cub3d *img, double angle, int ray_count, double original_dist);
 int		is_wall(double x, double y, t_cub3d *img);
-void	_3D(t_cub3d *img, double distance, int ray_count, int dir_x, int dir_y);
+void	_3D(t_cub3d *img, double distance, int ray_count, int dir_x, int dir_y, t_xpm xpm);
 void	exit_func2(char *err);
 void	add_xpm(t_cub3d *img);
 void	put_transparent(t_cub3d *img);
