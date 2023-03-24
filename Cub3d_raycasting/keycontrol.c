@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keycontrol.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysensoy <ysensoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:55:50 by yasinsensoy       #+#    #+#             */
-/*   Updated: 2023/03/24 11:57:23 by ysensoy          ###   ########.fr       */
+/*   Updated: 2023/03/24 16:56:26 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	pushbutton(int keycode, t_cub3d *ptr)
 	if (keycode == ESC || keycode == 65307)
 	{
 		mlx_destroy_window(ptr->mlx, ptr->mlx_win);
-		exit_func("\033[35m\nGame was closing\n", ptr);
+		exit_func3(ptr);
 	}
 	exit(0);
 	return (0);

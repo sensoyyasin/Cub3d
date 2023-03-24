@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapcontroller.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysensoy <ysensoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 12:21:35 by ysensoy           #+#    #+#             */
-/*   Updated: 2023/03/24 13:48:00 by ysensoy          ###   ########.fr       */
+/*   Updated: 2023/03/24 16:53:58 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,7 @@ void	mapcheck(t_cub3d *cub3dptr)
 		}
 		free(line);
 	}
-	cub3dptr->map[i] = NULL;
-	cub3dptr->max_map_height = i;
-	i = 0;
-	while (i < cub3dptr->max_map_height)
-	{
-		mapcheck3(cub3dptr->map[i], cub3dptr);
-		realmapcheck(i, cub3dptr);
-		if (cub3dptr->max_map_width < ft_strlen2(cub3dptr->map[i]))
-			cub3dptr->max_map_width = ft_strlen2(cub3dptr->map[i]);
-		i++;
-	}
-	printf("width: %d height: %d\n", cub3dptr->max_map_width,
-		cub3dptr->max_map_height);
-	close(fd_map);
-	if ((cub3dptr->w_timer == 1 || cub3dptr->s_timer == 1
-			|| cub3dptr->e_timer == 1 || cub3dptr->n_timer == 1))
-		cub3dptr->map_bool = 1;
+	mapcontroller2(cub3dptr, i);
 }
 
 void	mapcheck2(char *words, t_cub3d *img)
@@ -83,7 +67,8 @@ void	mapcheck2(char *words, t_cub3d *img)
 		|| !strcmp(img->split[0], "WE") || !strcmp(img->split[0], "EA"))
 	{
 		img->split[1] = clear_endstr(img->split[1]);
-		if ((fd = open(img->split[1], O_RDONLY)) < 0)
+		fd = open(img->split[1], O_RDONLY);
+		if (fd < 0)
 			exit_split_func(img->split, img);
 		split_comp(img->split, img);
 	}
@@ -130,41 +115,25 @@ void	realmapcheck(int i, t_cub3d *img)
 	int (j) = 0;
 	while (img->map[i])
 	{
-		j = 0;
-		while (img->map[i][j])
+		j = -1;
+		while (img->map[i][++j])
 		{
 			if ((img->map[i][j] == 'N' || img->map[i][j] == 'S'
 				|| img->map[i][j] == 'W' || img->map[i][j] == 'E')
 				&& (img->map[i][j - 1] <= 32 || img->map[i][j + 1] <= 32))
-			{
-				write(2, "PATLAT\n", 7);
-				exit_func(img->map[i], img);
-			}
+				exit_func("Player yanı hatası\n", img);
 			if (img->map[i][j] == ' ' && img->map[i][j] == '\t')
 				j++;
 			else if (img->map[i][j] == '0' && (!img->map[i - 1]
 					|| !img->map[i - 1][j] || img->map[i - 1][j] <= 32))
-			{
-				write(2, "Ilk satir\n", 10);
-				exit_func(img->map[i], img);
-			}
+				exit_func("Ilk satir hatası\n", img);
 			else if (img->map[i][0] != '1' && img->map[i][0] > 32)
-			{
-				write(2, "Ilk sutun 0 hatasi\n", 19);
-				exit_func(img->map[i], img);
-			}
+				exit_func("Ilk sutun 0 hatasi\n", img);
 			else if (img->map[i][j + 1] == '\n' && img->map[i][j] == '0')
-			{
-				write(2, "Son sutun 0 hatasi\n", 19);
-				exit_func(img->map[i], img);
-			}
+				exit_func("Son sutun 0 hatasi\n", img);
 			else if (img->map[i][j] == '0' && (i == img->max_map_height - 1
 					|| (img->map[i + 1][j] && img->map[i + 1][j] <= 32)))
-			{
-				write(2, "Son satir 0 hatasi\n", 19);
-				exit_func(img->map[i], img);
-			}
-			j++;
+				exit_func("Son satir 0 hatasi\n", img);
 		}
 		i++;
 	}

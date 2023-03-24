@@ -6,7 +6,7 @@
 /*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 11:57:52 by ysensoy           #+#    #+#             */
-/*   Updated: 2023/03/24 16:16:33 by mtemel           ###   ########.fr       */
+/*   Updated: 2023/03/24 16:59:13 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,12 +195,14 @@ void	raycasting(t_cub3d *img, double angle, int ray_counter);
 double	ray_vertical(t_cub3d *img, double angle, double dir_x, double dir_y, bool *hit);
 double	ray_horizontal(t_cub3d *img, double angle, double dir_x, double dir_y, bool *hit);
 int		is_wall_v2(double x, double y, t_cub3d *img);
-void	draw_ray(double distance, int dir_x, int dir_y, t_cub3d *img, double angle, int ray_count, double original_dist);
+void	draw_ray(double distance, int dir_x, int dir_y, t_cub3d *img, int ray_count);
 int		is_wall(double x, double y, t_cub3d *img);
 void	_3D(t_cub3d *img, double distance, int ray_count, int dir_x, int dir_y, t_xpm xpm);
 void	exit_func2(char *err);
 void	add_xpm(t_cub3d *img);
 void	put_transparent(t_cub3d *img);
-void    ft_color(t_cub3d *img);
+void	ft_color(t_cub3d *img);
+void	mapcontroller2(t_cub3d	*cub3dptr, int i);
+void	exit_func3(t_cub3d *img);
 
 #endif
