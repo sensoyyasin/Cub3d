@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yasinsensoy <yasinsensoy@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ysensoy <ysensoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:46:10 by yasinsensoy       #+#    #+#             */
-/*   Updated: 2023/03/21 21:49:04 by yasinsensoy      ###   ########.fr       */
+/*   Updated: 2023/03/24 11:48:01 by ysensoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,18 @@
 
 char	*clear_endstr(char *str)
 {
-	char *newstr;
-	int (i) = 0;
+	int		i;
+	char	*newstr;
+
+	i = 0;
 	while (str[i])
 	{
-		if(str[i] <= 32)
+		if (str[i] <= 32)
 		{
 			str[i] = 0;
 			newstr = ft_strdup(str);
 			free(str);
-			return(newstr);
+			return (newstr);
 		}
 		i++;
 	}
@@ -35,9 +37,9 @@ int	is_number(char *str)
 	int (i) = 0;
 	if (!str)
 		return (0);
-	while(str[i])
+	while (str[i])
 	{
-		if(str[i] > '9' && str[i] < '0')
+		if (str[i] > '9' && str[i] < '0')
 			return (0);
 		i++;
 	}

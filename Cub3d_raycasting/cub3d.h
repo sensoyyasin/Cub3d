@@ -182,5 +182,6 @@ int		is_wall(double x, double y, t_cub3d *img);
 void	_3D(t_cub3d *img, double distance, int ray_count, int dir_x, int dir_y);
 void	exit_func2(char *err);
 void	add_xpm(t_cub3d *img);
+void	put_transparent(t_cub3d *img);
 
 #endif

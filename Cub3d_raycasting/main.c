@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysensoy <ysensoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:36:26 by yasinsensoy       #+#    #+#             */
-/*   Updated: 2023/03/23 16:09:04 by mtemel           ###   ########.fr       */
+/*   Updated: 2023/03/24 11:46:16 by ysensoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,19 @@ void	check_all(t_cub3d *img)
 	if (!img->texture_bool || !img->map_bool)
 		exit_func("\033[1;31mMap or texture error\033[0m", img);
 	player(img);
-	img->f_final = (img->f_color[0] << 16) + (img->f_color[1] << 8) + (img->f_color[2]);
-	img->c_final = (img->c_color[0] << 16) + (img->c_color[1] << 8) + (img->c_color[2]);
+	img->f_final = (img->f_color[0] << 16)
+		+ (img->f_color[1] << 8) + (img->f_color[2]);
+	img->c_final = (img->c_color[0] << 16)
+		+ (img->c_color[1] << 8) + (img->c_color[2]);
 }
 
-void free_all(t_cub3d *img)
+void	free_all(t_cub3d *img)
 {
 	free(img->map);
 	free(img);
 }
 
-void initializer(t_cub3d *img)
+void	initializer(t_cub3d *img)
 {
 	img->check->w_check = false;
 	img->check->a_check = false;
@@ -58,38 +60,34 @@ void initializer(t_cub3d *img)
 	img->speed = (double)img->speed_pixel / (double)img->pixel;
 }
 
-/*	map image creation and fill transparent
-	(work when start) */
 void	map_addr(t_cub3d *img)
 {
 	int (map) = 0;
 	int (player) = 0;
 	int (ray) = 0;
 	int (game) = 0;
-	int (i) = -1;
-
 	img->img_game = mlx_new_image(img->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	img->img_map = mlx_new_image(img->mlx, img->max_map_width * img->pixel, img->max_map_height * img->pixel);
-	img->img_player = mlx_new_image(img->mlx, img->max_map_width * img->pixel, img->max_map_height * img->pixel);
-	img->img_ray = mlx_new_image(img->mlx, img->max_map_width * img->pixel, img->max_map_height * img->pixel);
-
-	img->addr_game = (int*)mlx_get_data_addr(img->img_game, &game, &game, &game);
-	img->addr_map = (int*)mlx_get_data_addr(img->img_map, &map, &map, &map);
-	img->addr_player = (int*)mlx_get_data_addr(img->img_player, &player, &player, &player);
-	img->addr_ray = (int*)mlx_get_data_addr(img->img_ray, &ray, &ray, &ray);
-
-	while (++i < img->max_map_width * img->pixel * img->max_map_height * img->pixel)
-	{
-		img->addr_map[i] = 0xFF000000;//map transparent
-		img->addr_player[i] = 0xFF000000;//player transparent
-		img->addr_ray[i] = 0xFF000000;//player transparent
-	}
+	img->img_map = mlx_new_image(img->mlx, img->max_map_width
+			* img->pixel, img->max_map_height * img->pixel);
+	img->img_player = mlx_new_image(img->mlx, img->max_map_width
+			* img->pixel, img->max_map_height * img->pixel);
+	img->img_ray = mlx_new_image(img->mlx, img->max_map_width
+			* img->pixel, img->max_map_height * img->pixel);
+	img->addr_game = (int *)mlx_get_data_addr(img->img_game,
+			&game, &game, &game);
+	img->addr_map = (int *)mlx_get_data_addr(img->img_map,
+			&map, &map, &map);
+	img->addr_player = (int *)mlx_get_data_addr(img->img_player,
+			&player, &player, &player);
+	img->addr_ray = (int *)mlx_get_data_addr(img->img_ray,
+			&ray, &ray, &ray);
+	put_transparent(img);
 	putpixel(img);
 }
 
 int	main(int argc, char **argv)
 {
-	t_cub3d *img;
+	t_cub3d	*img;
 
 	if (argc != 2)
 		return (printf("\033[1;31mBad argument!\n\033[0m"));
@@ -99,14 +97,12 @@ int	main(int argc, char **argv)
 	initializer(img);
 	check_all(img);
 	img->mlx = mlx_init();
-	img->mlx_win = mlx_new_window(img->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "Cub3d");
+	img->mlx_win = mlx_new_window(img->mlx,
+			WINDOW_WIDTH, WINDOW_HEIGHT, "Cub3d");
 	map_addr(img);
-	//start_window(img);
-	//Bu iki çağrı arasındaki fark, olayların türüdür. İlk çağrı, bir klavye tuşuna basıldığında çalışacakken, ikinci çağrı klavye tuşunun serbest bırakılması durumunda çalışacaktır.
 	mlx_hook(img->mlx_win, 2, 1L, keychecker, &img->mlx);
-	mlx_hook(img->mlx_win, 17, (0L), pushbutton, img); //kapatmak icin.
+	mlx_hook(img->mlx_win, 17, (0L), pushbutton, img);
 	mlx_hook(img->mlx_win, 3, 1L << 1, keychecker2, &img->mlx);
 	mlx_loop_hook(img->mlx, putimage, img);
 	mlx_loop(img->mlx);
-	//free_all(img);
 }
