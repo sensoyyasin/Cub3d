@@ -3,6 +3,9 @@ SO ./pictures/eagle.xpm
 WE ./pictures/greystone.xpm
 EA ./pictures/redbrick.xpm
 
+
+
+
 F 255,140,0
 C 0,154,205
 

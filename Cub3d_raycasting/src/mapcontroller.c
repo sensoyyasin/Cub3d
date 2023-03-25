@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapcontroller.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yasinsensoy <yasinsensoy@student.42.fr>    +#+  +:+       +#+        */
+/*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 12:21:35 by ysensoy           #+#    #+#             */
-/*   Updated: 2023/03/25 09:51:49 by yasinsensoy      ###   ########.fr       */
+/*   Updated: 2023/03/25 13:42:46 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,12 @@ void	mapcheck2(char *words, t_cub3d *img)
 		ft_color(img);
 		double_free_split(img->split, img->ut_color);
 	}
-	if (img->no == 1 && img->so == 1 && img->we == 1
-		&& img->ea == 1 && img->f == 1 && img->c == 1)
-		img->texture_bool = 1;
+	else
+	{
+		free(img->split[0]);
+		free(img->split);
+	}
+	texture_check(img);
 }
 
 void	mapcheck3(char *words, t_cub3d *img)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yasinsensoy <yasinsensoy@student.42.fr>    +#+  +:+       +#+        */
+/*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:44:31 by ysensoy           #+#    #+#             */
-/*   Updated: 2023/03/25 09:52:10 by yasinsensoy      ###   ########.fr       */
+/*   Updated: 2023/03/25 13:42:50 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,11 @@ int		isargtrue2(char *str)
 		exit(1);
 	}
 	return (0);
+}
+
+void	texture_check(t_cub3d *img)
+{
+	if (img->no == 1 && img->so == 1 && img->we == 1
+		&& img->ea == 1 && img->f == 1 && img->c == 1)
+		img->texture_bool = 1;
 }

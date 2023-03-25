@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yasinsensoy <yasinsensoy@student.42.fr>    +#+  +:+       +#+        */
+/*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 11:57:52 by ysensoy           #+#    #+#             */
-/*   Updated: 2023/03/25 09:55:51 by yasinsensoy      ###   ########.fr       */
+/*   Updated: 2023/03/25 13:42:25 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,5 +205,6 @@ void	ft_color(t_cub3d *img);
 void	mapcontroller2(t_cub3d	*cub3dptr, int i);
 void	exit_func3(t_cub3d *img);
 int		isargtrue2(char *str);
+void	texture_check(t_cub3d *img);
 
 #endif
