@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   line_length.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yasinsensoy <yasinsensoy@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:37:42 by yasinsensoy       #+#    #+#             */
-/*   Updated: 2023/03/24 16:11:59 by mtemel           ###   ########.fr       */
+/*   Updated: 2023/03/25 09:51:35 by yasinsensoy      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../header/cub3d.h"
 
 int	line_length(t_cub3d *cub3dptr)
 {

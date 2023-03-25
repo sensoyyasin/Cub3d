@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mapcontroller.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yasinsensoy <yasinsensoy@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 12:21:35 by ysensoy           #+#    #+#             */
-/*   Updated: 2023/03/24 17:18:30 by mtemel           ###   ########.fr       */
+/*   Updated: 2023/03/25 09:51:49 by yasinsensoy      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../header/cub3d.h"
 
 void	isargtrue(t_cub3d *cub3dptr)
 {

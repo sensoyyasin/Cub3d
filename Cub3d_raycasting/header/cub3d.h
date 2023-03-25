@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yasinsensoy <yasinsensoy@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 11:57:52 by ysensoy           #+#    #+#             */
-/*   Updated: 2023/03/24 17:19:54 by mtemel           ###   ########.fr       */
+/*   Updated: 2023/03/25 09:55:51 by yasinsensoy      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 # include "unistd.h"
 # include "fcntl.h"
 # include "math.h"
-# include "minilibx/mlx.h"
-# include "mlx/mlx.h"
-# include "libft/libft.h"
-# include "get_next_line/get_next_line.h"
+# include "../minilibx/mlx.h"
+# include "../mlx/mlx.h"
+# include "../libft/libft.h"
+# include "../get_next_line/get_next_line.h"
 
 # define PI 3.141592653
 # define DR 0.0174533

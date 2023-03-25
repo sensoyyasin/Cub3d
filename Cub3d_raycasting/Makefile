@@ -6,7 +6,7 @@
 #    By: yasinsensoy <yasinsensoy@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 12:28:00 by yasinsensoy       #+#    #+#              #
-#    Updated: 2023/03/22 20:57:28 by yasinsensoy      ###   ########.fr        #
+#    Updated: 2023/03/25 09:55:07 by yasinsensoy      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ MINILIBX = mlx
 CFLAGS	:= -Wall -Werror -Wextra -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz -L ./$(MINILIBX)
 endif
 NAME = Cub3d
-SRC = $(wildcard *.c) $(wildcard get_next_line/*.c) libft/libft.a
+SRC = $(wildcard src/*.c) $(wildcard get_next_line/*.c) libft/libft.a
 CC = gcc
 #CFLAGS = -Wall -Wextra -Werror -lmlx -framework OpenGL -framework AppKit -L ./minilibx
 OBJ = $(SRC: .c = .o)

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   keycontrol.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yasinsensoy <yasinsensoy@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:55:50 by yasinsensoy       #+#    #+#             */
-/*   Updated: 2023/03/24 16:56:26 by mtemel           ###   ########.fr       */
+/*   Updated: 2023/03/25 09:51:32 by yasinsensoy      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../header/cub3d.h"
 
 int	pushbutton(int keycode, t_cub3d *ptr)
 {

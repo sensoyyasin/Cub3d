@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pushbutton.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysensoy <ysensoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yasinsensoy <yasinsensoy@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:48:07 by yasinsensoy       #+#    #+#             */
-/*   Updated: 2023/03/24 11:56:24 by ysensoy          ###   ########.fr       */
+/*   Updated: 2023/03/25 09:51:55 by yasinsensoy      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../header/cub3d.h"
 
 void	player(t_cub3d *cub3dptr)
 {

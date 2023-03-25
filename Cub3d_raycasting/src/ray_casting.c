@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yasinsensoy <yasinsensoy@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 12:04:20 by ysensoy           #+#    #+#             */
-/*   Updated: 2023/03/24 17:12:04 by mtemel           ###   ########.fr       */
+/*   Updated: 2023/03/25 09:51:57 by yasinsensoy      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../header/cub3d.h"
 
-/* sin(90) = 1 * (-2) + 1 = -1; yukarıya bakis 
+/* sin(90) = 1 * (-2) + 1 = -1; yukarıya bakis
 dereceden radyana dönüştürür.
 Eğer açının cosinüsü pozitif ise,
 bu ifade 1 * 2 - 1 = 1 olarak değerlendirilir
 Sinüs değeri 0'dan büyükse ışın yukarıyı
-gösteriyor demektir ve ((sin(açı * (PI / 180)) > 0) * -2) + 1 
+gösteriyor demektir ve ((sin(açı * (PI / 180)) > 0) * -2) + 1
 ifadesi -1 olarak değerlendirilir.
 ray_vertical = dikey
 ray_horizontal = yatay

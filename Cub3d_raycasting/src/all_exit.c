@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   all_exit.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yasinsensoy <yasinsensoy@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:58:43 by yasinsensoy       #+#    #+#             */
-/*   Updated: 2023/03/24 16:55:50 by mtemel           ###   ########.fr       */
+/*   Updated: 2023/03/25 09:51:25 by yasinsensoy      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../header/cub3d.h"
 
 void	exit_func(char *err, t_cub3d *img)
 {

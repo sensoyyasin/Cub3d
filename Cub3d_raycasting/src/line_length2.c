@@ -6,11 +6,11 @@
 /*   By: yasinsensoy <yasinsensoy@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 16:11:30 by mtemel            #+#    #+#             */
-/*   Updated: 2023/03/24 22:01:03 by yasinsensoy      ###   ########.fr       */
+/*   Updated: 2023/03/25 09:51:36 by yasinsensoy      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../header/cub3d.h"
 
 /* rays to screen */
 void	my_mlx_pixe_put_angle(t_cub3d *img)

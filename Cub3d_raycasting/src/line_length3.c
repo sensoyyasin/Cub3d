@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   line_length3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yasinsensoy <yasinsensoy@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 16:20:52 by mtemel            #+#    #+#             */
-/*   Updated: 2023/03/24 16:21:13 by mtemel           ###   ########.fr       */
+/*   Updated: 2023/03/25 09:51:42 by yasinsensoy      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../header/cub3d.h"
 
 /* the function works each MAIN loop */
 int	putimage(t_cub3d *img)
