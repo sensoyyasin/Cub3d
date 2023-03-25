@@ -6,7 +6,7 @@
 /*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 11:57:52 by ysensoy           #+#    #+#             */
-/*   Updated: 2023/03/25 13:42:25 by mtemel           ###   ########.fr       */
+/*   Updated: 2023/03/25 13:55:22 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,9 @@ typedef struct cub3d
 	double	newp_x;
 	double	newp_y;
 	double	new_angle;
+	int		uz_y;
+	int		l_iter;
+	char	*line;
 }	t_cub3d;
 
 int		pushbutton(int keycode, t_cub3d *ptr);

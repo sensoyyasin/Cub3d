@@ -6,60 +6,59 @@
 /*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 12:21:35 by ysensoy           #+#    #+#             */
-/*   Updated: 2023/03/25 13:42:46 by mtemel           ###   ########.fr       */
+/*   Updated: 2023/03/25 14:01:10 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/cub3d.h"
 
-void	isargtrue(t_cub3d *cub3dptr)
+void	isargtrue(t_cub3d *img)
 {
 	int	len;
 
-	len = ft_strlen2(cub3dptr->map_input[1]);
-	if (cub3dptr->map_input[1][len - 1] != 'b' &&
-		cub3dptr->map_input[1][len - 2] != 'u' &&
-		cub3dptr->map_input[1][len - 3] != 'c' &&
-		cub3dptr->map_input[1][len - 4] != '.')
+	len = ft_strlen2(img->map_input[1]);
+	if (img->map_input[1][len - 1] != 'b' &&
+		img->map_input[1][len - 2] != 'u' &&
+		img->map_input[1][len - 3] != 'c' &&
+		img->map_input[1][len - 4] != '.')
 	{
 		write(2, "\033[1;31mWrong map format!\n\033[0m", 30);
 		exit(1);
 	}
 }
 
-void	mapcheck(t_cub3d *cub3dptr)
+void	mapcheck(t_cub3d *img)
 {
-	int		fd_map;
-	int		uz_y;
-	char	*line;
-	int		i;
-
-	uz_y = -1;
-	i = 0;
-	fd_map = open(cub3dptr->map_input[1], O_RDONLY);
+	img->uz_y = -1;
+	img->l_iter = 0;
+	int (fd_map) = open(img->map_input[1], O_RDONLY);
 	if (fd_map < 0)
 		exit_func2("\033[1;31mFile could not be opened!\n\033[0m");
-	cub3dptr->map = malloc((sizeof(char *)) * 1024);
-	while (++uz_y <= line_length(cub3dptr) && (line = get_next_line(fd_map)))
+	img->map = malloc((sizeof(char *)) * 1024);
+	while (++(img->uz_y) <= line_length(img))
 	{
-		if (!cub3dptr->texture_bool)
-			mapcheck2(line, cub3dptr);
-		else if (!cub3dptr->map_bool
-			&& cub3dptr->texture_bool && line[0] != '\n')
+		img->line = get_next_line(fd_map);
+		if (!img->line)
+			break ;
+		if (!img->texture_bool)
+			mapcheck2(img->line, img);
+		else if (!img->map_bool
+			&& img->texture_bool && img->line[0] != '\n')
 		{
-			cub3dptr->map[i] = ft_strdup(line);
-			write(1, cub3dptr->map[i], ft_strlen(cub3dptr->map[i]));
-			i++;
+			img->map[img->l_iter] = ft_strdup(img->line);
+			write(1, img->map[img->l_iter], ft_strlen(img->map[img->l_iter]));
+			img->l_iter++;
 		}
-		free(line);
+		free(img->line);
 	}
-	mapcontroller2(cub3dptr, i);
+	close(fd_map);
+	mapcontroller2(img, img->l_iter);
 }
 
 void	mapcheck2(char *words, t_cub3d *img)
 {
-	int		fd;
-	int		i;
+	int	fd;
+	int	i;
 
 	i = 0;
 	img->split = ft_split(words, ' ');
