@@ -6,7 +6,7 @@
 /*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 11:57:52 by ysensoy           #+#    #+#             */
-/*   Updated: 2023/03/25 13:55:22 by mtemel           ###   ########.fr       */
+/*   Updated: 2023/03/25 14:43:49 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@
 
 typedef struct s_bool
 {
-    bool	w_check;
-    bool	a_check;
-    bool	s_check;
-    bool	d_check;
-    bool	r_check;
-    bool	l_check;
-    bool	tab_check;
-}   t_check;
+	bool	w_check;
+	bool	a_check;
+	bool	s_check;
+	bool	d_check;
+	bool	r_check;
+	bool	l_check;
+	bool	tab_check;
+}	t_check;
 
 typedef struct s_mlximg
 {
@@ -150,6 +150,18 @@ typedef struct cub3d
 	int		uz_y;
 	int		l_iter;
 	char	*line;
+	int		dirx;
+	int		diry;
+	double	distance_v;
+	double	distance_h;
+	double	vdy;
+	double	vdx;
+	double	tmp_x;
+	double	tmptwo_x;
+	double	tmp_y;
+	double	tmptwo_y;
+	double	hdy;
+	double	hdx;
 }	t_cub3d;
 
 int		pushbutton(int keycode, t_cub3d *ptr);
@@ -195,12 +207,12 @@ void	draw3DWalls(t_cub3d *img, double i, int counter, int dir);
 void	fill_addr(t_cub3d *img);
 
 void	raycasting(t_cub3d *img, double angle, int ray_counter);
-double	ray_vertical(t_cub3d *img, double angle, double dir_x, double dir_y, bool *hit);
-double	ray_horizontal(t_cub3d *img, double angle, double dir_x, double dir_y, bool *hit);
+double	ray_vertical(t_cub3d *img, double angle, bool *hit);
+double	ray_horizontal(t_cub3d *img, double angle, bool *hit);
 int		is_wall_v2(double x, double y, t_cub3d *img);
-void	draw_ray(double distance, int dir_x, int dir_y, t_cub3d *img, int ray_count);
+void	draw_ray(double distance, t_cub3d *img, int ray_count);
 int		is_wall(double x, double y, t_cub3d *img);
-void	_3D(t_cub3d *img, double distance, int ray_count, int dir_x, int dir_y, t_xpm xpm);
+void	my3d(t_cub3d *img, double distance, int ray_count, t_xpm xpm);
 void	exit_func2(char *err);
 void	add_xpm(t_cub3d *img);
 void	put_transparent(t_cub3d *img);
@@ -208,6 +220,9 @@ void	ft_color(t_cub3d *img);
 void	mapcontroller2(t_cub3d	*cub3dptr, int i);
 void	exit_func3(t_cub3d *img);
 int		isargtrue2(char *str);
-void	texture_check(t_cub3d *img);
+void	ray_vertical_while(t_cub3d *img, bool *hit, double angle);
+void	ray_horizontal_while(t_cub3d *img, bool *hit, double angle);
+void	my3d_wall_control(t_cub3d *img, t_xpm xpm);
 
+void	texture_check(t_cub3d *img);
 #endif
