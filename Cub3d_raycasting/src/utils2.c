@@ -6,7 +6,7 @@
 /*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:44:31 by ysensoy           #+#    #+#             */
-/*   Updated: 2023/03/25 13:42:50 by mtemel           ###   ########.fr       */
+/*   Updated: 2023/03/25 14:25:44 by mtemel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@ void	ft_color(t_cub3d *img)
 	}
 }
 
-int		isargtrue2(char *str)
+int	isargtrue2(char *str)
 {
 	int	len;
 
 	len = ft_strlen2(str);
-	if (str[len - 1] != 'm' &&
-		str[len - 2] != 'p' &&
-		str[len - 3] != 'x' &&
-		str[len - 4] != '.')
+	if (str[len - 1] != 'm'
+		&& str[len - 2] != 'p'
+		&& str[len - 3] != 'x'
+		&& str[len - 4] != '.')
 	{
 		write(2, "\033[1;31mWrong XPM format!\n\033[0m", 30);
 		exit(1);
