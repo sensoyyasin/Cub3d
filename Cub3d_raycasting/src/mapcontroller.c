@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapcontroller.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtemel <mtemel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysensoy <ysensoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 12:21:35 by ysensoy           #+#    #+#             */
-/*   Updated: 2023/03/25 14:01:10 by mtemel           ###   ########.fr       */
+/*   Updated: 2023/05/06 11:32:30 by ysensoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void	mapcheck3(char *words, t_cub3d *img)
 
 void	realmapcheck(int i, t_cub3d *img)
 {
+	
 	int (j) = 0;
 	while (img->map[i])
 	{
@@ -122,11 +123,15 @@ void	realmapcheck(int i, t_cub3d *img)
 		{
 			if ((img->map[i][j] == 'N' || img->map[i][j] == 'S'
 				|| img->map[i][j] == 'W' || img->map[i][j] == 'E')
-				&& (img->map[i][j - 1] <= 32 || img->map[i][j + 1] <= 32))
+				&& (((img->map[i][j - 1] && img->map[i][j - 1] <= 32)
+				|| (img->map[i][j + 1] && img->map[i][j + 1] <= 32))
+				|| ((!img->map[i - 1] || img->map[i - 1][j] <= 32)
+				|| (!img->map[i + 1] || img->map[i + 1][j] <= 32))))
 				exit_func("Player yanı hatası\n", img);
-			if (img->map[i][j] == ' ' && img->map[i][j] == '\t')
+			if (img->map[i][j] == ' ' || img->map[i][j] == '\t')
 				j++;
-			else if (img->map[i][j] == '0' && (!img->map[i - 1]
+			if ((img->map[i][j] == '0' || img->map[i][j] == 'N' || img->map[i][j] == 'S'
+				|| img->map[i][j] == 'W' || img->map[i][j] == 'E') && (!img->map[i - 1]
 					|| !img->map[i - 1][j] || img->map[i - 1][j] <= 32))
 				exit_func("Ilk satir hatası\n", img);
 			else if (img->map[i][0] != '1' && img->map[i][0] > 32)

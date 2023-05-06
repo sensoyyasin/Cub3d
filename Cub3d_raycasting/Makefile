@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yasinsensoy <yasinsensoy@student.42.fr>    +#+  +:+       +#+         #
+#    By: ysensoy <ysensoy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 12:28:00 by yasinsensoy       #+#    #+#              #
-#    Updated: 2023/03/25 09:55:07 by yasinsensoy      ###   ########.fr        #
+#    Updated: 2023/05/06 11:44:22 by ysensoy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,8 @@ all : $(NAME)
 
 clean:
 	@rm -rf Cub3d
+	@cd libft && make clean && cd ..
+	@cd minilibx && make clean && cd ..
 	@echo "\033[1;92mCLEANING DONE\033[0m"
 
 fclean:
@@ -41,8 +43,6 @@ fclean:
 	@make clean
 
 re:
-	@cd libft && make re && cd ..
-	@cd $(MINILIBX) && make re && cd ..
 	@echo "\033[1;92mREMAKE\033[0m"
 	@make fclean
 	@make
